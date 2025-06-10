@@ -118,3 +118,11 @@ class ReturnEvent(Event):
     """
     pass
 
+
+def run(args) -> None:
+    """Handle CLI commands."""
+    if getattr(args, "command", None) == "dev" and args.update_toc:
+        from . import dev
+
+        dev.update_toc()
+

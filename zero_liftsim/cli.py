@@ -38,6 +38,13 @@ def build_parser() -> argparse.ArgumentParser:
         metavar="FILE",
         help="Path to configuration file.",
     )
+    subparsers = parser.add_subparsers(dest="command", required=False)
+    dev = subparsers.add_parser("dev", help="Developer utilities")
+    dev.add_argument(
+        "--update-toc",
+        action="store_true",
+        help="Update docs README with table of contents.",
+    )
     return parser
 
 
