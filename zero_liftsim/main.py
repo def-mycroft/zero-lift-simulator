@@ -132,22 +132,28 @@ class Lift:
 
 
 class Event:
-    """dummy: Abstract base class for all simulation events.
+    """Abstract base class for all simulation events.
 
-    each event represents a time-stamped occurrence that alters the state of
-    the system. Subclasses must implement an `execute(simulation)` method.
-
-    Events are scheduled into the simulation engine and executed in
-    time order. They may include:
-    - Arrival of an agent
-    - Boarding process starting
-    - Lift returning
-    - Any other discrete action tied to a specific time
-
-    This abstraction allows easy insertion of new behaviors without
-    modifying the simulation core.
+    Each event represents a time stamped occurrence that alters the state of
+    the system. Subclasses must override :py:meth:`execute` and may optionally
+    return an iterable of ``(event, time)`` pairs to schedule additional
+    events.
     """
-    def execute(self, simulation):
+
+    def execute(self, simulation: "Simulation") -> list[tuple["Event", int]] | None:
+        """Execute the event.
+
+        Parameters
+        ----------
+        simulation:
+            The :class:`Simulation` instance managing the event loop.
+
+        Returns
+        -------
+        list[tuple[Event, int]] | None
+            Optional iterable of new events and their execution times.
+        """
+
         raise NotImplementedError
 
 
@@ -169,42 +175,53 @@ class Agent:
 
 
 class ArrivalEvent(Event):
-    """dummy: An event indicating a skier agent arrives at the lift queue.
+    """Event representing an agent arriving at the lift queue."""
 
-    This event is scheduled at the agent’s designated arrival time. When executed:
-    - Adds the agent to the lift queue
-    - If the lift is idle, schedules a BoardingEvent
+    def __init__(self, agent: Agent, lift: Lift) -> None:
+        self.agent = agent
+        self.lift = lift
 
-    This is often the first event involving a given agent. It kicks off
-    their presence in the simulation timeline.
-    """
-    pass
+    def execute(self, simulation: Simulation) -> list[tuple[Event, int]]:
+        """Enqueue the agent and possibly trigger boarding."""
+
+        self.lift.enqueue(self.agent)
+        events: list[tuple[Event, int]] = []
+        if self.lift.state == "idle":
+            events.append((BoardingEvent(self.lift), simulation.current_time))
+        return events
 
 
 class BoardingEvent(Event):
-    """dummy: An event indicating the lift starts loading agents.
+    """Event indicating the lift starts loading queued agents."""
 
-    Triggered when the lift is idle and has agents in its queue. On execution:
-    - Transfers agents from the queue into the lift (up to capacity)
-    - Marks those agents as boarded
-    - Schedules a ReturnEvent based on lift cycle time
-    - Marks the lift state as 'moving'
+    def __init__(self, lift: Lift) -> None:
+        self.lift = lift
 
-    This abstracts all loading logic and gatekeeping.
-    """
-    pass
+    def execute(self, simulation: Simulation) -> list[tuple[Event, int]]:
+        """Load agents and schedule the lift's return."""
+
+        boarded = self.lift.load()
+        if boarded:
+            return [
+                (ReturnEvent(self.lift), simulation.current_time + self.lift.cycle_time)
+            ]
+        return []
 
 
 class ReturnEvent(Event):
-    """dummy: An event indicating the lift has returned and is ready for the next group.
+    """Event signifying the lift has returned from its cycle."""
 
-    Executed after the lift has completed its cycle. On execution:
-    - Marks the lift state as idle
-    - If there are still agents waiting, schedules the next BoardingEvent
+    def __init__(self, lift: Lift) -> None:
+        self.lift = lift
 
-    This resets the lift and allows another boarding cycle to begin.
-    """
-    pass
+    def execute(self, simulation: Simulation) -> list[tuple[Event, int]]:
+        """Mark the lift idle and trigger new boarding if needed."""
+
+        self.lift.mark_idle()
+        events: list[tuple[Event, int]] = []
+        if self.lift.queue_length() > 0:
+            events.append((BoardingEvent(self.lift), simulation.current_time))
+        return events
 
 
 def run(args) -> None:
