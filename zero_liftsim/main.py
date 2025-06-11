@@ -158,17 +158,52 @@ class Event:
 
 
 class Agent:
-    """dummy: Represents a skier agent with simple state used during simulation.
+    """Represents a skier and their evolving state during the simulation.
 
     Parameters
     ----------
     agent_id:
         Unique identifier for the agent.
+
+    Notes
+    -----
+    Agents track when they start waiting for the lift, the time they board,
+    and how many rides they have completed. ``start_wait`` and ``finish_ride``
+    update this state so statistics can be gathered over the course of a day.
     """
 
     def __init__(self, agent_id: int) -> None:
         self.agent_id = agent_id
         self.boarded: bool = False
+        self.wait_start: int | None = None
+        self.board_time: int | None = None
+        self.rides_completed: int = 0
+
+    def start_wait(self, time: int) -> None:
+        """Record the time the agent begins waiting in the queue."""
+
+        self.wait_start = time
+
+    def finish_ride(self, time: int) -> int:
+        """Mark the current ride complete and return the wait time.
+
+        Parameters
+        ----------
+        time:
+            Timestamp when the ride finishes.
+
+        Returns
+        -------
+        int
+            The wait time experienced for this ride.
+        """
+
+        wait_start = self.wait_start if self.wait_start is not None else time
+        wait_time = time - wait_start
+        self.rides_completed += 1
+        self.boarded = False
+        self.wait_start = None
+        return wait_time
 
     def __repr__(self) -> str:  # pragma: no cover - convenience
         return f"Agent({self.agent_id})"
