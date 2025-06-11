@@ -12,3 +12,4 @@ Welcome to the project wiki. Navigate using the links below:
 - [Best Practices Coding With Codex](best_practices_coding_with_codex.md)
 - [Law Simulation Book](law_simulation_book.md)
 - [Wiki Article Template](wiki_article_template.md)
+- [Prompt2 Event Classes](prompt2_event_classes.md)
