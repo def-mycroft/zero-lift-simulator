@@ -13,7 +13,7 @@ import heapq
 from collections import deque
 
 
-class Simulation:
+class Simulation:  # {{{
     """Simulation engine that manages global time and the event queue.
 
     The simulator runs a discrete-event loop. Events are stored in a ``heapq``
@@ -65,9 +65,10 @@ class Simulation:
             if new_events:
                 for evt, evt_time in new_events:
                     self.schedule(evt, evt_time)
+# }}}
 
 
-class Lift:
+class Lift:  # {{{
     """Represents a single ski lift with queue and transport behavior.
 
     Parameters
@@ -129,9 +130,10 @@ class Lift:
         """Mark the lift as idle after completing a cycle."""
 
         self.state = "idle"
+# }}}
 
 
-class Event:
+class Event:  # {{{
     """Abstract base class for all simulation events.
 
     Each event represents a time stamped occurrence that alters the state of
@@ -155,9 +157,10 @@ class Event:
         """
 
         raise NotImplementedError
+# }}}
 
 
-class Agent:
+class Agent:  # {{{
     """Represents a skier and their evolving state during the simulation.
 
     Parameters
@@ -207,9 +210,10 @@ class Agent:
 
     def __repr__(self) -> str:  # pragma: no cover - convenience
         return f"Agent({self.agent_id})"
+# }}}
 
 
-class ArrivalEvent(Event):
+class ArrivalEvent(Event):  # {{{
     """Event representing an agent arriving at the lift queue."""
 
     def __init__(self, agent: Agent, lift: Lift) -> None:
@@ -224,9 +228,10 @@ class ArrivalEvent(Event):
         if self.lift.state == "idle":
             events.append((BoardingEvent(self.lift), simulation.current_time))
         return events
+# }}}
 
 
-class BoardingEvent(Event):
+class BoardingEvent(Event):  # {{{
     """Event indicating the lift starts loading queued agents."""
 
     def __init__(self, lift: Lift) -> None:
@@ -241,9 +246,10 @@ class BoardingEvent(Event):
                 (ReturnEvent(self.lift), simulation.current_time + self.lift.cycle_time)
             ]
         return []
+# }}}
 
 
-class ReturnEvent(Event):
+class ReturnEvent(Event):  # {{{
     """Event signifying the lift has returned from its cycle."""
 
     def __init__(self, lift: Lift) -> None:
@@ -257,6 +263,7 @@ class ReturnEvent(Event):
         if self.lift.queue_length() > 0:
             events.append((BoardingEvent(self.lift), simulation.current_time))
         return events
+# }}}
 
 
 def run(args) -> None:
