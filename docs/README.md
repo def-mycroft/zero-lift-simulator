@@ -13,3 +13,4 @@ Welcome to the project wiki. Navigate using the links below:
 - [Law Simulation Book](law_simulation_book.md)
 - [Wiki Article Template](wiki_article_template.md)
 - [Prompt2 Event Classes](prompt2_event_classes.md)
+- [Prompt3 Agent Class](prompt3_agent_class.md)
