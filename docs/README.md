@@ -14,3 +14,4 @@ Welcome to the project wiki. Navigate using the links below:
 - [Wiki Article Template](wiki_article_template.md)
 - [Prompt2 Event Classes](prompt2_event_classes.md)
 - [Prompt3 Agent Class](prompt3_agent_class.md)
+- [Checkpoint - Primary Classes Implemented - pink-walk](main_notes_checkpoint_prim_classes.md)
