@@ -1,16 +1,18 @@
 """Core library for Zero Lift Simulator."""
 
-from __future__ import annotations
-
-import heapq
-from collections import deque
-
 """
 One-lift simulation kernel scaffold.
 This module defines the foundational class structure for an agent-based
 simulation of skier-lift interaction at a ski resort. Each class is a placeholder
 with a development-oriented docstring describing its intended role and expansion path.
 """
+
+
+from __future__ import annotations
+
+import heapq
+from collections import deque
+
 
 class Simulation:
     """Simulation engine that manages global time and the event queue.
@@ -64,41 +66,6 @@ class Simulation:
             if new_events:
                 for evt, evt_time in new_events:
                     self.schedule(evt, evt_time)
-
-class Event:
-    """Abstract base class for all simulation events.
-
-    Each event represents a time-stamped occurrence that alters the state of
-    the system. Subclasses must implement an `execute(simulation)` method.
-
-    Events are scheduled into the simulation engine and executed in
-    time order. They may include:
-    - Arrival of an agent
-    - Boarding process starting
-    - Lift returning
-    - Any other discrete action tied to a specific time
-
-    This abstraction allows easy insertion of new behaviors without
-    modifying the simulation core.
-    """
-    def execute(self, simulation):
-        raise NotImplementedError
-
-class Agent:
-    """Represents a skier agent with simple state used during simulation.
-
-    Parameters
-    ----------
-    agent_id:
-        Unique identifier for the agent.
-    """
-
-    def __init__(self, agent_id: int) -> None:
-        self.agent_id = agent_id
-        self.boarded: bool = False
-
-    def __repr__(self) -> str:  # pragma: no cover - convenience
-        return f"Agent({self.agent_id})"
 
 class Lift:
     """Represents a single ski lift with queue and transport behavior.
@@ -163,8 +130,43 @@ class Lift:
 
         self.state = "idle"
 
+class Event:
+    """dummy: Abstract base class for all simulation events.
+
+    each event represents a time-stamped occurrence that alters the state of
+    the system. Subclasses must implement an `execute(simulation)` method.
+
+    Events are scheduled into the simulation engine and executed in
+    time order. They may include:
+    - Arrival of an agent
+    - Boarding process starting
+    - Lift returning
+    - Any other discrete action tied to a specific time
+
+    This abstraction allows easy insertion of new behaviors without
+    modifying the simulation core.
+    """
+    def execute(self, simulation):
+        raise NotImplementedError
+
+class Agent:
+    """dummy: Represents a skier agent with simple state used during simulation.
+
+    Parameters
+    ----------
+    agent_id:
+        Unique identifier for the agent.
+    """
+
+    def __init__(self, agent_id: int) -> None:
+        self.agent_id = agent_id
+        self.boarded: bool = False
+
+    def __repr__(self) -> str:  # pragma: no cover - convenience
+        return f"Agent({self.agent_id})"
+
 class ArrivalEvent(Event):
-    """An event indicating a skier agent arrives at the lift queue.
+    """dummy: An event indicating a skier agent arrives at the lift queue.
 
     This event is scheduled at the agent’s designated arrival time. When executed:
     - Adds the agent to the lift queue
@@ -176,7 +178,7 @@ class ArrivalEvent(Event):
     pass
 
 class BoardingEvent(Event):
-    """An event indicating the lift starts loading agents.
+    """dummy: An event indicating the lift starts loading agents.
 
     Triggered when the lift is idle and has agents in its queue. On execution:
     - Transfers agents from the queue into the lift (up to capacity)
@@ -189,7 +191,7 @@ class BoardingEvent(Event):
     pass
 
 class ReturnEvent(Event):
-    """An event indicating the lift has returned and is ready for the next group.
+    """dummy: An event indicating the lift has returned and is ready for the next group.
 
     Executed after the lift has completed its cycle. On execution:
     - Marks the lift state as idle

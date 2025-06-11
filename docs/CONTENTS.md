@@ -2,7 +2,7 @@
 
 ## Prompt Articles
 - [Prompt0 Dev Init Class](prompt0_dev_init_class.md)
-- [Prompt1 Nextclass](prompt1_nextclass.md)
+- [Prompt1 Implement Lift](prompt1_implement_lift.md)
 
 ## Articles
 - [Adding Wiki Articles](adding_wiki_articles.md)
