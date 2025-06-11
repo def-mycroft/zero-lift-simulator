@@ -13,8 +13,9 @@ import heapq
 from collections import deque
 
 
-class Simulation:  # {{{
+class Simulation:  
     """Simulation engine that manages global time and the event queue.
+    # {{{
 
     The simulator runs a discrete-event loop. Events are stored in a ``heapq``
     as ``(timestamp, counter, event)`` tuples. ``counter`` ensures deterministic
@@ -68,8 +69,9 @@ class Simulation:  # {{{
 # }}}
 
 
-class Lift:  # {{{
+class Lift: 
     """Represents a single ski lift with queue and transport behavior.
+    # {{{
 
     Parameters
     ----------
@@ -133,8 +135,9 @@ class Lift:  # {{{
 # }}}
 
 
-class Event:  # {{{
+class Event:  
     """Abstract base class for all simulation events.
+    # {{{
 
     Each event represents a time stamped occurrence that alters the state of
     the system. Subclasses must override :py:meth:`execute` and may optionally
@@ -160,8 +163,9 @@ class Event:  # {{{
 # }}}
 
 
-class Agent:  # {{{
+class Agent:  
     """Represents a skier and their evolving state during the simulation.
+    # {{{
 
     Parameters
     ----------
@@ -213,8 +217,9 @@ class Agent:  # {{{
 # }}}
 
 
-class ArrivalEvent(Event):  # {{{
+class ArrivalEvent(Event):  
     """Event representing an agent arriving at the lift queue."""
+    # {{{
 
     def __init__(self, agent: Agent, lift: Lift) -> None:
         self.agent = agent
@@ -231,8 +236,9 @@ class ArrivalEvent(Event):  # {{{
 # }}}
 
 
-class BoardingEvent(Event):  # {{{
+class BoardingEvent(Event):  
     """Event indicating the lift starts loading queued agents."""
+    # {{{
 
     def __init__(self, lift: Lift) -> None:
         self.lift = lift
@@ -249,8 +255,9 @@ class BoardingEvent(Event):  # {{{
 # }}}
 
 
-class ReturnEvent(Event):  # {{{
+class ReturnEvent(Event):  
     """Event signifying the lift has returned from its cycle."""
+    # {{{
 
     def __init__(self, lift: Lift) -> None:
         self.lift = lift
