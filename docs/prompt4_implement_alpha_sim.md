@@ -20,6 +20,9 @@ Implement the first end-to-end "alpha" simulation and create a minimal logging u
 - Return summary metrics such as total rides completed and average wait time.
 
 ## Logging Kernel
+
+note: "kernel" here is meant to indicate that the idea is that this could become a larger logging utility. 
+
 - Create a module `zero_liftsim/logging.py` containing a simple `Logger` class.
 - `Logger.log(event_name, time, **info)` should append a dictionary to an internal list.
 - Provide a `records()` method returning the list of log entries.

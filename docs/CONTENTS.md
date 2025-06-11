@@ -1,6 +1,7 @@
 # Table of Contents
 
 ## Main Notes
+- [Checkpoint - Primary Classes Implemented - pink-walk](main_notes_checkpoint_prim_classes.md)
 - [Devplan - Current](main_notes_devplan.md)
 - [LiftSim Flowchart](main_notes_flowchart.md)
 - [Initial Develop Description - Zero Lift Simulator](main_notes_implementation.md)
@@ -10,6 +11,7 @@
 - [prompt1 - lift class](prompt1_implement_lift.md)
 - [prompt2 - event classes](prompt2_event_classes.md)
 - [prompt3 - agent class](prompt3_agent_class.md)
+- [prompt4 - alpha simulation and logging](prompt4_implement_alpha_sim.md)
 
 ## Articles
 - [How to Add Wiki Articles](adding_wiki_articles.md)
