@@ -12,6 +12,8 @@ with a development-oriented docstring describing its intended role and expansion
 import heapq
 from collections import deque
 
+from .logging import Logger
+
 
 class Simulation:  
     """Simulation engine that manages global time and the event queue.
@@ -46,7 +48,7 @@ class Simulation:
         heapq.heappush(self._queue, (time, self._counter, event))
         self._counter += 1
 
-    def run(self, stop_time: int | None = None) -> None:
+    def run(self, stop_time: int | None = None, logger: "Logger" | None = None) -> None:
         """Execute events in chronological order.
 
         Parameters
@@ -62,6 +64,10 @@ class Simulation:
                 self.current_time = stop_time
                 break
             self.current_time = time
+            if logger is not None:
+                q_len = getattr(event, "lift", None)
+                q_len = q_len.queue_length() if q_len else 0
+                logger.log(event.__class__.__name__, time, queue_length=q_len)
             new_events = event.execute(self)
             if new_events:
                 for evt, evt_time in new_events:
@@ -247,6 +253,8 @@ class BoardingEvent(Event):
         """Load agents and schedule the lift's return."""
 
         boarded = self.lift.load()
+        for agent in boarded:
+            agent.board_time = simulation.current_time
         if boarded:
             return [
                 (ReturnEvent(self.lift), simulation.current_time + self.lift.cycle_time)
@@ -271,6 +279,31 @@ class ReturnEvent(Event):
             events.append((BoardingEvent(self.lift), simulation.current_time))
         return events
 # }}}
+
+
+def run_alpha_sim(n_agents: int, lift_capacity: int, cycle_time: int) -> dict:
+    """Run a minimal simulation and return basic metrics."""
+
+    sim = Simulation()
+    lift = Lift(lift_capacity, cycle_time)
+    agents = [Agent(i + 1) for i in range(n_agents)]
+    arrival_times: list[int] = []
+
+    for i, agent in enumerate(agents):
+        arrival_times.append(i)
+        agent.start_wait(i)
+        sim.schedule(ArrivalEvent(agent, lift), i)
+
+    sim.run()
+
+    total_wait = 0
+    for agent, arrive in zip(agents, arrival_times):
+        if agent.board_time is not None:
+            total_wait += agent.board_time - arrive
+
+    avg_wait = total_wait / n_agents if n_agents > 0 else 0
+
+    return {"total_rides": n_agents, "average_wait": avg_wait}
 
 
 def run(args) -> None:

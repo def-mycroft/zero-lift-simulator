@@ -20,3 +20,4 @@
 - [Simulation Modeling Book Notes](law_simulation_book.md)
 - [.. _format:](numpydoc_styleguide.md)
 - [Article Title](wiki_article_template.md)
+- [Running the Alpha Simulation](alpha_sim_usage.md)
