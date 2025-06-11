@@ -1,4 +1,4 @@
-# Dev Notes - Zero Lift Simulator
+# Initial Develop Description - Zero Lift Simulator
 
 ## Overview
 Zero Lift Simulator ("LiftSim") is an agent-based simulation of skier-lift dynamics at a ski resort. The goal is to model individual skier behavior interacting with constrained lift infrastructure over a simulated day. The system is built around an event-driven simulation engine where agents arrive, queue for a single lift, ride, ski down, and repeat.
