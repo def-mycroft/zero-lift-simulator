@@ -1,14 +1,13 @@
 """Core library for Zero Lift Simulator."""
 
+from __future__ import annotations
+
 """
 One-lift simulation kernel scaffold.
 This module defines the foundational class structure for an agent-based
 simulation of skier-lift interaction at a ski resort. Each class is a placeholder
 with a development-oriented docstring describing its intended role and expansion path.
 """
-
-
-from __future__ import annotations
 
 import heapq
 from collections import deque
@@ -66,6 +65,7 @@ class Simulation:
             if new_events:
                 for evt, evt_time in new_events:
                     self.schedule(evt, evt_time)
+
 
 class Lift:
     """Represents a single ski lift with queue and transport behavior.
@@ -130,6 +130,7 @@ class Lift:
 
         self.state = "idle"
 
+
 class Event:
     """dummy: Abstract base class for all simulation events.
 
@@ -149,6 +150,7 @@ class Event:
     def execute(self, simulation):
         raise NotImplementedError
 
+
 class Agent:
     """dummy: Represents a skier agent with simple state used during simulation.
 
@@ -165,6 +167,7 @@ class Agent:
     def __repr__(self) -> str:  # pragma: no cover - convenience
         return f"Agent({self.agent_id})"
 
+
 class ArrivalEvent(Event):
     """dummy: An event indicating a skier agent arrives at the lift queue.
 
@@ -176,6 +179,7 @@ class ArrivalEvent(Event):
     their presence in the simulation timeline.
     """
     pass
+
 
 class BoardingEvent(Event):
     """dummy: An event indicating the lift starts loading agents.
@@ -189,6 +193,7 @@ class BoardingEvent(Event):
     This abstracts all loading logic and gatekeeping.
     """
     pass
+
 
 class ReturnEvent(Event):
     """dummy: An event indicating the lift has returned and is ready for the next group.
