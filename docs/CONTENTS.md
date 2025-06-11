@@ -15,9 +15,9 @@
 
 ## Articles
 - [How to Add Wiki Articles](adding_wiki_articles.md)
+- [Running the Alpha Simulation](alpha_sim_usage.md)
 - [Best Practices for Coding with Codex](best_practices_coding_with_codex.md)
 - [Dev Snippets](dev_snippets.md)
+- [Docstring Style Guide](docstring_style_guide.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
-- [.. _format:](numpydoc_styleguide.md)
 - [Article Title](wiki_article_template.md)
-- [Running the Alpha Simulation](alpha_sim_usage.md)

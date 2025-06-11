@@ -284,6 +284,7 @@ class ReturnEvent(Event):
 def run_alpha_sim(n_agents: int, lift_capacity: int, cycle_time: int) -> dict:
     """Run a minimal simulation and return basic metrics."""
 
+    logger = Logger()
     sim = Simulation()
     lift = Lift(lift_capacity, cycle_time)
     agents = [Agent(i + 1) for i in range(n_agents)]
@@ -294,7 +295,7 @@ def run_alpha_sim(n_agents: int, lift_capacity: int, cycle_time: int) -> dict:
         agent.start_wait(i)
         sim.schedule(ArrivalEvent(agent, lift), i)
 
-    sim.run()
+    sim.run(logger=logger)
 
     total_wait = 0
     for agent, arrive in zip(agents, arrival_times):
