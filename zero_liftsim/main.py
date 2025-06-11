@@ -1,5 +1,9 @@
 """Core library for Zero Lift Simulator."""
 
+from __future__ import annotations
+
+import heapq
+
 """
 One-lift simulation kernel scaffold.
 This module defines the foundational class structure for an agent-based
@@ -10,20 +14,55 @@ with a development-oriented docstring describing its intended role and expansion
 class Simulation:
     """Simulation engine that manages global time and the event queue.
 
-    This class holds the central event loop for the simulation. It maintains a
-    priority queue of scheduled events (sorted by timestamp), the current clock
-    time, and a counter for tie-breaking identical event times.
+    The simulator runs a discrete-event loop. Events are stored in a ``heapq``
+    as ``(timestamp, counter, event)`` tuples. ``counter`` ensures deterministic
+    ordering of events scheduled for the same ``timestamp``.
 
-    It is responsible for:
-    - Popping the next scheduled event.
-    - Advancing the clock.
-    - Executing the event logic.
-    - Inserting any new events back into the queue.
-
-    It knows nothing about the semantics of agents or lifts—only about time
-    and event execution order.
+    ``schedule`` is used to add events to the queue. ``run`` pops events in
+    time order, advances ``current_time`` and executes each event. ``Event``
+    objects may optionally return iterables of ``(event, time)`` pairs which are
+    automatically scheduled.
     """
-    pass
+
+    def __init__(self) -> None:
+        self.current_time: int = 0
+        self._counter: int = 0
+        self._queue: list[tuple[int, int, Event]] = []
+
+    def schedule(self, event: "Event", time: int) -> None:
+        """Schedule ``event`` to run at ``time``.
+
+        Parameters
+        ----------
+        event:
+            The event instance to schedule.
+        time:
+            Timestamp at which the event should execute.
+        """
+
+        heapq.heappush(self._queue, (time, self._counter, event))
+        self._counter += 1
+
+    def run(self, stop_time: int | None = None) -> None:
+        """Execute events in chronological order.
+
+        Parameters
+        ----------
+        stop_time:
+            Optional time limit. The simulation stops when the next event's
+            timestamp exceeds this value.
+        """
+
+        while self._queue:
+            time, _, event = heapq.heappop(self._queue)
+            if stop_time is not None and time > stop_time:
+                self.current_time = stop_time
+                break
+            self.current_time = time
+            new_events = event.execute(self)
+            if new_events:
+                for evt, evt_time in new_events:
+                    self.schedule(evt, evt_time)
 
 class Event:
     """Abstract base class for all simulation events.
