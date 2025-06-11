@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import heapq
+from collections import deque
 
 """
 One-lift simulation kernel scaffold.
@@ -84,42 +85,83 @@ class Event:
         raise NotImplementedError
 
 class Agent:
-    """Represents a skier agent with individual traits and state.
+    """Represents a skier agent with simple state used during simulation.
 
-    Each agent is uniquely identified and possesses traits like:
-    - arrival time
-    - time they began waiting in line
-    - whether they’ve boarded the lift
-
-    In future expansions, agents may include:
-    - skill level
-    - tolerance for waiting
-    - time-of-day preferences
-    - probability-based decision rules for breaks or early departure
-
-    The agent holds only state and identity—it does not schedule or process events.
+    Parameters
+    ----------
+    agent_id:
+        Unique identifier for the agent.
     """
-    pass
+
+    def __init__(self, agent_id: int) -> None:
+        self.agent_id = agent_id
+        self.boarded: bool = False
+
+    def __repr__(self) -> str:  # pragma: no cover - convenience
+        return f"Agent({self.agent_id})"
 
 class Lift:
     """Represents a single ski lift with queue and transport behavior.
 
-    This class tracks:
-    - queue of waiting agents
-    - lift capacity
-    - loading and return cycle times
-    - operational state (idle, moving)
+    Parameters
+    ----------
+    capacity:
+        Maximum number of agents that can board per cycle.
+    cycle_time:
+        Minutes from departure to return.
 
-    Lift objects are passive and stateless in time—they are modified by events
-    like BoardingEvent and ReturnEvent. Lift does not manage its own timing or
-    schedule events, but it provides accessors and mutators for its state and queue.
-
-    Future lift logic may include:
-    - weather-induced delays
-    - terrain-based capacity limits
-    - interdependencies with other lifts
+    Notes
+    -----
+    The lift is passive: it exposes state and queue operations but does not
+    schedule events itself. External ``Event`` objects manipulate the lift via
+    these methods.
     """
-    pass
+
+    def __init__(self, capacity: int, cycle_time: int) -> None:
+        self.capacity = capacity
+        self.cycle_time = cycle_time
+        self.queue: deque[Agent] = deque()
+        self.state: str = "idle"
+
+    # -- queue operations -------------------------------------------------
+    def enqueue(self, agent: Agent) -> None:
+        """Add ``agent`` to the end of the waiting queue."""
+
+        self.queue.append(agent)
+
+    def queue_length(self) -> int:
+        """Return the current number of waiting agents."""
+
+        return len(self.queue)
+
+    # -- loading ----------------------------------------------------------
+    def load(self) -> list[Agent]:
+        """Load agents from the queue up to ``capacity`` and set state.
+
+        Returns
+        -------
+        list[Agent]
+            Agents that boarded the lift.
+        """
+
+        if self.state != "idle":
+            return []
+
+        boarded: list[Agent] = []
+        while self.queue and len(boarded) < self.capacity:
+            agent = self.queue.popleft()
+            agent.boarded = True
+            boarded.append(agent)
+
+        if boarded:
+            self.state = "moving"
+
+        return boarded
+
+    def mark_idle(self) -> None:
+        """Mark the lift as idle after completing a cycle."""
+
+        self.state = "idle"
 
 class ArrivalEvent(Event):
     """An event indicating a skier agent arrives at the lift queue.
