@@ -1,30 +1,27 @@
-"""Core library for Zero Lift Simulator."""
+"""Core library for Zero Lift Simulator.
+
+One-lift simulation kernel scaffold. This module defines the foundational class
+structure for an agent-based simulation of skier-lift interaction at a ski
+resort. Each class is a placeholder with a development-oriented docstring
+describing its intended role and expansion path.
+"""
 
 from __future__ import annotations
-
-"""
-One-lift simulation kernel scaffold.
-This module defines the foundational class structure for an agent-based
-simulation of skier-lift interaction at a ski resort. Each class is a placeholder
-with a development-oriented docstring describing its intended role and expansion path.
-"""
 
 import heapq
 from collections import deque
 
 
-class Simulation:  
+class Simulation:
     """Simulation engine that manages global time and the event queue.
-    # {{{
 
     The simulator runs a discrete-event loop. Events are stored in a ``heapq``
-    as ``(timestamp, counter, event)`` tuples. ``counter`` ensures deterministic
-    ordering of events scheduled for the same ``timestamp``.
-
-    ``schedule`` is used to add events to the queue. ``run`` pops events in
-    time order, advances ``current_time`` and executes each event. ``Event``
-    objects may optionally return iterables of ``(event, time)`` pairs which are
-    automatically scheduled.
+    as ``(timestamp, counter, event)`` tuples where ``counter`` ensures
+    deterministic ordering of events scheduled for the same ``timestamp``.
+    The :py:meth:`schedule` method adds events to the queue. :py:meth:`run` pops
+    events in time order, advances ``current_time`` and executes each event.
+    ``Event`` objects may optionally return iterables of ``(event, time)`` pairs
+    which are automatically scheduled.
     """
 
     def __init__(self) -> None:
@@ -33,13 +30,13 @@ class Simulation:
         self._queue: list[tuple[int, int, Event]] = []
 
     def schedule(self, event: "Event", time: int) -> None:
-        """Schedule ``event`` to run at ``time``.
+        """Schedule an event at a specific time.
 
         Parameters
         ----------
-        event:
+        event : Event
             The event instance to schedule.
-        time:
+        time : int
             Timestamp at which the event should execute.
         """
 
@@ -51,9 +48,9 @@ class Simulation:
 
         Parameters
         ----------
-        stop_time:
-            Optional time limit. The simulation stops when the next event's
-            timestamp exceeds this value.
+        stop_time : int, optional
+            Time limit after which the simulation stops. If ``None``, all
+            events are processed.
         """
 
         while self._queue:
@@ -69,22 +66,21 @@ class Simulation:
 # }}}
 
 
-class Lift: 
-    """Represents a single ski lift with queue and transport behavior.
-    # {{{
+class Lift:
+    """Representation of a single ski lift.
 
     Parameters
     ----------
-    capacity:
+    capacity : int
         Maximum number of agents that can board per cycle.
-    cycle_time:
+    cycle_time : int
         Minutes from departure to return.
 
     Notes
     -----
     The lift is passive: it exposes state and queue operations but does not
-    schedule events itself. External ``Event`` objects manipulate the lift via
-    these methods.
+    schedule events itself. External :class:`Event` objects manipulate the lift
+    via these methods.
     """
 
     def __init__(self, capacity: int, cycle_time: int) -> None:
@@ -95,18 +91,24 @@ class Lift:
 
     # -- queue operations -------------------------------------------------
     def enqueue(self, agent: Agent) -> None:
-        """Add ``agent`` to the end of the waiting queue."""
+        """Add an agent to the end of the waiting queue.
+
+        Parameters
+        ----------
+        agent : Agent
+            Agent to enqueue.
+        """
 
         self.queue.append(agent)
 
     def queue_length(self) -> int:
-        """Return the current number of waiting agents."""
+        """Return the current number of agents waiting in the queue."""
 
         return len(self.queue)
 
     # -- loading ----------------------------------------------------------
     def load(self) -> list[Agent]:
-        """Load agents from the queue up to ``capacity`` and set state.
+        """Load agents from the queue up to ``capacity`` and set the state.
 
         Returns
         -------
@@ -135,14 +137,12 @@ class Lift:
 # }}}
 
 
-class Event:  
+class Event:
     """Abstract base class for all simulation events.
-    # {{{
 
-    Each event represents a time stamped occurrence that alters the state of
+    Each event represents a time-stamped occurrence that alters the state of
     the system. Subclasses must override :py:meth:`execute` and may optionally
-    return an iterable of ``(event, time)`` pairs to schedule additional
-    events.
+    return an iterable of ``(event, time)`` pairs to schedule additional events.
     """
 
     def execute(self, simulation: "Simulation") -> list[tuple["Event", int]] | None:
@@ -150,12 +150,12 @@ class Event:
 
         Parameters
         ----------
-        simulation:
+        simulation : Simulation
             The :class:`Simulation` instance managing the event loop.
 
         Returns
         -------
-        list[tuple[Event, int]] | None
+        list[tuple[Event, int]] or None
             Optional iterable of new events and their execution times.
         """
 
@@ -163,18 +163,17 @@ class Event:
 # }}}
 
 
-class Agent:  
+class Agent:
     """Represents a skier and their evolving state during the simulation.
-    # {{{
 
     Parameters
     ----------
-    agent_id:
+    agent_id : int
         Unique identifier for the agent.
 
     Notes
     -----
-    Agents track when they start waiting for the lift, the time they board,
+    Agents track when they start waiting for the lift, when they board,
     and how many rides they have completed. ``start_wait`` and ``finish_ride``
     update this state so statistics can be gathered over the course of a day.
     """
@@ -187,7 +186,13 @@ class Agent:
         self.rides_completed: int = 0
 
     def start_wait(self, time: int) -> None:
-        """Record the time the agent begins waiting in the queue."""
+        """Record the time the agent begins waiting in the queue.
+
+        Parameters
+        ----------
+        time : int
+            Current simulation time.
+        """
 
         self.wait_start = time
 
@@ -196,7 +201,7 @@ class Agent:
 
         Parameters
         ----------
-        time:
+        time : int
             Timestamp when the ride finishes.
 
         Returns
@@ -217,7 +222,7 @@ class Agent:
 # }}}
 
 
-class ArrivalEvent(Event):  
+class ArrivalEvent(Event):
     """Event representing an agent arriving at the lift queue."""
     # {{{
 
@@ -226,7 +231,18 @@ class ArrivalEvent(Event):
         self.lift = lift
 
     def execute(self, simulation: Simulation) -> list[tuple[Event, int]]:
-        """Enqueue the agent and possibly trigger boarding."""
+        """Enqueue the agent and possibly trigger boarding.
+
+        Parameters
+        ----------
+        simulation : Simulation
+            Running simulation instance.
+
+        Returns
+        -------
+        list[tuple[Event, int]]
+            Events generated by this arrival.
+        """
 
         self.lift.enqueue(self.agent)
         events: list[tuple[Event, int]] = []
@@ -236,7 +252,7 @@ class ArrivalEvent(Event):
 # }}}
 
 
-class BoardingEvent(Event):  
+class BoardingEvent(Event):
     """Event indicating the lift starts loading queued agents."""
     # {{{
 
@@ -244,7 +260,18 @@ class BoardingEvent(Event):
         self.lift = lift
 
     def execute(self, simulation: Simulation) -> list[tuple[Event, int]]:
-        """Load agents and schedule the lift's return."""
+        """Load agents and schedule the lift's return.
+
+        Parameters
+        ----------
+        simulation : Simulation
+            Running simulation instance.
+
+        Returns
+        -------
+        list[tuple[Event, int]]
+            Events generated by this boarding.
+        """
 
         boarded = self.lift.load()
         if boarded:
@@ -255,7 +282,7 @@ class BoardingEvent(Event):
 # }}}
 
 
-class ReturnEvent(Event):  
+class ReturnEvent(Event):
     """Event signifying the lift has returned from its cycle."""
     # {{{
 
@@ -263,7 +290,18 @@ class ReturnEvent(Event):
         self.lift = lift
 
     def execute(self, simulation: Simulation) -> list[tuple[Event, int]]:
-        """Mark the lift idle and trigger new boarding if needed."""
+        """Mark the lift idle and trigger new boarding if needed.
+
+        Parameters
+        ----------
+        simulation : Simulation
+            Running simulation instance.
+
+        Returns
+        -------
+        list[tuple[Event, int]]
+            Events generated by the lift's return.
+        """
 
         self.lift.mark_idle()
         events: list[tuple[Event, int]] = []
@@ -274,7 +312,13 @@ class ReturnEvent(Event):
 
 
 def run(args) -> None:
-    """Handle CLI commands."""
+    """Handle CLI commands.
+
+    Parameters
+    ----------
+    args : Namespace
+        Parsed command-line arguments.
+    """
     if getattr(args, "command", None) == "dev" and args.update_toc:
         from . import dev
 
