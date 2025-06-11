@@ -18,4 +18,5 @@
 - [Best Practices for Coding with Codex](best_practices_coding_with_codex.md)
 - [Dev Snippets](dev_snippets.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
+- [.. _format:](numpydoc_styleguide.md)
 - [Article Title](wiki_article_template.md)
