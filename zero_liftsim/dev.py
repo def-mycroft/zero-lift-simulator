@@ -80,4 +80,7 @@ def analyze_docs() -> None:
     from .git_tools import append_git_info
 
     for path in sorted(docs_dir.glob("*.md")):
+        text = path.read_text(encoding="utf-8")
+        if "# Git Info" in text:
+            continue
         append_git_info(path)
