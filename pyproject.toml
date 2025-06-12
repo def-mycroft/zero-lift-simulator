@@ -10,7 +10,8 @@ description = "Zero Lift Simulator CLI"
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
-    "codenamize>=2.3"
+    "codenamize>=2.3",
+    "GitPython>=3.1",
 ]
 
 [project.scripts]

@@ -29,6 +29,7 @@
 - [Dev Snippets](dev_snippets.md)
 - [Development Reference for Prompts](development_ref_for_prompts.md)
 - [Docstring Style Guide](docstring_style_guide.md)
+- [Git Tools](git-tools.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
 - [Project Questions - answered](project_questions_orange.md)
 - [Styleguide for Wiki Articles](styleguide_wiki_articles.md)

@@ -50,6 +50,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Throwaway util for development / testing. "
     )
+    dev.add_argument(
+        "--analyze-docs",
+        action="store_true",
+        help="Append git info to all markdown docs.",
+    )
     return parser
 
 
@@ -72,6 +77,9 @@ def run(args) -> None:
         data = run_alpha_sim(n_agents=3, lift_capacity=2, cycle_time=5)
         agents = data['agents']
         ########################################################################
+    if getattr(args, "command", None) == "dev" and args.analyze_docs:
+        from . import dev
+        dev.analyze_docs()
 
 
 if __name__ == "__main__":  # pragma: no cover - manual invocation
