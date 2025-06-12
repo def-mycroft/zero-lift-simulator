@@ -22,7 +22,8 @@ class SimulationManager:
 
     This class manages the setup, execution, and result archiving
     of an agent-based ski lift simulation. It handles agent creation,
-    lift initialization, event scheduling, and result summarization.
+    lift initialization, event scheduling, and result summarization. Use
+    :py:meth:`run` to execute the simulation for a given time window.
 
     Parameters
     ----------
@@ -74,19 +75,46 @@ class SimulationManager:
             agent.start_wait(i, ts)
             self.sim.schedule(ArrivalEvent(agent, self.lift), i)
 
-    def run(self) -> dict:
-        """Execute the simulation and return summary metrics."""
+    def run(
+        self,
+        *,
+        end_datetime: datetime | None = None,
+        runtime_minutes: int | None = None,
+    ) -> dict:
+        """Execute the simulation and return summary metrics.
+
+        Parameters
+        ----------
+        end_datetime:
+            Optional absolute end time for the simulation. Takes precedence over
+            ``runtime_minutes`` if both are provided.
+        runtime_minutes:
+            Duration of the run in minutes. Defaults to the number of minutes
+            between ``start_datetime`` and 4 PM the same day.
+        """
         if self.sim is None:
             self._setup()
         assert self.sim is not None  # mypy hint
-        self.sim.run(logger=self.logger, full_agent_logging=True,
-                     start_datetime=self.start_datetime)
-        total_wait = 0
-        for agent, arrive in zip(self.agents, self.arrival_times):
-            if agent.board_time is not None:
-                total_wait += agent.board_time - arrive
-        avg_wait = total_wait / self.n_agents if self.n_agents > 0 else 0
-        return {"total_rides": self.n_agents, "average_wait": avg_wait, "agents": self.agents}
+        if runtime_minutes is None:
+            if end_datetime is None:
+                default_end = self.start_datetime.replace(hour=16, minute=0, second=0, microsecond=0)
+                end_datetime = default_end
+            runtime_minutes = int((end_datetime - self.start_datetime).total_seconds() // 60)
+        stop = runtime_minutes
+        self.sim.run(
+            stop_time=stop,
+            logger=self.logger,
+            full_agent_logging=True,
+            start_datetime=self.start_datetime,
+        )
+        total_wait = 0.0
+        total_rides = 0
+        for agent in self.agents:
+            total_rides += agent.rides_completed
+            for info in agent.experience_rideloop.log.values():
+                total_wait += info["time_spent_in_queue"]
+        avg_wait = total_wait / total_rides if total_rides > 0 else 0
+        return {"total_rides": total_rides, "average_wait": avg_wait, "agents": self.agents}
 
     def archive_agent_rideloop_experience(self, directory: str | Path) -> None:
         """Write each agent's ride loop log to ``directory`` in JSON format."""

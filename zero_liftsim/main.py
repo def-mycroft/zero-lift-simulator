@@ -50,6 +50,7 @@ class Simulation:
         self._agent_records: list[dict] = []
         self.simulation_uuid = str(uuid())
         self.simulation_codename = codenamize(self.simulation_uuid)
+        self.stop_time: int | None = None
 
     def schedule(self, event: "Event", time: int) -> None:
         """Schedule ``event`` to run at ``time``.
@@ -83,6 +84,7 @@ class Simulation:
         """
 
         self.start_datetime = start_datetime
+        self.stop_time = stop_time
         if full_agent_logging:
             self._agent_logger = Logger("agent.log")
             self._agent_records = []
@@ -345,6 +347,7 @@ class ReturnEvent(Event):
 
     def execute(self, simulation: Simulation) -> list[tuple[Event, int]]:
         """Mark the lift idle and trigger new boarding if needed."""
+        events: list[tuple[Event, int]] = []
         for agent in self.boarded:
             timestamp_dt = (
                 simulation.start_datetime
@@ -362,6 +365,14 @@ class ReturnEvent(Event):
                 queue_duration,
             )
             agent.finish_ride(simulation.current_time, timestamp_dt.isoformat())
+            next_arrival = simulation.current_time + int(traverse_dur)
+            if simulation.stop_time is not None and next_arrival < simulation.stop_time:
+                ts = (
+                    simulation.start_datetime
+                    + timedelta(minutes=next_arrival)
+                ).isoformat()
+                agent.start_wait(next_arrival, ts)
+                events.append((ArrivalEvent(agent, self.lift), next_arrival))
         self.lift.mark_idle()
         for agent in self.boarded:
             self._log_agent_event(
@@ -371,7 +382,6 @@ class ReturnEvent(Event):
                 queue_length=self.lift.queue_length(),
                 lift_state=self.lift.state,
             )
-        events: list[tuple[Event, int]] = []
         if self.lift.queue_length() > 0:
             events.append((BoardingEvent(self.lift), simulation.current_time))
         return events
@@ -382,6 +392,7 @@ def run_alpha_sim(
     lift_capacity: int,
     *,
     start_datetime: datetime | None = None,
+    runtime_minutes: int | None = None,
 ) -> dict:
     """Run a minimal simulation and return basic metrics."""
 
@@ -392,5 +403,5 @@ def run_alpha_sim(
         lift_capacity=lift_capacity,
         start_datetime=start_datetime,
     )
-    return manager.run()
+    return manager.run(runtime_minutes=runtime_minutes)
 

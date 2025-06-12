@@ -23,7 +23,10 @@ def test_run_alpha_sim_metrics():
     orig = Lift.time_spent_ride_lift
     Lift.time_spent_ride_lift = lambda self: 5
     result = run_alpha_sim(
-        n_agents=3, lift_capacity=2, start_datetime=start
+        n_agents=3,
+        lift_capacity=2,
+        start_datetime=start,
+        runtime_minutes=10,
     )
     Lift.time_spent_ride_lift = orig
     assert result["total_rides"] == 3
