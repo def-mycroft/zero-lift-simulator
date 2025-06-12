@@ -34,6 +34,7 @@
 - [Git Tools](git-tools.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
 - [Project Questions stingy-orange - answered](project_questions_orange.md)
+- [Unstructured Thoughts - abstract motivations of simulation](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
 - [Styleguide for Wiki Articles](styleguide_wiki_articles.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
 - [unnamed periodic-concentrate 057c30ef](unnamed-periodic-concentrate-057c30ef.md)
