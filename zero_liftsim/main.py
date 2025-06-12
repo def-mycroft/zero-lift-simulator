@@ -509,7 +509,7 @@ def run_alpha_sim(
 ) -> dict:
     """Run a minimal simulation and return basic metrics."""
 
-    from main.simmanager import SimulationManager
+    from zero_liftsim.simmanager import SimulationManager
 
     manager = SimulationManager(
         n_agents=n_agents,

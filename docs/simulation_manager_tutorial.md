@@ -6,7 +6,7 @@ of a lift simulation. Instantiate it with parameters similar to an
 `sklearn` estimator and call ``run`` to execute the simulation.
 
 ```python
-from main.simmanager import SimulationManager
+from zero_liftsim.simmanager import SimulationManager
 
 manager = SimulationManager(
     n_agents=3,
