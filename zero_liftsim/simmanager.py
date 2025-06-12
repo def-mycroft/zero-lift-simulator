@@ -8,12 +8,12 @@ from datetime import datetime, timedelta
 
 from zero_liftsim.main import (
     Simulation,
-    Lift,
     Agent,
     ArrivalEvent,
     BoardingEvent,
     ReturnEvent,
 )
+from zero_liftsim.lift import Lift
 from zero_liftsim.logging import Logger
 
 
@@ -30,8 +30,6 @@ class SimulationManager:
         Number of agents that will participate in the simulation.
     lift_capacity : int
         Number of agents a lift can board per cycle.
-    cycle_time : int
-        Minutes for the lift to complete one round trip.
     start_datetime : datetime, optional
         When the simulation begins. Defaults to 2025-03-12 09:00.
     logger : Logger, optional
@@ -53,13 +51,11 @@ class SimulationManager:
         *,
         n_agents: int,
         lift_capacity: int,
-        cycle_time: int,
         start_datetime: datetime | None = None,
         logger: Logger | None = None,
     ) -> None:
         self.n_agents = n_agents
         self.lift_capacity = lift_capacity
-        self.cycle_time = cycle_time
         self.start_datetime = start_datetime or datetime(2025, 3, 12, 9, 0, 0)
         self.logger = logger or Logger()
         self.sim: Simulation | None = None
@@ -69,7 +65,7 @@ class SimulationManager:
 
     def _setup(self) -> None:
         self.sim = Simulation()
-        self.lift = Lift(self.lift_capacity, self.cycle_time)
+        self.lift = Lift(self.lift_capacity)
         self.agents = [Agent(i + 1, logger=self.logger) for i in range(self.n_agents)]
         self.arrival_times = []
         for i, agent in enumerate(self.agents):
