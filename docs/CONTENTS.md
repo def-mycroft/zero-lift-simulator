@@ -22,6 +22,7 @@
 - [As a Human: How to Code with Codex](as_a_human_how_to_code_with_codex.md)
 - [Best Practices for Coding with Codex](best_practices_coding_with_codex.md)
 - [Bugfix - Add Dependencies](bugfix_add_deps.md)
+- [Bugfix - GitPython implementation](bugfix_git_agreeable.md)
 - [Bugfix - Logger Filepath](bugfix_logger_filepath_finish.md)
 - [Bugfix Response - Logger Filepath finish](bugfix_response_logger_filepath_finish.md)
 - [Bugfix - missing riders object](bugfix_riders.md)
