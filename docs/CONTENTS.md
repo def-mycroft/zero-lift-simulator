@@ -37,7 +37,7 @@
 - [Unstructured Thoughts - abstract motivations of simulation](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
 - [Styleguide for Wiki Articles](styleguide_wiki_articles.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
-- [unnamed periodic-concentrate 057c30ef](unnamed-periodic-concentrate-057c30ef.md)
+- [prompt7 - simulation datetime logging](prompt7_simulation_datetime.md)
 - [Updating Dependencies](updating_dependencies.md)
 - [Wiki Article Creation Instructions for Codex](wiki_article_creation_for_codex.md)
 - [Article Title](wiki_article_template.md)
