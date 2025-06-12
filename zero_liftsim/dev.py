@@ -73,3 +73,11 @@ def update_toc() -> None:
         fh.write(toc)
         fh.write("\n")
 
+
+def analyze_docs() -> None:
+    """Append git commit info to all Markdown docs."""
+    docs_dir = Path(__file__).resolve().parent.parent / "docs"
+    from .git_tools import append_git_info
+
+    for path in sorted(docs_dir.glob("*.md")):
+        append_git_info(path)
