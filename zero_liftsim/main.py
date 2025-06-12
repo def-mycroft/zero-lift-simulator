@@ -192,12 +192,12 @@ class Lift:
         self.traverse_mean = 5
         self.traverse_sd = 1.5
 
-    def time_cost_ride_lift(self) -> float:
+    def time_spent_ride_lift(self) -> float:
         """Sample the time to ride the lift."""
 
         return max(1, gauss(self.ride_mean, self.ride_sd))
 
-    def time_cost_traverse_down_mountain(self) -> float:
+    def time_spent_traverse_down_mountain(self) -> float:
         """Sample the time to ski down from the lift."""
 
         return max(1, gauss(self.traverse_mean, self.traverse_sd))
@@ -407,7 +407,7 @@ class BoardingEvent(Event):
         boarded = self.lift.load()
         for agent in boarded:
             agent.board_time = simulation.current_time
-            agent._ride_duration = self.lift.time_cost_ride_lift()
+            agent._ride_duration = self.lift.time_spent_ride_lift()
             timestamp = (
                 simulation.start_datetime
                 + timedelta(minutes=simulation.current_time)
@@ -477,8 +477,8 @@ class ReturnEvent(Event):
             if agent.wait_start is not None and agent.board_time is not None:
                 queue_duration = agent.board_time - agent.wait_start
             ride_dur = getattr(agent, "_ride_duration", self.lift.cycle_time)
-            traverse_dur = self.lift.time_cost_traverse_down_mountain()
-            agent.rideloop.add_entry(
+            traverse_dur = self.lift.time_spent_traverse_down_mountain()
+            agent.experience_rideloop.add_entry(
                 timestamp_dt,
                 ride_dur,
                 traverse_dur,

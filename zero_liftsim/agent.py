@@ -31,7 +31,7 @@ class Agent:
         self.rides_completed: int = 0
         self.self_logging = self_logging
         self.activity_log: dict[int, dict] = {}
-        self.rideloop = AgentRideLoopExperience()
+        self.experience_rideloop = AgentRideLoopExperience()
         if logger is not None:
             logger.devlog(
                 f"init agent {self.agent_uuid} {self.agent_uuid_codename}"

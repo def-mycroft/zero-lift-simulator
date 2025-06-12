@@ -52,3 +52,6 @@ Thumbs.db
 # Log files
 logs/*.log
 
+agent.py
+agent.py
+experience.py
