@@ -258,7 +258,12 @@ class Agent:
         Number of lift rides completed by the agent.
     # }}}
     """
-    def __init__(self, agent_id: int, logger: "Logger" | None = None) -> None:
+    def __init__(
+        self,
+        agent_id: int,
+        logger: "Logger" | None = None,
+        self_logging: bool = True,
+    ) -> None:
         self.agent_id = agent_id
         self.agent_uuid = str(uuid())
         self.agent_uuid_codename = codenamize(self.agent_uuid)
@@ -266,16 +271,34 @@ class Agent:
         self.wait_start: int | None = None
         self.board_time: int | None = None
         self.rides_completed: int = 0
+        self.self_logging = self_logging
+        self.activity_log: dict[int, dict] = {}
         if logger is not None:
             logger.devlog(
                 f"init agent {self.agent_uuid} {self.agent_uuid_codename}"
             )
             self.logger = logger
 
+    def log_event(self, event: str, time: int, **info) -> None:
+        """Append a record to :pyattr:`activity_log` if self logging is enabled."""
+
+        if not self.self_logging:
+            return
+        record = {
+            "time": time,
+            "event": event,
+            "agent_id": self.agent_id,
+            "agent_uuid": self.agent_uuid,
+            "agent_uuid_codename": self.agent_uuid_codename,
+        }
+        record.update(info)
+        self.activity_log[len(self.activity_log)] = record
+
     def start_wait(self, time: int) -> None:
         """Record the time the agent begins waiting in the queue."""
 
         self.wait_start = time
+        self.log_event("start_wait", time)
 
     def finish_ride(self, time: int) -> int:
         """Mark the current ride complete and return the wait time.
@@ -296,6 +319,7 @@ class Agent:
         self.rides_completed += 1
         self.boarded = False
         self.wait_start = None
+        self.log_event("ride_complete", time, wait_time=wait_time)
         return wait_time
 
     def __repr__(self) -> str:  # pragma: no cover - convenience
@@ -332,6 +356,12 @@ class ArrivalEvent(Event):
         """Enqueue the agent and possibly trigger boarding."""
 
         self.lift.enqueue(self.agent)
+        self.agent.log_event(
+            "arrival",
+            simulation.current_time,
+            queue_length=self.lift.queue_length(),
+            lift_state=self.lift.state,
+        )
         events: list[tuple[Event, int]] = []
         if self.lift.state == "idle":
             events.append((BoardingEvent(self.lift), simulation.current_time))
@@ -374,9 +404,18 @@ class BoardingEvent(Event):
         boarded = self.lift.load()
         for agent in boarded:
             agent.board_time = simulation.current_time
+            agent.log_event(
+                "board",
+                simulation.current_time,
+                queue_length=self.lift.queue_length(),
+                lift_state=self.lift.state,
+            )
         if boarded:
             return [
-                (ReturnEvent(self.lift), simulation.current_time + self.lift.cycle_time)
+                (
+                    ReturnEvent(self.lift, boarded),
+                    simulation.current_time + self.lift.cycle_time,
+                )
             ]
         return []
 # }}}
@@ -407,12 +446,15 @@ class ReturnEvent(Event):
     lift's availability and determines whether a boarding cycle should resume.
     # }}}
     """
-    def __init__(self, lift: Lift) -> None:
+    def __init__(self, lift: Lift, boarded: list[Agent] | None = None) -> None:
         self.lift = lift
+        self.boarded = boarded or []
 
     def execute(self, simulation: Simulation) -> list[tuple[Event, int]]:
         """Mark the lift idle and trigger new boarding if needed."""
 
+        for agent in self.boarded:
+            agent.finish_ride(simulation.current_time)
         self.lift.mark_idle()
         events: list[tuple[Event, int]] = []
         if self.lift.queue_length() > 0:
