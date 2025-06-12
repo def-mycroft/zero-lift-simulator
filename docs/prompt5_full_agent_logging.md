@@ -19,7 +19,7 @@ run.
 ## Requirements
 
 - Extend `Simulation.run` with an optional `full_agent_logging: bool = False`
-  parameter. When enabled, create or open `logs/agent.log` for writing.
+  parameter. When enabled, use the Logger class to setup this logger. modify logger class as needed to support this. 
 - Whenever an `Event` executes and it references an `Agent` (directly or
   indirectly), write a log entry containing at minimum:
   - the agent's UUID and codename
