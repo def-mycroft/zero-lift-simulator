@@ -20,6 +20,10 @@ from zero_liftsim.logging import Logger
 class SimulationManager:
     """Configure and execute a lift simulation.
 
+    This class manages the setup, execution, and result archiving
+    of an agent-based ski lift simulation. It handles agent creation,
+    lift initialization, event scheduling, and result summarization.
+
     Parameters
     ----------
     n_agents : int
@@ -32,8 +36,18 @@ class SimulationManager:
         When the simulation begins. Defaults to 2025-03-12 09:00.
     logger : Logger, optional
         Logger used during the run. Created automatically if omitted.
-    """
 
+    Attributes
+    ----------
+    sim : Simulation or None
+        The simulation engine instance.
+    lift : Lift or None
+        The lift used during the simulation.
+    agents : list of Agent
+        All agents participating in the simulation.
+    arrival_times : list of int
+        Scheduled arrival times for agents.
+    """
     def __init__(
         self,
         *,

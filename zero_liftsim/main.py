@@ -20,21 +20,14 @@ from .logging import Logger
 
 
 class Simulation:
-    """Engine for managing event-driven skier-lift interactions.
+    """Discrete-event simulation engine for managing scheduled events.
     # {{{
 
-    # {{{
-    The Simulation class implements a discrete-event simulation
-    architecture where system evolution is driven by time-stamped
-    events. Events are managed in a min-heap priority queue sorted by
-    execution time and insertion order. The simulation clock advances to
-    the time of each event, which is then executed to update system
-    state and potentially schedule future events.
-
-    Events are scheduled using `schedule`, and the simulation is
-    started via `run`. Each event may return new events to be scheduled
-    dynamically. A logger may be passed to `run` to record per-event
-    state for analysis or debugging.
+    The Simulation class maintains a priority queue of time-ordered
+    events and executes them in order. Each event is expected to
+    implement a `run()` method that performs the required update to
+    the simulation state. Simulation can be run with logging enabled
+    and supports attaching real-time timestamps for output analysis.
 
     Parameters
     ----------
@@ -43,17 +36,11 @@ class Simulation:
     Attributes
     ----------
     current_time : int
-        The current time in simulation units (typically minutes).
-    _counter : int
-        A tie-breaker counter to ensure deterministic event ordering.
-    _queue : list of tuple[int, int, Event]
-        Priority queue of scheduled events, ordered by time and counter.
-
-    Notes
-    -----
-    The simulation engine is agnostic to domain logic. It provides
-    deterministic execution of arbitrary event objects that implement
-    an `execute(sim)` method.
+        The current simulation time, in minutes from start.
+    event_queue : list of Event
+        Priority queue of scheduled events.
+    event_log : list of dict
+        Records of event execution used for debugging or analysis.
     # }}}
     """
     def __init__(self) -> None:
@@ -187,8 +174,10 @@ class Lift:
         self.queue: deque[Agent] = deque()
         self.state: str = "idle"
         self.current_riders: list[Agent] = []
+
         self.ride_mean = 7
         self.ride_sd = 1
+
         self.traverse_mean = 5
         self.traverse_sd = 1.5
 
