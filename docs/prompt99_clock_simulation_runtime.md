@@ -1,4 +1,4 @@
-# prompt99 - clock simulation runtime
+# prompt9 - clock simulation runtime
 
 random codename:
 
@@ -36,4 +36,5 @@ Upgrade the system so that a simulation runs continuously until a specified end 
 
 Use the existing project style for docstrings, logging, and tests. Focus on clarity so future prompts can extend the simulation further.
 
-# Git Info
+
+-- also, as a quick edit, update the functionality for zls dev --update-toc so that all files that match `docs/prompt_*md` will be included under prompt articles. rn it looks like it is cutting off after 9. also, it should sort with largest number on top
