@@ -22,8 +22,8 @@ class Logger:
         logs_dir = Path(__file__).resolve().parents[1] / "logs"
         logs_dir.mkdir(exist_ok=True)
         self._path = logs_dir / filename
-        # open in append mode so consecutive runs keep history
-        self._file = open(self._path, "a", encoding="utf-8")
+        # open in write mode so each run starts with a clean log file
+        self._file = open(self._path, "w", encoding="utf-8")
 
     def log(self, event_name: str, time: int, **info) -> None:
         """Record an event with optional metadata and write it to file."""
