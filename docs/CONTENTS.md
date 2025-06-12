@@ -23,3 +23,4 @@
 - [Docstring Style Guide](docstring_style_guide.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
 - [Article Title](wiki_article_template.md)
+- [Updating Dependencies](updating_dependencies.md)

@@ -4,7 +4,12 @@ from __future__ import annotations
 
 import heapq
 from uuid import uuid4 as uuid
-from codenamize import codenamize
+try:
+    from codenamize import codenamize
+except ModuleNotFoundError:  # pragma: no cover - fallback for environments without the package
+    def codenamize(value: str) -> str:
+        """Simplistic fallback that returns the first eight characters."""
+        return value[:8]
 from collections import deque
 
 from .logging import Logger
@@ -77,7 +82,6 @@ class Simulation:
         """
 
         i = str(uuid())
-        logger.devlog(f"\n\n{'#'*80}\nsimulation run call {i}")
         while self._queue:
             time, _, event = heapq.heappop(self._queue)
             if stop_time is not None and time > stop_time:
@@ -254,7 +258,7 @@ class Agent:
         Number of lift rides completed by the agent.
     # }}}
     """
-    def __init__(self, agent_id: int, logger: "Logger" | None ) -> None:
+    def __init__(self, agent_id: int, logger: "Logger" | None = None) -> None:
         self.agent_id = agent_id
         self.agent_uuid = str(uuid())
         self.agent_uuid_codename = codenamize(self.agent_uuid)
@@ -262,7 +266,10 @@ class Agent:
         self.wait_start: int | None = None
         self.board_time: int | None = None
         self.rides_completed: int = 0
-        logger.devlog(f"init agent {self.agent_uuid} {self.agent_uuid_codename}")
+        if logger is not None:
+            logger.devlog(
+                f"init agent {self.agent_uuid} {self.agent_uuid_codename}"
+            )
 
     def start_wait(self, time: int) -> None:
         """Record the time the agent begins waiting in the queue."""
