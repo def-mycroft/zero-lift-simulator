@@ -82,7 +82,7 @@ class SimulationManager:
         path = Path(directory)
         path.mkdir(parents=True, exist_ok=True)
         for agent in self.agents:
-            data = {dt.isoformat(): info for dt, info in agent.rideloop.log.items()}
+            data = {dt.isoformat(): info for dt, info in agent.experience_rideloop.log.items()}
             outfile = path / f"agent_{agent.agent_id}.json"
             with outfile.open("w", encoding="utf-8") as fh:
                 json.dump(data, fh, indent=2)
