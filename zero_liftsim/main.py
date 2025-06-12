@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import heapq
 from uuid import uuid4 as uuid
+from datetime import datetime, timedelta
 try:
     from codenamize import codenamize
 except ModuleNotFoundError:  # pragma: no cover - fallback for environments without the package
@@ -81,6 +82,7 @@ class Simulation:
         logger: "Logger" | None = None,
         *,
         full_agent_logging: bool = False,
+        start_datetime: datetime = datetime(2025, 3, 12, 9, 0, 0),
     ) -> None:
         """Execute events in chronological order.
 
@@ -91,6 +93,7 @@ class Simulation:
             timestamp exceeds this value.
         """
 
+        self.start_datetime = start_datetime
         if full_agent_logging:
             self._agent_logger = Logger("agent.log")
             self._agent_records = []
@@ -108,7 +111,13 @@ class Simulation:
             if logger is not None:
                 q_len = getattr(event, "lift", None)
                 q_len = q_len.queue_length() if q_len else 0
-                logger.log(event.__class__.__name__, time, queue_length=q_len)
+                timestamp = (self.start_datetime + timedelta(minutes=time)).isoformat()
+                logger.log(
+                    event.__class__.__name__,
+                    time,
+                    timestamp,
+                    queue_length=q_len,
+                )
             new_events = event.execute(self)
             if new_events:
                 for evt, evt_time in new_events:
@@ -275,12 +284,19 @@ class Event:
             "description": description,
         }
         entry.update(info)
+        timestamp = (
+            simulation.start_datetime + timedelta(minutes=simulation.current_time)
+        ).isoformat()
         simulation._agent_logger.log(
-            self.__class__.__name__, simulation.current_time, **entry
+            self.__class__.__name__, simulation.current_time, timestamp, **entry
         )
         simulation._agent_records.append(
-            {"event": self.__class__.__name__, 
-             "time": simulation.current_time, **entry}
+            {
+                "event": self.__class__.__name__,
+                "time": timestamp,
+                "time_offset": simulation.current_time,
+                **entry,
+            }
         )
 # }}}
 
@@ -334,13 +350,14 @@ class Agent:
             )
             self.logger = logger
 
-    def log_event(self, event: str, time: int, **info) -> None:
+    def log_event(self, event: str, time: int, timestamp: str, **info) -> None:
         """Append a record to :pyattr:`activity_log` if self logging is enabled."""
 
         if not self.self_logging:
             return
         record = {
-            "time": time,
+            "time": timestamp,
+            "time_offset": time,
             "event": event,
             "agent_id": self.agent_id,
             "agent_uuid": self.agent_uuid,
@@ -349,13 +366,13 @@ class Agent:
         record.update(info)
         self.activity_log[len(self.activity_log)] = record
 
-    def start_wait(self, time: int) -> None:
+    def start_wait(self, time: int, timestamp: str) -> None:
         """Record the time the agent begins waiting in the queue."""
 
         self.wait_start = time
-        self.log_event("start_wait", time)
+        self.log_event("start_wait", time, timestamp)
 
-    def finish_ride(self, time: int) -> int:
+    def finish_ride(self, time: int, timestamp: str) -> int:
         """Mark the current ride complete and return the wait time.
 
         Parameters
@@ -374,7 +391,13 @@ class Agent:
         self.rides_completed += 1
         self.boarded = False
         self.wait_start = None
-        self.log_event("ride_complete", time, wait_time=wait_time)
+        self.log_event(
+            "ride_complete",
+            time,
+            timestamp,
+            wait_time=wait_time,
+            wait_time_readable=f"{wait_time} minutes",
+        )
         return wait_time
 
     def __repr__(self) -> str:  # pragma: no cover - convenience
@@ -411,9 +434,13 @@ class ArrivalEvent(Event):
         """Enqueue the agent and possibly trigger boarding."""
 
         self.lift.enqueue(self.agent)
+        timestamp = (
+            simulation.start_datetime + timedelta(minutes=simulation.current_time)
+        ).isoformat()
         self.agent.log_event(
             "arrival",
             simulation.current_time,
+            timestamp,
             queue_length=self.lift.queue_length(),
             lift_state=self.lift.state,
         )
@@ -466,9 +493,14 @@ class BoardingEvent(Event):
         boarded = self.lift.load()
         for agent in boarded:
             agent.board_time = simulation.current_time
+            timestamp = (
+                simulation.start_datetime
+                + timedelta(minutes=simulation.current_time)
+            ).isoformat()
             agent.log_event(
                 "board",
                 simulation.current_time,
+                timestamp,
                 queue_length=self.lift.queue_length(),
                 lift_state=self.lift.state,
             )
@@ -522,7 +554,11 @@ class ReturnEvent(Event):
     def execute(self, simulation: Simulation) -> list[tuple[Event, int]]:
         """Mark the lift idle and trigger new boarding if needed."""
         for agent in self.boarded:
-            agent.finish_ride(simulation.current_time)
+            timestamp = (
+                simulation.start_datetime
+                + timedelta(minutes=simulation.current_time)
+            ).isoformat()
+            agent.finish_ride(simulation.current_time, timestamp)
         self.lift.mark_idle()
         for agent in self.boarded:
             self._log_agent_event(
@@ -538,7 +574,13 @@ class ReturnEvent(Event):
         return events
 # }}}
 
-def run_alpha_sim(n_agents: int, lift_capacity: int, cycle_time: int) -> dict:
+def run_alpha_sim(
+    n_agents: int,
+    lift_capacity: int,
+    cycle_time: int,
+    *,
+    start_datetime: datetime | None = None,
+) -> dict:
     """Run a minimal simulation and return basic metrics."""
 
     logger = Logger()
@@ -547,12 +589,16 @@ def run_alpha_sim(n_agents: int, lift_capacity: int, cycle_time: int) -> dict:
     agents = [Agent(i + 1, logger=logger) for i in range(n_agents)]
     arrival_times: list[int] = []
 
+    if start_datetime is None:
+        start_datetime = datetime(2025, 3, 12, 9, 0, 0)
+
     for i, agent in enumerate(agents):
         arrival_times.append(i)
-        agent.start_wait(i)
+        ts = (start_datetime + timedelta(minutes=i)).isoformat()
+        agent.start_wait(i, ts)
         sim.schedule(ArrivalEvent(agent, lift), i)
 
-    sim.run(logger=logger, full_agent_logging=True)
+    sim.run(logger=logger, full_agent_logging=True, start_datetime=start_datetime)
 
     total_wait = 0
     for agent, arrive in zip(agents, arrival_times):

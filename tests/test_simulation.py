@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 
 import pytest
+from datetime import datetime
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -24,7 +25,7 @@ def test_events_execute_in_time_order():
     sim.schedule(RecorderEvent('e1', log), 5)
     sim.schedule(RecorderEvent('e2', log), 1)
     sim.schedule(RecorderEvent('e3', log), 3)
-    sim.run()
+    sim.run(start_datetime=datetime(2025, 3, 12, 9, 0, 0))
     assert [label for label, _ in log] == ['e2', 'e3', 'e1']
     assert [time for _, time in log] == [1, 3, 5]
 
@@ -34,6 +35,6 @@ def test_tied_events_preserve_insertion_order():
     sim = Simulation()
     sim.schedule(RecorderEvent('first', log), 2)
     sim.schedule(RecorderEvent('second', log), 2)
-    sim.run()
+    sim.run(start_datetime=datetime(2025, 3, 12, 9, 0, 0))
     assert [label for label, _ in log] == ['first', 'second']
     assert [time for _, time in log] == [2, 2]

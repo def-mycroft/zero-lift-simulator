@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 
 import pytest
+from datetime import datetime
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -33,7 +34,7 @@ def test_single_agent_cycle():
             return events
 
     sim.schedule(LogArrivalEvent(agent, lift), 0)
-    sim.run()
+    sim.run(start_datetime=datetime(2025, 3, 12, 9, 0, 0))
 
     assert log == [
         ("arrival", "idle"),
