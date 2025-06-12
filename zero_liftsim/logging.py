@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from datetime import datetime
 
 
 class Logger:
@@ -33,6 +34,24 @@ class Logger:
         self._records.append(entry)
 
         self._file.write(json.dumps(entry) + "\n")
+        self._file.flush()
+
+    def devlog(self, message: str) -> None:
+        """Write a timestamped development message to the log file.
+
+        Parameters
+        ----------
+        message:
+            Arbitrary text to append to the log file.
+
+        Notes
+        -----
+        ``devlog`` only writes to the file; it does not modify
+        :pyattr:`_records`.
+        """
+
+        stamp = datetime.now().isoformat()
+        self._file.write(f"{stamp} {message}\n")
         self._file.flush()
 
     def records(self) -> list[dict]:

@@ -41,3 +41,21 @@ def test_logger_writes_file(tmp_path):
     with open(log_path, "r", encoding="utf-8") as f:
         lines = [json.loads(line) for line in f]
     assert lines == logger.records()
+
+
+def test_devlog_writes_message():
+    log_name = "dev_test.log"
+    logger = Logger(log_name)
+    logger.devlog("hello world")
+
+    log_path = Path(__file__).resolve().parents[1] / "logs" / log_name
+    assert log_path.exists()
+    with open(log_path, "r", encoding="utf-8") as f:
+        line = f.readline().strip()
+    ts, msg = line.split(" ", 1)
+    from datetime import datetime
+
+    # ensure timestamp parses and message matches
+    datetime.fromisoformat(ts)
+    assert msg == "hello world"
+    assert logger.records() == []
