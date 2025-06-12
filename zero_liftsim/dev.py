@@ -3,6 +3,7 @@ from __future__ import annotations
 """Developer utilities for zero-liftsim."""
 
 from pathlib import Path
+import re
 
 
 
@@ -20,15 +21,23 @@ def _title_from_filename(name: str) -> str:
     return base.title()
 
 
+_PROMPT_RE = re.compile(r"^prompt[_-]?(\d+)")
+
+
+def _prompt_number(path: Path) -> int:
+    """Return the integer prompt index extracted from ``path``."""
+    match = _PROMPT_RE.match(path.stem)
+    if match:
+        return int(match.group(1))
+    return -1
+
+
 def generate_docs_toc() -> str:
     """Generate a Markdown table of contents for Markdown files in ``docs``."""
     docs_dir = Path(__file__).resolve().parent.parent / "docs"
     main_paths: list[Path] = sorted(docs_dir.glob("main_notes*md"))
     prompt_paths = list(docs_dir.glob("prompt*md"))
-    prompt_paths.sort(
-        key=lambda p: int(p.stem.split("_", 1)[0].replace("prompt", "")),
-        reverse=True,
-    )
+    prompt_paths.sort(key=_prompt_number, reverse=True)
     other_paths: list[Path] = []
 
     used = set(main_paths) | set(prompt_paths)

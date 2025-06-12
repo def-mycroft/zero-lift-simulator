@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+import re
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -27,6 +28,10 @@ def test_new_doc_creates_file(tmp_path):
 def test_generate_docs_toc_includes_all_prompts():
     toc = dev.generate_docs_toc()
     prompt_lines = [l for l in toc.splitlines() if l.startswith("- [prompt")]
-    # ensure prompt99 appears first when sorted descending
-    assert prompt_lines[0].startswith("- [prompt9")
+    numbers = []
+    for line in prompt_lines:
+        link = line.split("(")[1].split(")")[0]
+        num = int(re.search(r"prompt[_-]?(\d+)", link).group(1))
+        numbers.append(num)
+    assert numbers == sorted(numbers, reverse=True)
     assert len(prompt_lines) >= 10
