@@ -1,11 +1,10 @@
-# Research Prompt: Business Value from LiftSim
+# Research Output: Business Value from LiftSim
 
 random codename: ajar-visit fe771a0e
 
 ***
 
-# Research Prompt: Business-Relevant Leverage in Agent-Based Simulation
-
+# Article
 ## Introduction
 
 LiftSim is an agent-based, discrete-event simulation modeling how skiers queue, board, ride, and cycle through a ski lift. By tracking each skier (“agent”) and each lift event, LiftSim produces detailed logs of wait times, lift usage, and throughput. These outputs hold direct relevance for ski resort operations: excessive lift queues and long wait times can erode customer satisfaction, loyalty, and even the economic viability of a resort. Conversely, efficient lift operations (moving skiers up the mountain quickly and consistently) maximize guests’ time on the slopes, enhancing perceived value. This research examines how LiftSim’s existing outputs already map to key business **KPIs** and decision points, and identifies what further developments would elevate it into a robust decision-support tool. The goal is a pragmatic analysis that bridges simulation metrics with real operational and financial decisions – initially in the ski domain, with analogous lessons from theme parks, transport, and logistics. The tone remains analytical and concrete, focusing on actionable insights rather than theoretical exposition.
