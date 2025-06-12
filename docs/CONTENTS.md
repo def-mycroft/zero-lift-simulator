@@ -17,6 +17,7 @@
 - [How to Add Wiki Articles](adding_wiki_articles.md)
 - [Running the Alpha Simulation](alpha_sim_usage.md)
 - [Best Practices for Coding with Codex](best_practices_coding_with_codex.md)
+- [Bugfix with Logger Filepath](bugfix_logger_filepath_finish.md)
 - [Dev Snippets](dev_snippets.md)
 - [Docstring Style Guide](docstring_style_guide.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
