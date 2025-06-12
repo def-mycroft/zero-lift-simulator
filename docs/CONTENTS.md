@@ -15,6 +15,7 @@
 - [prompt4 - alpha simulation and logging](prompt4_implement_alpha_sim.md)
 - [prompt5 - full agent logging](prompt5_full_agent_logging.md)
 - [prompt6 - agent logging](prompt6_agent_logging.md)
+- [prompt7 - simulation datetime logging](prompt7_simulation_datetime.md)
 
 ## Articles
 - [How to Add Wiki Articles](adding_wiki_articles.md)
@@ -34,10 +35,9 @@
 - [Git Tools](git-tools.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
 - [Project Questions stingy-orange - answered](project_questions_orange.md)
-- [Unstructured Thoughts - abstract motivations of simulation](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
+- [Simulation Motivations](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
 - [Styleguide for Wiki Articles](styleguide_wiki_articles.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
-- [prompt7 - simulation datetime logging](prompt7_simulation_datetime.md)
 - [Updating Dependencies](updating_dependencies.md)
 - [Wiki Article Creation Instructions for Codex](wiki_article_creation_for_codex.md)
 - [Article Title](wiki_article_template.md)
