@@ -412,6 +412,13 @@ class ArrivalEvent(Event):
             queue_length=self.lift.queue_length(),
             lift_state=self.lift.state,
         )
+        self._log_agent_event(
+            simulation,
+            self.agent,
+            "arrival",
+            queue_length=self.lift.queue_length(),
+            lift_state=self.lift.state,
+        )
         events: list[tuple[Event, int]] = []
         if self.lift.state == "idle":
             events.append((BoardingEvent(self.lift), simulation.current_time))
@@ -460,6 +467,13 @@ class BoardingEvent(Event):
                 queue_length=self.lift.queue_length(),
                 lift_state=self.lift.state,
             )
+            self._log_agent_event(
+                simulation,
+                agent,
+                "board",
+                queue_length=self.lift.queue_length(),
+                lift_state=self.lift.state,
+            )
         if boarded:
             return [
                 (
@@ -505,7 +519,7 @@ class ReturnEvent(Event):
         for agent in self.boarded:
             agent.finish_ride(simulation.current_time)
         self.lift.mark_idle()
-        for agent in riders:
+        for agent in self.boarded:
             self._log_agent_event(
                 simulation,
                 agent,
