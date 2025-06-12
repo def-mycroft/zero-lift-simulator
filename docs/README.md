@@ -19,4 +19,4 @@ Welcome to the project wiki. Navigate using the links below:
 - [Checkpoint - Primary Classes Implemented - pink-walk](main_notes_checkpoint_prim_classes.md)
 - [Running the Alpha Simulation](alpha_sim_usage.md)
 
-- [Project Questions](project_questions.md)
+- [Project Questions](project_questions_orange.md)

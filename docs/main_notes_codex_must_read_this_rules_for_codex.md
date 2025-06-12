@@ -22,3 +22,12 @@ This guide is present in "docs/" and should be used when editing docstrings.
 If something is changed about a method or class, the docstring should prob be
 updated to reflect this.  
 
+## Pay special attention to "for codex"
+
+if you see something here that uses the phrase "for codex", it is probably meant for you to read and adhere to. 
+
+## follow the wiki article creation article 
+
+be esp sure to follow instructions here: [[zero/999-chaotic/zero-liftsim-docs/wiki_article_creation_for_codex|wiki_article_creation_for_codex]]
+
+
