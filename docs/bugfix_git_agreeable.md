@@ -83,4 +83,7 @@ m on  main is 📦 v0.1.0 via 🐍 v3.11.8 via 🅒 zero
 ```
 
 
-apply a fix. this might be an misudnersatnding of how GitPython works? 
+apply a fix. this might be an misudnersatnding of how GitPython works?
+# Git Info
+Commit: 983ae79d0267b2084002bcc14db39e6b34e8c2ef
+Date: 2025-06-12T10:32:25-07:00

@@ -20,3 +20,6 @@ Welcome to the project wiki. Navigate using the links below:
 - [Running the Alpha Simulation](alpha_sim_usage.md)
 
 - [Project Questions](project_questions_orange.md)
+# Git Info
+Commit: 29d1fd93b3593a909bd51c980bf2b1d4d33a8310
+Date: 2025-06-12T07:01:38-07:00

@@ -29,5 +29,6 @@ if you see something here that uses the phrase "for codex", it is probably meant
 ## follow the wiki article creation article 
 
 be esp sure to follow instructions here: [[zero/999-chaotic/zero-liftsim-docs/wiki_article_creation_for_codex|wiki_article_creation_for_codex]]
-
-
+# Git Info
+Commit: 29d1fd93b3593a909bd51c980bf2b1d4d33a8310
+Date: 2025-06-12T07:01:38-07:00

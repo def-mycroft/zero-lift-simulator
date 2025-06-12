@@ -68,4 +68,6 @@ If you’re generating or expanding code from these notes:
 
 ---
 This document should be included in the repo as a core reference alongside the initial kernel module and expanded incrementally as the project grows.
-
+# Git Info
+Commit: c936e3318795d8493c35cb3f8299b583141a5be0
+Date: 2025-06-11T08:52:59-07:00

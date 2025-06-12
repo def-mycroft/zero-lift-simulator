@@ -38,5 +38,7 @@ This article lists open questions about the project to clarify next steps and en
 
 3. Are there preferred patterns for handling event scheduling and logging that we should standardize? - would just like to standardize a pattern 
 4. What performance characteristics are most critical to measure as we expand functionality? - really, biggest thing is intrepretability and clarity. codex is writing nice code and it seems to be working; but the biggest friction I have is that I don't really, like, know what the agents are doing. that is why I've been adding logging features etc. 
-5. Are there any integrations (e.g., with external data sources) planned for future development? - nothing planned. doesn't seem very likely. 
-
+5. Are there any integrations (e.g., with external data sources) planned for future development? - nothing planned. doesn't seem very likely.
+# Git Info
+Commit: 5150480b4bc79fba87833d812b9ff27b7a7f7ba9
+Date: 2025-06-12T10:16:58-07:00

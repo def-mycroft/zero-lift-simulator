@@ -81,3 +81,6 @@ Recursive prompts compound ambiguity quickly. If a request has multiple possible
 ## purpose of this document
 
 This file isn’t for rules enforcement or template rigidity. It’s a scratchpad of insights meant to reduce friction in recursive prompting. Treat it as alive, informal, and adaptive. If something in a session feels like it belongs in here, bring it up. I want this to evolve alongside my workflow.
+# Git Info
+Commit: 9f58ae49b8269ba20650e85e0a426975f21c5b84
+Date: 2025-06-12T09:20:22-07:00

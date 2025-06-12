@@ -16,5 +16,6 @@ These classes now allow a basic discrete‑event cycle of agents arriving, board
 ## Next Steps
 
 The immediate goal is to run a very simple "alpha" simulation that exercises this cycle end‑to‑end. To verify agent behavior in detail, a **logging mode** will be added. This mode can capture per‑event information—such as queue length, cycle start/finish times, and each agent's wait time and ride count—even if it slows down large runs. Further down the road, more robust data logging and experiment tracking will be introduced so results can be analyzed or persisted.
-
-
+# Git Info
+Commit: 7e5a82fe4c0a267340e3ce7526811a76490a895c
+Date: 2025-06-11T13:29:18-07:00

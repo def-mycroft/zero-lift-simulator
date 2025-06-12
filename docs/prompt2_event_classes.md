@@ -39,4 +39,6 @@ Implement the event classes in `zero_liftsim/main.py`. `Simulation` and `Lift` a
 - Add unit tests covering an agent arriving, boarding, and the lift returning using the `Simulation` engine.
 - Ensure the lift state transitions from `idle` → `moving` → `idle` and that events execute in order.
 - Run `pytest` to confirm all tests pass before committing.
-
+# Git Info
+Commit: c936e3318795d8493c35cb3f8299b583141a5be0
+Date: 2025-06-11T08:52:59-07:00

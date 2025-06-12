@@ -41,4 +41,6 @@ run.
 - Confirm that simulations run without this flag do not produce the agent log.
 - Follow the guidance in `docs/best_practices_coding_with_codex.md` and run
   `pytest` before committing.
-
+# Git Info
+Commit: 5de18aa7b74b06096b9ab32fc8cf8880d2c9e262
+Date: 2025-06-12T05:33:01-07:00

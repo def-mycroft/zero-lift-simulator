@@ -55,3 +55,6 @@ Best Practices
 Follow docs/best_practices_coding_with_codex.md: small, testable methods, clear docstrings, and run pytest before committing.
 
 This continues the work started with the “Simulation” class implementation.
+# Git Info
+Commit: c936e3318795d8493c35cb3f8299b583141a5be0
+Date: 2025-06-11T08:52:59-07:00

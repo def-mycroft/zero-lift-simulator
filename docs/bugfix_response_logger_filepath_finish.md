@@ -9,3 +9,6 @@ the file contained additional lines and the equality check failed.
 The fix updates `Logger.__init__` to open the target log file in write mode.
 Starting with an empty file ensures that the in-memory records match the
 contents written to disk for each run.
+# Git Info
+Commit: de07e4fbdd656be0f457f57718f565d959bc2d2f
+Date: 2025-06-11T18:38:06-07:00

@@ -58,3 +58,6 @@ The file ``logs/debug.log`` will contain a line similar to::
 ```
 2025-06-19T12:00:00 initializing setup
 ```
+# Git Info
+Commit: 2123fb0b47c5df266f76bdbf8a0f945c1fcc72b6
+Date: 2025-06-11T18:41:52-07:00

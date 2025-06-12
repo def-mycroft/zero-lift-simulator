@@ -11,3 +11,6 @@ Follow these steps whenever you need to add or upgrade a library.
 
 Keeping dependencies pinned in version control makes setups reproducible
 and prevents missing package errors like the one shown in `bugfix_add_deps.md`.
+# Git Info
+Commit: 2f5068fc8f8197674c649acc355f43d152959939
+Date: 2025-06-11T19:35:01-07:00

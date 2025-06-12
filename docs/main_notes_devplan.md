@@ -202,3 +202,6 @@ Add parameterizable experiments, scenario variants, and agent-specific heuristic
 ---
 
 Let me know when you’re ready to prompt Codex and want help crafting the first focused implementation prompt (e.g. `Simulation.run()` or `Lift.load()`), or when you're ready to design the sim entry point and test harness.
+# Git Info
+Commit: c936e3318795d8493c35cb3f8299b583141a5be0
+Date: 2025-06-11T08:52:59-07:00

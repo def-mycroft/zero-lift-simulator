@@ -39,4 +39,6 @@ The key idea is to treat Codex as a collaborator that works best with tightly sc
 ## Why This Works
 
 Writing prompts in the repo keeps a persistent record of what Codex was asked to do. The codename reference allows complex instructions to be reused without pasting them repeatedly. By layering small changes and documenting context, the developer can evolve the simulator while maintaining clarity and test coverage.
-
+# Git Info
+Commit: 43db73f7df84193785b045c7924387d0090ba6e5
+Date: 2025-06-12T10:20:31-07:00

@@ -68,4 +68,7 @@ more literally, right now, we have:
 
 ...analyze this codebase and write a prompt for codex which describes what is to be implemented and how it will be implemented. 
 
-also, when running the simulation, we wnt to be able to specify when it starts (default 9am on 2025-03-12). 
+also, when running the simulation, we wnt to be able to specify when it starts (default 9am on 2025-03-12).
+# Git Info
+Commit: 5150480b4bc79fba87833d812b9ff27b7a7f7ba9
+Date: 2025-06-12T10:16:58-07:00

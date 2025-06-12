@@ -38,4 +38,7 @@ note: "kernel" here is meant to indicate that the idea is that this could become
 ## documentation 
 
 
-after the above, write a documentation article in `docs/` which describes how to run the alpha sim and to understand what is being logged and retrieve some basic simulation data. this example needs to be something that runs very quickly, ideally seconds. just big enough to be functional. 
+after the above, write a documentation article in `docs/` which describes how to run the alpha sim and to understand what is being logged and retrieve some basic simulation data. this example needs to be something that runs very quickly, ideally seconds. just big enough to be functional.
+# Git Info
+Commit: 547ecf2650ddc7774c93dbc156f587bb2b7674ed
+Date: 2025-06-11T14:05:12-07:00

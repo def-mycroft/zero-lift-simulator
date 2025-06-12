@@ -103,4 +103,7 @@ m on  main [!?] is 📦 v0.1.0 via 🐍 v3.11.8 via 🅒 zero
 
 --- I would like to use codenamize and other packages that are common to use.
 write a wiki article in docs/ which describe how to update deps. also fix this
-codenamize dep. 
+codenamize dep.
+# Git Info
+Commit: 9d55db8493a91cbaf5fdc4ed07c26e6c9490db58
+Date: 2025-06-12T04:34:11-07:00

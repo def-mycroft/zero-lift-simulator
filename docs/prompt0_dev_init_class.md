@@ -44,3 +44,6 @@ Coding Practices
 Follow the “Best Practices for Coding with Codex” guide in docs/best_practices_coding_with_codex.md—small, testable units, proper docstrings, and reviewing diffs before committing.
 
 With these steps you will create a minimal but functional simulation engine to support the other classes.
+# Git Info
+Commit: c936e3318795d8493c35cb3f8299b583141a5be0
+Date: 2025-06-11T08:52:59-07:00
