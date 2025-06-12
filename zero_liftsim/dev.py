@@ -24,19 +24,19 @@ def generate_docs_toc() -> str:
     """Generate a Markdown table of contents for Markdown files in ``docs``."""
     docs_dir = Path(__file__).resolve().parent.parent / "docs"
     main_paths: list[Path] = sorted(docs_dir.glob("main_notes*md"))
-    prompt_paths: list[Path] = []
+    prompt_paths = list(docs_dir.glob("prompt*md"))
+    prompt_paths.sort(
+        key=lambda p: int(p.stem.split("_", 1)[0].replace("prompt", "")),
+        reverse=True,
+    )
     other_paths: list[Path] = []
 
+    used = set(main_paths) | set(prompt_paths)
     for path in sorted(docs_dir.glob("*.md")):
         name = path.name.lower()
-        if name in {"readme.md", "contents.md"}:
+        if name in {"readme.md", "contents.md"} or path in used:
             continue
-        if path in main_paths:
-            continue
-        if path.stem.lower().startswith("prompt"):
-            prompt_paths.append(path)
-        else:
-            other_paths.append(path)
+        other_paths.append(path)
 
     lines = []
     lines.append("## Main Notes")

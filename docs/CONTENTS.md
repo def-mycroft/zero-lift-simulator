@@ -9,17 +9,17 @@
 - [Initial Develop Description - Zero Lift Simulator](main_notes_implementation.md)
 
 ## Prompt Articles
-- [prompt0 - simulation class](prompt0_dev_init_class.md)
-- [prompt9 - Implement Multi-Lift Setup stimulating-divide 3437c905](prompt10_multi_lift_sim.md)
-- [prompt1 - lift class](prompt1_implement_lift.md)
-- [prompt2 - event classes](prompt2_event_classes.md)
-- [prompt3 - agent class](prompt3_agent_class.md)
-- [prompt4 - alpha simulation and logging](prompt4_implement_alpha_sim.md)
-- [prompt5 - full agent logging](prompt5_full_agent_logging.md)
-- [prompt6 - agent logging](prompt6_agent_logging.md)
-- [prompt7 - simulation datetime logging](prompt7_simulation_datetime.md)
+- [prompt9 - clock simulation runtime](prompt99_clock_simulation_runtime.md)
+- [prompt10 - Implement Multi-Lift Setup stimulating-divide 3437c905](prompt10_multi_lift_sim.md)
 - [prompt8 - Implement AgentExperience class](prompt8_time_distribution_enhancement.md)
-- [prompt99 - clock simulation runtime](prompt99_clock_simulation_runtime.md)
+- [prompt7 - simulation datetime logging](prompt7_simulation_datetime.md)
+- [prompt6 - agent logging](prompt6_agent_logging.md)
+- [prompt5 - full agent logging](prompt5_full_agent_logging.md)
+- [prompt4 - alpha simulation and logging](prompt4_implement_alpha_sim.md)
+- [prompt3 - agent class](prompt3_agent_class.md)
+- [prompt2 - event classes](prompt2_event_classes.md)
+- [prompt1 - lift class](prompt1_implement_lift.md)
+- [prompt0 - simulation class](prompt0_dev_init_class.md)
 
 ## Articles
 - [How to Add Wiki Articles](adding_wiki_articles.md)
@@ -50,5 +50,3 @@
 - [Updating Dependencies](updating_dependencies.md)
 - [Wiki Article Creation Instructions for Codex](wiki_article_creation_for_codex.md)
 - [Article Title](wiki_article_template.md)
-
-*** 
