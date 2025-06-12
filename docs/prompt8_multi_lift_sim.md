@@ -1,8 +1,10 @@
-# Prompt for Codex: Implement Multi-Lift Setup stimulating-divide 3437c905
+# prompt8 - Implement Multi-Lift Setup stimulating-divide 3437c905
 
 random codename: stimulating-divide 3437c905
 
 *** 
+
+
 
 
 You're working in the `zero-lift-simulator` codebase to implement a **Multi-Lift Simulation Prototype** that models a fixed two-lift network with agent routing between them. The goal is to evolve LiftSim from a single-lift simulation into a minimal-but-functional **lift network simulator**, enabling the system to demonstrate network-level congestion and throughput dynamics.
@@ -11,7 +13,7 @@ This is an **intermediate prototype**, not a full generalization. Focus on concr
 
 ### Update Scope
 
-* Modify the simulation engine so that it can model **two lifts**, `L1` and `L2`, with agents routed from `L1` to `L2` after completing a full ride-cycle on each.
+* Modify the simulation engine so that it can model **three lifts**, `L1` and `L2` and `L3`, with agents routed from `L1` to `L2` after completing a full ride-cycle on each.
 * Hardcode the route: all agents begin at `L1`, ride it, descend (fixed delay), queue for `L2`, ride it, descend (fixed delay), and repeat.
 * Extend the `Agent` class to track which lift the agent is headed to next (`.next_lift_id` or similar).
 * Extend the event system (`Event`, `BoardingEvent`, etc.) so each event is scoped to a specific lift (e.g., include a `lift_id`).
