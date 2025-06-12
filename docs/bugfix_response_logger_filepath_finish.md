@@ -1,4 +1,4 @@
-# Logger Filepath Bugfix Response
+# Bugfix Response - Logger Filepath finish
 
 In `tests/test_alpha_sim.py::test_logger_writes_file`, the assertion failed
 because the log file retained entries from earlier runs. The `Logger` class

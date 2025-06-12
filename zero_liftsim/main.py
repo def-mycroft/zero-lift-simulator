@@ -250,7 +250,7 @@ class Agent:
         Number of lift rides completed by the agent.
     # }}}
     """
-    def __init__(self, agent_id: int) -> None:
+    def __init__(self, agent_id: int, logger=None) -> None:
         self.agent_id = agent_id
         self.boarded: bool = False
         self.wait_start: int | None = None
@@ -411,7 +411,7 @@ def run_alpha_sim(n_agents: int, lift_capacity: int, cycle_time: int) -> dict:
     logger = Logger()
     sim = Simulation()
     lift = Lift(lift_capacity, cycle_time)
-    agents = [Agent(i + 1) for i in range(n_agents)]
+    agents = [Agent(i + 1, logger=logger) for i in range(n_agents)]
     arrival_times: list[int] = []
 
     for i, agent in enumerate(agents):
@@ -428,7 +428,7 @@ def run_alpha_sim(n_agents: int, lift_capacity: int, cycle_time: int) -> dict:
 
     avg_wait = total_wait / n_agents if n_agents > 0 else 0
 
-    return {"total_rides": n_agents, "average_wait": avg_wait}
+    return {"total_rides": n_agents, "average_wait": avg_wait, "agents": agents}
 
 
 def run(args) -> None:
