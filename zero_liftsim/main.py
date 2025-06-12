@@ -12,6 +12,9 @@ except ModuleNotFoundError:  # pragma: no cover - fallback for environments with
         """Simplistic fallback that returns the first eight characters."""
         return value[:8]
 from collections import deque
+from random import gauss
+
+from .agent import Agent
 
 from .logging import Logger
 
@@ -184,6 +187,20 @@ class Lift:
         self.queue: deque[Agent] = deque()
         self.state: str = "idle"
         self.current_riders: list[Agent] = []
+        self.ride_mean = 7
+        self.ride_sd = 1
+        self.traverse_mean = 5
+        self.traverse_sd = 1.5
+
+    def time_cost_ride_lift(self) -> float:
+        """Sample the time to ride the lift."""
+
+        return max(1, gauss(self.ride_mean, self.ride_sd))
+
+    def time_cost_traverse_down_mountain(self) -> float:
+        """Sample the time to ski down from the lift."""
+
+        return max(1, gauss(self.traverse_mean, self.traverse_sd))
 
     # -- queue operations -------------------------------------------------
     def enqueue(self, agent: Agent) -> None:
@@ -300,109 +317,6 @@ class Event:
         )
 # }}}
 
-class Agent:
-    """Represents an individual skier within the simulation.
-    # {{{
-
-    # {{{
-    Each agent tracks its interaction with the lift system, including
-    wait times, boarding events, and the number of completed rides. This
-    class supports state updates necessary to compute performance metrics
-    such as total wait time and ride count.
-
-    Parameters
-    ----------
-    agent_id : int
-        Unique identifier assigned to the agent.
-
-    Attributes
-    ----------
-    agent_id : int
-        Identifier for the agent instance.
-    boarded : bool
-        Whether the agent is currently on the lift.
-    wait_start : int or None
-        Simulation time when the agent began waiting in the queue.
-    board_time : int or None
-        Time at which the agent boarded the lift.
-    rides_completed : int
-        Number of lift rides completed by the agent.
-    # }}}
-    """
-    def __init__(
-        self,
-        agent_id: int,
-        logger: "Logger" | None = None,
-        self_logging: bool = True,
-    ) -> None:
-        self.agent_id = agent_id
-        self.agent_uuid = str(uuid())
-        self.agent_uuid_codename = codenamize(self.agent_uuid)
-        self.boarded: bool = False
-        self.wait_start: int | None = None
-        self.board_time: int | None = None
-        self.rides_completed: int = 0
-        self.self_logging = self_logging
-        self.activity_log: dict[int, dict] = {}
-        if logger is not None:
-            logger.devlog(
-                f"init agent {self.agent_uuid} {self.agent_uuid_codename}"
-            )
-            self.logger = logger
-
-    def log_event(self, event: str, time: int, timestamp: str, **info) -> None:
-        """Append a record to :pyattr:`activity_log` if self logging is enabled."""
-
-        if not self.self_logging:
-            return
-        record = {
-            "time": timestamp,
-            "time_offset": time,
-            "event": event,
-            "agent_id": self.agent_id,
-            "agent_uuid": self.agent_uuid,
-            "agent_uuid_codename": self.agent_uuid_codename,
-        }
-        record.update(info)
-        self.activity_log[len(self.activity_log)] = record
-
-    def start_wait(self, time: int, timestamp: str) -> None:
-        """Record the time the agent begins waiting in the queue."""
-
-        self.wait_start = time
-        self.log_event("start_wait", time, timestamp)
-
-    def finish_ride(self, time: int, timestamp: str) -> int:
-        """Mark the current ride complete and return the wait time.
-
-        Parameters
-        ----------
-        time:
-            Timestamp when the ride finishes.
-
-        Returns
-        -------
-        int
-            The wait time experienced for this ride.
-        """
-
-        wait_start = self.wait_start if self.wait_start is not None else time
-        wait_time = time - wait_start
-        self.rides_completed += 1
-        self.boarded = False
-        self.wait_start = None
-        self.log_event(
-            "ride_complete",
-            time,
-            timestamp,
-            wait_time=wait_time,
-            wait_time_readable=f"{wait_time} minutes",
-        )
-        return wait_time
-
-    def __repr__(self) -> str:  # pragma: no cover - convenience
-        return f"Agent({self.agent_id})"
-# }}}
 
 class ArrivalEvent(Event):
     """Event representing a skier's arrival at the lift queue.
@@ -493,6 +407,7 @@ class BoardingEvent(Event):
         boarded = self.lift.load()
         for agent in boarded:
             agent.board_time = simulation.current_time
+            agent._ride_duration = self.lift.time_cost_ride_lift()
             timestamp = (
                 simulation.start_datetime
                 + timedelta(minutes=simulation.current_time)
@@ -554,11 +469,22 @@ class ReturnEvent(Event):
     def execute(self, simulation: Simulation) -> list[tuple[Event, int]]:
         """Mark the lift idle and trigger new boarding if needed."""
         for agent in self.boarded:
-            timestamp = (
+            timestamp_dt = (
                 simulation.start_datetime
                 + timedelta(minutes=simulation.current_time)
-            ).isoformat()
-            agent.finish_ride(simulation.current_time, timestamp)
+            )
+            queue_duration = 0
+            if agent.wait_start is not None and agent.board_time is not None:
+                queue_duration = agent.board_time - agent.wait_start
+            ride_dur = getattr(agent, "_ride_duration", self.lift.cycle_time)
+            traverse_dur = self.lift.time_cost_traverse_down_mountain()
+            agent.rideloop.add_entry(
+                timestamp_dt,
+                ride_dur,
+                traverse_dur,
+                queue_duration,
+            )
+            agent.finish_ride(simulation.current_time, timestamp_dt.isoformat())
         self.lift.mark_idle()
         for agent in self.boarded:
             self._log_agent_event(
