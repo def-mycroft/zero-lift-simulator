@@ -4,97 +4,49 @@ random codename: ajar-visit fe771a0e
 
 ***
 
-This prompt initiates a deep research project into the strategic business applications of LiftSim, an agent-based simulation engine modeling skier-lift interactions at resorts. The research is oriented toward identifying high-leverage opportunities where LiftSim’s outputs can be mapped to key operational or financial decisions, especially in environments where human throughput, queuing, and physical infrastructure are tightly coupled.
+# Research Prompt: Business-Relevant Leverage in Agent-Based Simulation
 
-This project is part of a broader technical portfolio, and its outputs will be publicly viewable. The intention is to demonstrate how simulation—when paired with data science tools and business fluency—can generate decision-relevant insight for real-world operations teams. The downstream report will balance analytical rigor with business relevance and is designed to engage readers from both technical and managerial backgrounds.
+This research project investigates how LiftSim—an agent-based, event-driven simulation of skier-lift interactions—can be applied to generate decision-relevant insights in real-world operational contexts. The simulation models the microdynamics of skiers queuing, boarding, and cycling through lift infrastructure, and produces output logs suitable for downstream analysis. The goal of this research is to identify where such outputs intersect meaningfully with operational, financial, or strategic decisions—initially within the ski resort domain, but with full awareness of analogous use cases in logistics, entertainment, and transport infrastructure.
 
-## Research Focus
+This research is part of a broader technical portfolio. It will be publicly viewable and may be of interest to business stakeholders evaluating simulation tools, data science leads assessing product sense, or operations professionals exploring ways to increase throughput, reduce bottlenecks, or justify capital decisions. The deliverable will be structured to support both technical interpretation and business relevance, and will avoid speculative or abstract theorizing in favor of directly actionable framing.
 
-The central question is: _Where does LiftSim generate business-relevant signal, and how could the tool be extended to deepen that impact?_
+## Objective
 
-You will investigate the current simulation structure, its agent/event mechanics, and its output data. Then, identify specific scenarios where these outputs could inform pricing, labor, investment, or marketing strategies. The end goal is to articulate a set of compelling use cases that would resonate with resort operators, operations researchers, or cross-functional data science teams evaluating the feasibility of simulation-driven decision support.
+Determine where LiftSim already produces usable business signal and what technical or analytical extensions would increase its value as a decision-support tool. The project will emphasize points of contact between simulation output and high-leverage operational KPIs, such as capacity utilization, queueing delays, and service timing. Research will focus on practical use cases that connect simulation metrics to business actions—pricing, staffing, infrastructure design, and strategic planning.
 
-## Contextual Orientation
+## Orientation
 
-This simulation tool is inspired by real-world resort operations but is not limited to the ski industry. Analogous domains include transportation, event logistics, urban mobility, and entertainment infrastructure—any setting where capacity planning, human flow, and service timing intersect. Preference should be given to domains with large operational lever arms: where small changes in throughput, queue experience, or resource allocation yield meaningful business results.
+This work assumes the reader may be a resort operations leader, a technically literate COO, or an analyst working within an operations-heavy company—possibly in the ski industry, but not necessarily. A secondary audience includes hiring managers or collaborators evaluating the business potential of simulation-based analytics. The research should therefore demonstrate fluency across technical modeling, applied decision-making, and cross-domain analogy. It should not assume or require deep prior familiarity with simulation methods.
 
-## Strategic Objectives
+## Research Questions
 
-- Analyze LiftSim’s core outputs and determine which are already suitable for business analytics use.
-    
-- Identify gaps in LiftSim’s internal modeling that currently limit business interpretability.
-    
-- Evaluate extensions to the simulation engine or post-processing analytics that could close those gaps.
-    
-- Frame each finding or recommendation as a hypothesis about potential business value or decision impact.
-    
+1. What operational or financial decisions could LiftSim plausibly inform today, given its current implementation?
+2. Which existing simulation outputs (e.g. time-in-queue, lift cycle timing, interarrival gaps, rider throughput) map most directly to business KPIs?
+3. What data would be required to calibrate LiftSim for credible use in real-world planning or forecasting scenarios?
+4. What simulation or logging extensions would significantly increase LiftSim’s business relevance (e.g. weather models, agent preference variation, cost modeling, pricing response)?
+5. What transferable insights from analogous domains—theme parks, transit systems, logistics hubs—can inform LiftSim’s evolution and its practical utility?
 
-## Primary Research Questions
+## Research Tasks
 
-1. What real-world decisions—operational, strategic, or financial—could LiftSim plausibly inform today?
-    
-2. Which LiftSim outputs (e.g. time-in-queue, ride distribution, inter-arrival gaps) correlate with high-value KPIs in resort or service infrastructure settings?
-    
-3. What data would be needed to calibrate LiftSim for credible operational use?
-    
-4. What extensions (e.g. behavioral agent types, weather integration, pricing feedback loops) would significantly increase LiftSim’s business relevance?
-    
-5. What lessons or analogs from simulation in other industries could guide LiftSim’s development?
-    
+* Analyze the LiftSim source code and `docs/` materials to identify its current modeling structure, event loop behavior, and logging logic.
+* Catalog all metrics currently produced and assess which are natively interpretable in a business context.
+* Review simulation-relevant literature from operations-heavy fields, emphasizing where discrete-event models have informed tactical or strategic decisions.
+* Propose a short list of compelling business use cases, ideally grounded in plausible real-world settings.
+* Rank proposed extensions by estimated impact on simulation interpretability and decision utility.
+* Summarize cross-industry analogs where similar simulation models have produced measurable ROI or operational leverage.
 
-## Research Artifacts
+## Output Expectations
 
-You have access to:
+* A 2–3 page report structured for clarity and rigor, appropriate for a reader with either technical or business background.
+* A short ranked list of proposed feature or modeling extensions, with rationale grounded in business impact.
+* A brief section on analogs from other industries, structured to surface design principles, not just domain similarity.
+* Optional: visualizations, sample dashboards, or log excerpts that clarify how LiftSim outputs could be read as KPIs.
 
-- Full LiftSim source code and CLI interface.
-    
-- Example usage logs and developer notes (`logs/`, `notebooks/`).
-    
-- Design rationale and development planning documents (`docs/`), including:
-    
-    - Simulation Modeling Book Notes
-        
-    - Prompt history and modular design breakdowns
-        
-    - Codex interaction styleguides and architecture commentary
-        
+## Tone and Framing
 
-Use these materials to develop an internal model of LiftSim’s design constraints and narrative logic.
+The report should be written in a dry, precise, analytical tone. It should be visibly authored by someone fluent in both modeling systems and applied analytics but should not explicitly refer to the author. Any implied marketing should come solely from the coherence and relevance of the insights, not from promotional language. The writing should aim for clarity, conciseness, and transferability.
 
-## Tasks
+## Strategic Use
 
-- Review the codebase to understand the simulation loop, event queues, and agent actions.
-    
-- Catalog current outputs and assess their applicability to business decision-making.
-    
-- Survey operations literature across skiing, logistics, and theme parks for use-case inspiration.
-    
-- Propose a small set of realistic use cases for LiftSim that would be compelling to a business stakeholder.
-    
-- Rank possible feature extensions by estimated business value.
-    
-
-## Expected Outputs
-
-- A 2–3 page report suitable for technical or business leadership review.
-    
-- A ranked table of proposed features/extensions and their rationale.
-    
-- A cross-industry analogs section summarizing transferable simulation strategies.
-    
-- Optional: visualizations or dashboard mockups of LiftSim outputs mapped to business KPIs.
-    
-
-## Orientation Toward Hiring
-
-This deep research project is part of a broader public portfolio. Its goal is not only to refine LiftSim itself, but to illustrate the researcher's ability to:
-
-- Translate simulation outputs into business insight.
-    
-- Guide development with a clear understanding of strategic value.
-    
-- Operate across technical and managerial boundaries in applied analytics contexts.
-    
-
-While not explicitly promotional, the final report should be crafted with the awareness that it may be read by professionals in hiring or leadership roles assessing simulation maturity, business modeling capability, or cross-functional product thinking.
+This research is not purely academic. It serves as a publicly visible demonstration of how a technical simulation can be positioned as a decision-support system. It may function as a portfolio artifact for evaluating candidates capable of simulation-aware product thinking, or as a conversation starter for applied analytics roles with operational depth. The document will live alongside the LiftSim codebase and is intended to withstand scrutiny from both engineering teams and operational strategists.
 
