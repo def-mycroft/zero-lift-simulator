@@ -22,6 +22,7 @@
 
 ## Articles
 - [How to Add Wiki Articles](adding_wiki_articles.md)
+- [Agent Experience](agent-experience.md)
 - [Running the Alpha Simulation](alpha_sim_usage.md)
 - [As a Human: How to Code with Codex](as_a_human_how_to_code_with_codex.md)
 - [Best Practices for Coding with Codex](best_practices_coding_with_codex.md)
@@ -35,12 +36,14 @@
 - [Dev Snippets](dev_snippets.md)
 - [Development Reference for Prompts](development_ref_for_prompts.md)
 - [Docstring Style Guide](docstring_style_guide.md)
+- [codex: Maintain SimulationManager Documentation](for_codex_simmanager_docs.md)
 - [codex: Update the Table of Contents](for_codex_update_toc.md)
 - [Git Tools](git-tools.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
 - [Project Questions stingy-orange - answered](project_questions_orange.md)
 - [Simulation Motivations](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
 - [Running Tests Using python -m pytest](running_tests.md)
+- [Using SimulationManager](simulation_manager_tutorial.md)
 - [Styleguide for Wiki Articles](styleguide_wiki_articles.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
 - [Updating Dependencies](updating_dependencies.md)
