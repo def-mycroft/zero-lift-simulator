@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+from datetime import datetime
 
 from zero_liftsim import main as zls, __version__
 
@@ -51,6 +52,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Throwaway util for development / testing. "
     )
     dev.add_argument(
+        "--start-datetime",
+        metavar="ISO",
+        help="Start datetime for dev simulation runs.",
+    )
+    dev.add_argument(
         "--analyze-docs",
         action="store_true",
         help="Append git info to all markdown docs.",
@@ -79,7 +85,17 @@ def run(args) -> None:
         ########################################################################
         import pandas as pd
         from zero_liftsim.main import run_alpha_sim
-        data = run_alpha_sim(n_agents=3, lift_capacity=2, cycle_time=5)
+        start = (
+            datetime.fromisoformat(args.start_datetime)
+            if args.start_datetime
+            else datetime(2025, 3, 12, 9, 0, 0)
+        )
+        data = run_alpha_sim(
+            n_agents=3,
+            lift_capacity=2,
+            cycle_time=5,
+            start_datetime=start,
+        )
         agents = data['agents']
         ########################################################################
     if getattr(args, "command", None) == "dev" and args.analyze_docs:

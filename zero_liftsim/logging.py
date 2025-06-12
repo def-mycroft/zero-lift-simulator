@@ -26,10 +26,14 @@ class Logger:
         # open in write mode so each run starts with a clean log file
         self._file = open(self._path, "w", encoding="utf-8")
 
-    def log(self, event_name: str, time: int, **info) -> None:
+    def log(self, event_name: str, time: int, timestamp: str, **info) -> None:
         """Record an event with optional metadata and write it to file."""
 
-        entry = {"event": event_name, "time": time}
+        entry = {
+            "event": event_name,
+            "time": timestamp,
+            "time_offset": time,
+        }
         entry.update(info)
         self._records.append(entry)
 
