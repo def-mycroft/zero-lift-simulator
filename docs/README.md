@@ -18,3 +18,5 @@ Welcome to the project wiki. Navigate using the links below:
 - [Prompt4 Alpha Simulation and Logging](prompt4_implement_alpha_sim.md)
 - [Checkpoint - Primary Classes Implemented - pink-walk](main_notes_checkpoint_prim_classes.md)
 - [Running the Alpha Simulation](alpha_sim_usage.md)
+
+- [Project Questions](project_questions.md)
