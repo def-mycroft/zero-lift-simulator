@@ -17,3 +17,6 @@ dependencies = [
 
 [project.scripts]
 zero-liftsim = "zero_liftsim.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["zero_liftsim*"]
