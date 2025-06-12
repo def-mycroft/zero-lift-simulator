@@ -2,13 +2,6 @@
 
 from __future__ import annotations
 
-"""
-One-lift simulation kernel scaffold.
-This module defines the foundational class structure for an agent-based
-simulation of skier-lift interaction at a ski resort. Each class is a placeholder
-with a development-oriented docstring describing its intended role and expansion path.
-"""
-
 import heapq
 from collections import deque
 
@@ -16,19 +9,42 @@ from .logging import Logger
 
 
 class Simulation:  
-    """Simulation engine that manages global time and the event queue.
+    """Engine for managing event-driven skier-lift interactions.
     # {{{
 
-    The simulator runs a discrete-event loop. Events are stored in a ``heapq``
-    as ``(timestamp, counter, event)`` tuples. ``counter`` ensures deterministic
-    ordering of events scheduled for the same ``timestamp``.
+    # {{{
+    The Simulation class implements a discrete-event simulation
+    architecture where system evolution is driven by time-stamped
+    events. Events are managed in a min-heap priority queue sorted by
+    execution time and insertion order. The simulation clock advances to
+    the time of each event, which is then executed to update system
+    state and potentially schedule future events.
 
-    ``schedule`` is used to add events to the queue. ``run`` pops events in
-    time order, advances ``current_time`` and executes each event. ``Event``
-    objects may optionally return iterables of ``(event, time)`` pairs which are
-    automatically scheduled.
+    Events are scheduled using `schedule`, and the simulation is
+    started via `run`. Each event may return new events to be scheduled
+    dynamically. A logger may be passed to `run` to record per-event
+    state for analysis or debugging.
+
+    Parameters
+    ----------
+    None
+
+    Attributes
+    ----------
+    current_time : int
+        The current time in simulation units (typically minutes).
+    _counter : int
+        A tie-breaker counter to ensure deterministic event ordering.
+    _queue : list of tuple[int, int, Event]
+        Priority queue of scheduled events, ordered by time and counter.
+
+    Notes
+    -----
+    The simulation engine is agnostic to domain logic. It provides
+    deterministic execution of arbitrary event objects that implement
+    an `execute(sim)` method.
+    # }}}
     """
-
     def __init__(self) -> None:
         self.current_time: int = 0
         self._counter: int = 0
@@ -74,10 +90,38 @@ class Simulation:
                     self.schedule(evt, evt_time)
 # }}}
 
-
 class Lift: 
-    """Represents a single ski lift with queue and transport behavior.
+    """Single ski lift managing a FIFO queue and transport cycles.
     # {{{
+
+    # {{{
+    The Lift handles agent queuing, loading, and state transitions between
+    idle and moving. It does not schedule simulation events directly; instead,
+    it exposes methods that allow external events to enqueue agents, load
+    passengers, and mark the lift as idle after completing a cycle.
+
+    Parameters
+    ----------
+    capacity : int
+        Maximum number of agents that can board the lift per cycle.
+    cycle_time : int
+        Total time, in minutes, for the lift to complete a round trip.
+
+    Attributes
+    ----------
+    queue : deque of Agent
+        The FIFO queue of agents waiting to board.
+    state : str
+        Current state of the lift, either 'idle' or 'moving'.
+
+    Notes
+    -----
+    Agents are removed from the queue in order of arrival. Once boarding is
+    complete, the lift enters the 'moving' state and must be marked idle by
+    an external event (typically a ReturnEvent) before boarding can resume.
+    """
+
+    """Represents a single ski lift with queue and transport behavior.
 
     Parameters
     ----------
@@ -91,8 +135,8 @@ class Lift:
     The lift is passive: it exposes state and queue operations but does not
     schedule events itself. External ``Event`` objects manipulate the lift via
     these methods.
+    # }}}
     """
-
     def __init__(self, capacity: int, cycle_time: int) -> None:
         self.capacity = capacity
         self.cycle_time = cycle_time
@@ -140,17 +184,26 @@ class Lift:
         self.state = "idle"
 # }}}
 
-
-class Event:  
+class Event:
     """Abstract base class for all simulation events.
     # {{{
 
-    Each event represents a time stamped occurrence that alters the state of
-    the system. Subclasses must override :py:meth:`execute` and may optionally
-    return an iterable of ``(event, time)`` pairs to schedule additional
-    events.
-    """
+    # {{{
+    Each event represents a discrete occurrence at a specific simulation
+    timestamp. Events are responsible for advancing the simulation state
+    by executing their logic and optionally scheduling new events.
 
+    Subclasses must implement the `execute` method, which modifies the
+    simulation and returns an iterable of `(event, time)` pairs to be
+    added to the event queue.
+
+    Notes
+    -----
+    All event subclasses should be stateless beyond the data required
+    to perform their task. They should not hold references to global
+    objects or manipulate simulation state outside their intended scope.
+    # }}}
+    """
     def execute(self, simulation: "Simulation") -> list[tuple["Event", int]] | None:
         """Execute the event.
 
@@ -168,23 +221,35 @@ class Event:
         raise NotImplementedError
 # }}}
 
-
-class Agent:  
-    """Represents a skier and their evolving state during the simulation.
+class Agent:
+    """Represents an individual skier within the simulation.
     # {{{
+
+    # {{{
+    Each agent tracks its interaction with the lift system, including
+    wait times, boarding events, and the number of completed rides. This
+    class supports state updates necessary to compute performance metrics
+    such as total wait time and ride count.
 
     Parameters
     ----------
-    agent_id:
-        Unique identifier for the agent.
+    agent_id : int
+        Unique identifier assigned to the agent.
 
-    Notes
-    -----
-    Agents track when they start waiting for the lift, the time they board,
-    and how many rides they have completed. ``start_wait`` and ``finish_ride``
-    update this state so statistics can be gathered over the course of a day.
+    Attributes
+    ----------
+    agent_id : int
+        Identifier for the agent instance.
+    boarded : bool
+        Whether the agent is currently on the lift.
+    wait_start : int or None
+        Simulation time when the agent began waiting in the queue.
+    board_time : int or None
+        Time at which the agent boarded the lift.
+    rides_completed : int
+        Number of lift rides completed by the agent.
+    # }}}
     """
-
     def __init__(self, agent_id: int) -> None:
         self.agent_id = agent_id
         self.boarded: bool = False
@@ -222,11 +287,28 @@ class Agent:
         return f"Agent({self.agent_id})"
 # }}}
 
-
-class ArrivalEvent(Event):  
-    """Event representing an agent arriving at the lift queue."""
+class ArrivalEvent(Event):
+    """Event representing a skier's arrival at the lift queue.
     # {{{
 
+    # {{{
+    This event models the moment an agent reaches the lift line and 
+    joins the queue. If the lift is currently idle, this event also 
+    schedules a `BoardingEvent` immediately to initiate loading.
+
+    Parameters
+    ----------
+    agent : Agent
+        The skier agent arriving at the lift.
+    lift : Lift
+        The lift the agent will attempt to board.
+
+    Notes
+    -----
+    This event does not handle skiing down or departure; it only 
+    concerns lift-side behavior at arrival.
+    # }}}
+    """
     def __init__(self, agent: Agent, lift: Lift) -> None:
         self.agent = agent
         self.lift = lift
@@ -241,11 +323,33 @@ class ArrivalEvent(Event):
         return events
 # }}}
 
-
-class BoardingEvent(Event):  
-    """Event indicating the lift starts loading queued agents."""
+class BoardingEvent(Event):
+    """Event indicating the lift begins boarding agents from the queue.
     # {{{
 
+    # {{{
+    When triggered, this event attempts to load agents onto the lift up to
+    its capacity. If agents are successfully boarded, it schedules a
+    `ReturnEvent` corresponding to the end of the lift's cycle. Boarding only
+    occurs if the lift is currently idle.
+
+    Parameters
+    ----------
+    lift : Lift
+        The lift instance associated with this boarding event.
+
+    Returns
+    -------
+    list of tuple[Event, int]
+        A list containing the next scheduled `ReturnEvent` if agents were
+        loaded; otherwise, an empty list.
+
+    Notes
+    -----
+    This event modifies agent state by setting their `board_time` to the
+    current simulation time and updating the lift's internal state to "moving".
+    # }}}
+    """
     def __init__(self, lift: Lift) -> None:
         self.lift = lift
 
@@ -262,11 +366,32 @@ class BoardingEvent(Event):
         return []
 # }}}
 
-
-class ReturnEvent(Event):  
-    """Event signifying the lift has returned from its cycle."""
+class ReturnEvent(Event):
+    """Event indicating the lift completes its transport cycle.
     # {{{
 
+    # {{{
+    This event is scheduled when the lift finishes a run and becomes available
+    to load new agents. Upon execution, it sets the lift state to "idle" and
+    optionally schedules a new `BoardingEvent` if agents are still queued.
+
+    Parameters
+    ----------
+    lift : Lift
+        The lift instance associated with this return event.
+
+    Returns
+    -------
+    list[tuple[Event, int]]
+        A list containing a new `BoardingEvent` scheduled at the current time,
+        if the lift queue is non-empty. Otherwise, returns an empty list.
+
+    Notes
+    -----
+    ReturnEvent does not manipulate agent state directly. It only updates the
+    lift's availability and determines whether a boarding cycle should resume.
+    # }}}
+    """
     def __init__(self, lift: Lift) -> None:
         self.lift = lift
 
@@ -279,7 +404,6 @@ class ReturnEvent(Event):
             events.append((BoardingEvent(self.lift), simulation.current_time))
         return events
 # }}}
-
 
 def run_alpha_sim(n_agents: int, lift_capacity: int, cycle_time: int) -> dict:
     """Run a minimal simulation and return basic metrics."""
