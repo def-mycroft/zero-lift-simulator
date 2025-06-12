@@ -58,6 +58,8 @@ class Simulation:
         self._queue: list[tuple[int, int, Event]] = []
         self._agent_logger: Logger | None = None
         self._agent_records: list[dict] = []
+        self.simulation_uuid = str(uuid())
+        self.simulation_codename = codenamize(self.simulation_uuid)
 
     def schedule(self, event: "Event", time: int) -> None:
         """Schedule ``event`` to run at ``time``.
@@ -267,7 +269,9 @@ class Event:
             return
         entry = {
             "agent_uuid": agent.agent_uuid,
-            "codename": agent.agent_uuid_codename,
+            "agent_codename": agent.agent_uuid_codename,
+            "simulation_uuid": simulation.simulation_uuid,
+            "simulation_codename": simulation.simulation_codename,
             "description": description,
         }
         entry.update(info)
@@ -275,7 +279,8 @@ class Event:
             self.__class__.__name__, simulation.current_time, **entry
         )
         simulation._agent_records.append(
-            {"event": self.__class__.__name__, "time": simulation.current_time, **entry}
+            {"event": self.__class__.__name__, 
+             "time": simulation.current_time, **entry}
         )
 # }}}
 
@@ -547,7 +552,7 @@ def run_alpha_sim(n_agents: int, lift_capacity: int, cycle_time: int) -> dict:
         agent.start_wait(i)
         sim.schedule(ArrivalEvent(agent, lift), i)
 
-    sim.run(logger=logger)
+    sim.run(logger=logger, full_agent_logging=True)
 
     total_wait = 0
     for agent, arrive in zip(agents, arrival_times):

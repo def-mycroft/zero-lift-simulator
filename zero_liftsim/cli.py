@@ -66,7 +66,13 @@ def run(args) -> None:
         from . import dev
         dev.update_toc()
     if getattr(args, "command", None) == "dev" and args.exec_hook:
-        print('code goes here to be executed via cli')
+        ########################################################################
+        import pandas as pd
+        from zero_liftsim.main import run_alpha_sim
+        data = run_alpha_sim(n_agents=3, lift_capacity=2, cycle_time=5)
+        agents = data['agents']
+        ########################################################################
+
 
 if __name__ == "__main__":  # pragma: no cover - manual invocation
     main()
