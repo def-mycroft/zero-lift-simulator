@@ -24,6 +24,7 @@
 - [Bugfix - Logger Filepath](bugfix_logger_filepath_finish.md)
 - [Bugfix Response - Logger Filepath finish](bugfix_response_logger_filepath_finish.md)
 - [Bugfix - missing riders object](bugfix_riders.md)
+- [Research Prompt: Business Value from LiftSim](business-value-research-prompt.md)
 - [Process for Codex Dev](codex_dev_process.md)
 - [Dev Snippets](dev_snippets.md)
 - [Docstring Style Guide](docstring_style_guide.md)
