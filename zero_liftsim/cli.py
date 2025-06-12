@@ -55,6 +55,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Append git info to all markdown docs.",
     )
+    dev.add_argument(
+        "--new-doc",
+        action="store_true",
+        help="Create a blank documentation stub in docs/.",
+    )
     return parser
 
 
@@ -80,6 +85,10 @@ def run(args) -> None:
     if getattr(args, "command", None) == "dev" and args.analyze_docs:
         from . import dev
         dev.analyze_docs()
+    if getattr(args, "command", None) == "dev" and args.new_doc:
+        from . import docs_tools, dev
+        docs_tools.new_doc()
+        dev.update_toc()
 
 
 if __name__ == "__main__":  # pragma: no cover - manual invocation
