@@ -32,4 +32,13 @@ sim.run(logger=logger)
 print(logger.records())
 ```
 
-Logs are kept in memory and can be inspected after the run.
+Each logged entry is also appended to ``logs/main.log`` by default.
+You can supply a different filename to ``Logger`` and it will be
+created inside the ``logs`` directory:
+
+```python
+logger = Logger("my_run.log")
+```
+
+The ``records()`` method still returns the in-memory list of log
+entries.
