@@ -509,29 +509,13 @@ def run_alpha_sim(
 ) -> dict:
     """Run a minimal simulation and return basic metrics."""
 
-    logger = Logger()
-    sim = Simulation()
-    lift = Lift(lift_capacity, cycle_time)
-    agents = [Agent(i + 1, logger=logger) for i in range(n_agents)]
-    arrival_times: list[int] = []
+    from main.simmanager import SimulationManager
 
-    if start_datetime is None:
-        start_datetime = datetime(2025, 3, 12, 9, 0, 0)
-
-    for i, agent in enumerate(agents):
-        arrival_times.append(i)
-        ts = (start_datetime + timedelta(minutes=i)).isoformat()
-        agent.start_wait(i, ts)
-        sim.schedule(ArrivalEvent(agent, lift), i)
-
-    sim.run(logger=logger, full_agent_logging=True, start_datetime=start_datetime)
-
-    total_wait = 0
-    for agent, arrive in zip(agents, arrival_times):
-        if agent.board_time is not None:
-            total_wait += agent.board_time - arrive
-
-    avg_wait = total_wait / n_agents if n_agents > 0 else 0
-
-    return {"total_rides": n_agents, "average_wait": avg_wait, "agents": agents}
+    manager = SimulationManager(
+        n_agents=n_agents,
+        lift_capacity=lift_capacity,
+        cycle_time=cycle_time,
+        start_datetime=start_datetime,
+    )
+    return manager.run()
 
