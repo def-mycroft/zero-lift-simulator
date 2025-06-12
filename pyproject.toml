@@ -9,6 +9,9 @@ authors = [{name = "Zero Lift", email = "example@example.com"}]
 description = "Zero Lift Simulator CLI"
 readme = "README.md"
 requires-python = ">=3.8"
+dependencies = [
+    "codenamize>=2.3"
+]
 
 [project.scripts]
 zero-liftsim = "zero_liftsim.cli:main"
