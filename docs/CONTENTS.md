@@ -1,6 +1,7 @@
 # Table of Contents
 
 ## Main Notes
+- [Research Output: Business Value from LiftSim](main_notes_business_value_research.md)
 - [Checkpoint - Primary Classes Implemented - pink-walk](main_notes_checkpoint_prim_classes.md)
 - [Project Rules/Conventions for Codex](main_notes_codex_must_read_this_rules_for_codex.md)
 - [Devplan - Current](main_notes_devplan.md)
@@ -16,7 +17,8 @@
 - [prompt5 - full agent logging](prompt5_full_agent_logging.md)
 - [prompt6 - agent logging](prompt6_agent_logging.md)
 - [prompt7 - simulation datetime logging](prompt7_simulation_datetime.md)
-- [prompt8 - Implement Multi-Lift Setup stimulating-divide 3437c905](prompt8_multi_lift_sim.md)
+- [Prompt - Implement AgentExperience class](prompt8_time_distribution_enhancement.md)
+- [prompt9 - Implement Multi-Lift Setup stimulating-divide 3437c905](prompt9_multi_lift_sim.md)
 
 ## Articles
 - [How to Add Wiki Articles](adding_wiki_articles.md)
@@ -28,7 +30,6 @@
 - [Bugfix - Logger Filepath](bugfix_logger_filepath_finish.md)
 - [Bugfix Response - Logger Filepath finish](bugfix_response_logger_filepath_finish.md)
 - [Bugfix - missing riders object](bugfix_riders.md)
-- [Research Output: Business Value from LiftSim](business-value-research-prompt.md)
 - [Process for Codex Dev](codex_dev_process.md)
 - [Dev Snippets](dev_snippets.md)
 - [Development Reference for Prompts](development_ref_for_prompts.md)
@@ -41,7 +42,6 @@
 - [Running Tests Using python -m pytest](running_tests.md)
 - [Styleguide for Wiki Articles](styleguide_wiki_articles.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
-- [unnamed spurious-action 9169a44e](unnamed-spurious-action-9169a44e.md)
 - [Updating Dependencies](updating_dependencies.md)
 - [Wiki Article Creation Instructions for Codex](wiki_article_creation_for_codex.md)
 - [Article Title](wiki_article_template.md)
