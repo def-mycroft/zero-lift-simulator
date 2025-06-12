@@ -517,11 +517,3 @@ def run_alpha_sim(n_agents: int, lift_capacity: int, cycle_time: int) -> dict:
 
     return {"total_rides": n_agents, "average_wait": avg_wait, "agents": agents}
 
-
-def run(args) -> None:
-    """Handle CLI commands."""
-    if getattr(args, "command", None) == "dev" and args.update_toc:
-        from . import dev
-
-        dev.update_toc()
-
