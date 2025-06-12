@@ -5,12 +5,14 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from datetime import datetime
-from zero_liftsim.main import Simulation, Lift, Agent, ArrivalEvent
+from zero_liftsim.main import Simulation, Agent, ArrivalEvent
+from zero_liftsim.lift import Lift
 
 
 def test_agent_log_created_and_contains_entries():
     sim = Simulation()
-    lift = Lift(capacity=1, cycle_time=5)
+    lift = Lift(capacity=1)
+    lift.time_spent_ride_lift = lambda: 5
     agent = Agent(1)
     sim.schedule(ArrivalEvent(agent, lift), 0)
     start = datetime(2025, 3, 12, 9, 0, 0)
@@ -32,7 +34,8 @@ def test_agent_log_not_created_when_disabled():
         log_path.unlink()
 
     sim = Simulation()
-    lift = Lift(capacity=1, cycle_time=5)
+    lift = Lift(capacity=1)
+    lift.time_spent_ride_lift = lambda: 5
     agent = Agent(1)
     sim.schedule(ArrivalEvent(agent, lift), 0)
     sim.run(start_datetime=datetime(2025, 3, 12, 9, 0, 0))

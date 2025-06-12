@@ -5,11 +5,12 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from zero_liftsim.main import Agent, Lift
+from zero_liftsim.main import Agent
+from zero_liftsim.lift import Lift
 
 
 def test_fifo_loading_and_capacity():
-    lift = Lift(capacity=2, cycle_time=5)
+    lift = Lift(capacity=2)
     a1, a2, a3 = Agent(1), Agent(2), Agent(3)
     lift.enqueue(a1)
     lift.enqueue(a2)
@@ -23,7 +24,7 @@ def test_fifo_loading_and_capacity():
 
 
 def test_state_transitions():
-    lift = Lift(capacity=1, cycle_time=3)
+    lift = Lift(capacity=1)
     a1 = Agent(1)
     lift.enqueue(a1)
     assert lift.state == "idle"
@@ -34,7 +35,7 @@ def test_state_transitions():
 
 
 def test_load_when_fewer_agents_than_capacity():
-    lift = Lift(capacity=3, cycle_time=5)
+    lift = Lift(capacity=3)
     a1 = Agent(1)
     lift.enqueue(a1)
 

@@ -6,13 +6,15 @@ from datetime import datetime
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from zero_liftsim.main import Agent, ArrivalEvent, BoardingEvent, ReturnEvent, Lift, Simulation
+from zero_liftsim.main import Agent, ArrivalEvent, BoardingEvent, ReturnEvent, Simulation
+from zero_liftsim.lift import Lift
 
 
 def test_single_agent_cycle():
     log = []
     sim = Simulation()
-    lift = Lift(capacity=1, cycle_time=5)
+    lift = Lift(capacity=1)
+    lift.time_spent_ride_lift = lambda: 5
     agent = Agent(1)
 
     class LogArrivalEvent(ArrivalEvent):

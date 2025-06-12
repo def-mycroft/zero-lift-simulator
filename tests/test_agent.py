@@ -4,7 +4,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from datetime import datetime, timedelta
-from zero_liftsim.main import Agent, Simulation, Lift, ArrivalEvent
+from zero_liftsim.main import Agent, Simulation, ArrivalEvent
+from zero_liftsim.lift import Lift
 
 
 def test_wait_and_finish_ride():
@@ -39,7 +40,8 @@ def test_multiple_rides():
 
 def test_activity_log_enabled_via_events():
     sim = Simulation()
-    lift = Lift(capacity=1, cycle_time=5)
+    lift = Lift(capacity=1)
+    lift.time_spent_ride_lift = lambda: 5
     agent = Agent(3)
     start = datetime(2025, 3, 12, 9, 0, 0)
     agent.start_wait(0, start.isoformat())

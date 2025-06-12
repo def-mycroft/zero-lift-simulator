@@ -11,10 +11,9 @@ except ModuleNotFoundError:  # pragma: no cover - fallback for environments with
     def codenamize(value: str) -> str:
         """Simplistic fallback that returns the first eight characters."""
         return value[:8]
-from collections import deque
-from random import gauss
 
 from .agent import Agent
+from .lift import Lift
 
 from .logging import Logger
 
@@ -121,118 +120,6 @@ class Simulation:
         return list(self._agent_records)
 # }}}
 
-class Lift: 
-    """Single ski lift managing a FIFO queue and transport cycles.
-    # {{{
-
-    # {{{
-    The Lift handles agent queuing, loading, and state transitions between
-    idle and moving. It does not schedule simulation events directly; instead,
-    it exposes methods that allow external events to enqueue agents, load
-    passengers, and mark the lift as idle after completing a cycle.
-
-    Parameters
-    ----------
-    capacity : int
-        Maximum number of agents that can board the lift per cycle.
-    cycle_time : int
-        Total time, in minutes, for the lift to complete a round trip.
-
-    Attributes
-    ----------
-    queue : deque of Agent
-        The FIFO queue of agents waiting to board.
-    state : str
-        Current state of the lift, either 'idle' or 'moving'.
-
-    Notes
-    -----
-    Agents are removed from the queue in order of arrival. Once boarding is
-    complete, the lift enters the 'moving' state and must be marked idle by
-    an external event (typically a ReturnEvent) before boarding can resume.
-    """
-
-    """Represents a single ski lift with queue and transport behavior.
-
-    Parameters
-    ----------
-    capacity:
-        Maximum number of agents that can board per cycle.
-    cycle_time:
-        Minutes from departure to return.
-
-    Notes
-    -----
-    The lift is passive: it exposes state and queue operations but does not
-    schedule events itself. External ``Event`` objects manipulate the lift via
-    these methods.
-    # }}}
-    """
-    def __init__(self, capacity: int, cycle_time: int) -> None:
-        self.capacity = capacity
-        self.cycle_time = cycle_time
-        self.queue: deque[Agent] = deque()
-        self.state: str = "idle"
-        self.current_riders: list[Agent] = []
-
-        self.ride_mean = 7
-        self.ride_sd = 1
-
-        self.traverse_mean = 5
-        self.traverse_sd = 1.5
-
-    def time_spent_ride_lift(self) -> float:
-        """Sample the time to ride the lift."""
-
-        return max(1, gauss(self.ride_mean, self.ride_sd))
-
-    def time_spent_traverse_down_mountain(self) -> float:
-        """Sample the time to ski down from the lift."""
-
-        return max(1, gauss(self.traverse_mean, self.traverse_sd))
-
-    # -- queue operations -------------------------------------------------
-    def enqueue(self, agent: Agent) -> None:
-        """Add ``agent`` to the end of the waiting queue."""
-
-        self.queue.append(agent)
-
-    def queue_length(self) -> int:
-        """Return the current number of waiting agents."""
-
-        return len(self.queue)
-
-    # -- loading ----------------------------------------------------------
-    def load(self) -> list[Agent]:
-        """Load agents from the queue up to ``capacity`` and set state.
-
-        Returns
-        -------
-        list[Agent]
-            Agents that boarded the lift.
-        """
-
-        if self.state != "idle":
-            return []
-
-        boarded: list[Agent] = []
-        while self.queue and len(boarded) < self.capacity:
-            agent = self.queue.popleft()
-            agent.boarded = True
-            boarded.append(agent)
-
-        if boarded:
-            self.state = "moving"
-            self.current_riders = list(boarded)
-
-        return boarded
-
-    def mark_idle(self) -> None:
-        """Mark the lift as idle after completing a cycle."""
-
-        self.state = "idle"
-        self.current_riders = []
-# }}}
 
 class Event:
     """Abstract base class for all simulation events.
@@ -394,9 +281,10 @@ class BoardingEvent(Event):
         """Load agents and schedule the lift's return."""
 
         boarded = self.lift.load()
+        ride_time = self.lift.time_spent_ride_lift() if boarded else 0
         for agent in boarded:
             agent.board_time = simulation.current_time
-            agent._ride_duration = self.lift.time_spent_ride_lift()
+            agent._ride_duration = ride_time
             timestamp = (
                 simulation.start_datetime
                 + timedelta(minutes=simulation.current_time)
@@ -419,7 +307,7 @@ class BoardingEvent(Event):
             return [
                 (
                     ReturnEvent(self.lift, boarded),
-                    simulation.current_time + self.lift.cycle_time,
+                    simulation.current_time + int(ride_time),
                 )
             ]
         return []
@@ -465,7 +353,7 @@ class ReturnEvent(Event):
             queue_duration = 0
             if agent.wait_start is not None and agent.board_time is not None:
                 queue_duration = agent.board_time - agent.wait_start
-            ride_dur = getattr(agent, "_ride_duration", self.lift.cycle_time)
+            ride_dur = getattr(agent, "_ride_duration", self.lift.time_spent_ride_lift())
             traverse_dur = self.lift.time_spent_traverse_down_mountain()
             agent.experience_rideloop.add_entry(
                 timestamp_dt,
@@ -492,7 +380,6 @@ class ReturnEvent(Event):
 def run_alpha_sim(
     n_agents: int,
     lift_capacity: int,
-    cycle_time: int,
     *,
     start_datetime: datetime | None = None,
 ) -> dict:
@@ -503,7 +390,6 @@ def run_alpha_sim(
     manager = SimulationManager(
         n_agents=n_agents,
         lift_capacity=lift_capacity,
-        cycle_time=cycle_time,
         start_datetime=start_datetime,
     )
     return manager.run()

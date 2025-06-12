@@ -8,20 +8,24 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from zero_liftsim.main import (
     run_alpha_sim,
     Simulation,
-    Lift,
     Agent,
     ArrivalEvent,
     BoardingEvent,
     ReturnEvent,
 )
+from zero_liftsim.lift import Lift
 from zero_liftsim.logging import Logger
 
 
 def test_run_alpha_sim_metrics():
     start = datetime(2025, 3, 12, 9, 0, 0)
+    # ensure deterministic lift timing for this test
+    orig = Lift.time_spent_ride_lift
+    Lift.time_spent_ride_lift = lambda self: 5
     result = run_alpha_sim(
-        n_agents=3, lift_capacity=2, cycle_time=5, start_datetime=start
+        n_agents=3, lift_capacity=2, start_datetime=start
     )
+    Lift.time_spent_ride_lift = orig
     assert result["total_rides"] == 3
     assert abs(result["average_wait"] - (0 + 4 + 3) / 3) < 1e-6
 
@@ -29,7 +33,8 @@ def test_run_alpha_sim_metrics():
 def test_logging_records_events():
     logger = Logger()
     sim = Simulation()
-    lift = Lift(capacity=1, cycle_time=5)
+    lift = Lift(capacity=1)
+    lift.time_spent_ride_lift = lambda: 5
     agent = Agent(1)
     sim.schedule(ArrivalEvent(agent, lift), 0)
     start = datetime(2025, 3, 12, 9, 0, 0)
@@ -49,7 +54,8 @@ def test_logger_writes_file(tmp_path):
     log_name = "test.log"
     logger = Logger(log_name)
     sim = Simulation()
-    lift = Lift(capacity=1, cycle_time=5)
+    lift = Lift(capacity=1)
+    lift.time_spent_ride_lift = lambda: 5
     agent = Agent(1)
     sim.schedule(ArrivalEvent(agent, lift), 0)
     start = datetime(2025, 3, 12, 9, 0, 0)
