@@ -270,6 +270,7 @@ class Agent:
             logger.devlog(
                 f"init agent {self.agent_uuid} {self.agent_uuid_codename}"
             )
+            self.logger = logger
 
     def start_wait(self, time: int) -> None:
         """Record the time the agent begins waiting in the queue."""
