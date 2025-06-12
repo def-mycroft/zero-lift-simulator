@@ -42,3 +42,19 @@ logger = Logger("my_run.log")
 
 The ``records()`` method still returns the in-memory list of log
 entries.
+
+## Development Log
+
+Use ``Logger.devlog`` to write ad-hoc messages directly to the log
+file. Each line is prefixed with an ISO timestamp.
+
+```python
+logger = Logger("debug.log")
+logger.devlog("initializing setup")
+```
+
+The file ``logs/debug.log`` will contain a line similar to::
+
+```
+2025-06-19T12:00:00 initializing setup
+```
