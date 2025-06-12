@@ -45,6 +45,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Update docs README with table of contents.",
     )
+    dev.add_argument(
+        "--exec-hook",
+        action="store_true",
+        help="Throwaway util for development / testing. "
+    )
     return parser
 
 
@@ -52,8 +57,16 @@ def main(argv: list[str] | None = None) -> None:
     """Entry point for the CLI."""
     parser = build_parser()
     args = parser.parse_args(argv)
-    zls.run(args)
+    run(args)
 
+
+def run(args) -> None:
+    """Handle CLI commands."""
+    if getattr(args, "command", None) == "dev" and args.update_toc:
+        from . import dev
+        dev.update_toc()
+    if getattr(args, "command", None) == "dev" and args.exec_hook:
+        print('code goes here to be executed via cli')
 
 if __name__ == "__main__":  # pragma: no cover - manual invocation
     main()

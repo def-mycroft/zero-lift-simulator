@@ -15,7 +15,7 @@ from collections import deque
 from .logging import Logger
 
 
-class Simulation:  
+class Simulation:
     """Engine for managing event-driven skier-lift interactions.
     # {{{
 
@@ -56,6 +56,8 @@ class Simulation:
         self.current_time: int = 0
         self._counter: int = 0
         self._queue: list[tuple[int, int, Event]] = []
+        self._agent_logger: Logger | None = None
+        self._agent_records: list[dict] = []
 
     def schedule(self, event: "Event", time: int) -> None:
         """Schedule ``event`` to run at ``time``.
@@ -71,7 +73,13 @@ class Simulation:
         heapq.heappush(self._queue, (time, self._counter, event))
         self._counter += 1
 
-    def run(self, stop_time: int | None = None, logger: "Logger" | None = None) -> None:
+    def run(
+        self,
+        stop_time: int | None = None,
+        logger: "Logger" | None = None,
+        *,
+        full_agent_logging: bool = False,
+    ) -> None:
         """Execute events in chronological order.
 
         Parameters
@@ -80,6 +88,13 @@ class Simulation:
             Optional time limit. The simulation stops when the next event's
             timestamp exceeds this value.
         """
+
+        if full_agent_logging:
+            self._agent_logger = Logger("agent.log")
+            self._agent_records = []
+        else:
+            self._agent_logger = None
+            self._agent_records = []
 
         i = str(uuid())
         while self._queue:
@@ -96,6 +111,13 @@ class Simulation:
             if new_events:
                 for evt, evt_time in new_events:
                     self.schedule(evt, evt_time)
+
+        self._agent_logger = None
+
+    def agent_records(self) -> list[dict]:
+        """Return collected agent-level log entries."""
+
+        return list(self._agent_records)
 # }}}
 
 class Lift: 
@@ -150,6 +172,7 @@ class Lift:
         self.cycle_time = cycle_time
         self.queue: deque[Agent] = deque()
         self.state: str = "idle"
+        self.current_riders: list[Agent] = []
 
     # -- queue operations -------------------------------------------------
     def enqueue(self, agent: Agent) -> None:
@@ -183,6 +206,7 @@ class Lift:
 
         if boarded:
             self.state = "moving"
+            self.current_riders = list(boarded)
 
         return boarded
 
@@ -190,6 +214,7 @@ class Lift:
         """Mark the lift as idle after completing a cycle."""
 
         self.state = "idle"
+        self.current_riders = []
 # }}}
 
 class Event:
@@ -227,6 +252,31 @@ class Event:
         """
 
         raise NotImplementedError
+
+    # ------------------------------------------------------------------
+    def _log_agent_event(
+        self,
+        simulation: "Simulation",
+        agent: "Agent",
+        description: str,
+        **info,
+    ) -> None:
+        """Log an agent-related event if agent logging is active."""
+
+        if simulation._agent_logger is None:
+            return
+        entry = {
+            "agent_uuid": agent.agent_uuid,
+            "codename": agent.agent_uuid_codename,
+            "description": description,
+        }
+        entry.update(info)
+        simulation._agent_logger.log(
+            self.__class__.__name__, simulation.current_time, **entry
+        )
+        simulation._agent_records.append(
+            {"event": self.__class__.__name__, "time": simulation.current_time, **entry}
+        )
 # }}}
 
 class Agent:
@@ -452,10 +502,17 @@ class ReturnEvent(Event):
 
     def execute(self, simulation: Simulation) -> list[tuple[Event, int]]:
         """Mark the lift idle and trigger new boarding if needed."""
-
         for agent in self.boarded:
             agent.finish_ride(simulation.current_time)
         self.lift.mark_idle()
+        for agent in riders:
+            self._log_agent_event(
+                simulation,
+                agent,
+                "completed ride",
+                queue_length=self.lift.queue_length(),
+                lift_state=self.lift.state,
+            )
         events: list[tuple[Event, int]] = []
         if self.lift.queue_length() > 0:
             events.append((BoardingEvent(self.lift), simulation.current_time))
@@ -486,12 +543,4 @@ def run_alpha_sim(n_agents: int, lift_capacity: int, cycle_time: int) -> dict:
     avg_wait = total_wait / n_agents if n_agents > 0 else 0
 
     return {"total_rides": n_agents, "average_wait": avg_wait, "agents": agents}
-
-
-def run(args) -> None:
-    """Handle CLI commands."""
-    if getattr(args, "command", None) == "dev" and args.update_toc:
-        from . import dev
-
-        dev.update_toc()
 
