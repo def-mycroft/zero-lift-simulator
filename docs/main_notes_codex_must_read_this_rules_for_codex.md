@@ -1,4 +1,4 @@
-
+# Project Rules/Conventions for Codex
 
 This document should help guide codex behavior, i.e. "codex, will you please
 read this and follow as you're editing this codebase". 

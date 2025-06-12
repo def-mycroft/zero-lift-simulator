@@ -2,6 +2,7 @@
 
 ## Main Notes
 - [Checkpoint - Primary Classes Implemented - pink-walk](main_notes_checkpoint_prim_classes.md)
+- [Project Rules/Conventions for Codex](main_notes_codex_must_read_this_rules_for_codex.md)
 - [Devplan - Current](main_notes_devplan.md)
 - [LiftSim Flowchart](main_notes_flowchart.md)
 - [Initial Develop Description - Zero Lift Simulator](main_notes_implementation.md)
@@ -20,10 +21,12 @@
 - [Running the Alpha Simulation](alpha_sim_usage.md)
 - [Best Practices for Coding with Codex](best_practices_coding_with_codex.md)
 - [Bugfix - Add Dependencies](bugfix_add_deps.md)
-- [Bugfix with Logger Filepath](bugfix_logger_filepath_finish.md)
+- [Bugfix - Logger Filepath](bugfix_logger_filepath_finish.md)
 - [Bugfix Response - Logger Filepath finish](bugfix_response_logger_filepath_finish.md)
+- [Bugfix - missing riders object](bugfix_riders.md)
 - [Dev Snippets](dev_snippets.md)
 - [Docstring Style Guide](docstring_style_guide.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
+- [Styleguide for Wiki Articles](styleguide_wiki_articles.md)
 - [Updating Dependencies](updating_dependencies.md)
 - [Article Title](wiki_article_template.md)

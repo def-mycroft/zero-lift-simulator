@@ -1,5 +1,6 @@
+# Styleguide for Wiki Articles
 
-random codenamee: robust-application a24d9a19
+random codename: robust-application a24d9a19
 
 
 *** 
