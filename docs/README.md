@@ -20,3 +20,4 @@ Welcome to the project wiki. Navigate using the links below:
 - [Running the Alpha Simulation](alpha_sim_usage.md)
 
 - [Project Questions](project_questions.md)
+- [Research Prompt: Business Value from LiftSim](business-value-research-prompt.md)
