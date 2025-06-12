@@ -42,9 +42,11 @@ class AgentRideLoopExperience(AgentExperienceHistory):
     queue : float
         Time spent waiting in queue for the lift, in minutes.
     """
-    def add_entry(self, dt: datetime, ride: float, traverse: float, 
+    def add_entry(self, agent, dt: datetime, ride: float, traverse: float, 
                   queue: float) -> None:
         self.log[dt] = {
+            "agent_uuid": agent.agent_uuid,
+            "agent_uuid_codename": agent.agent_uuid_codename,
             "time_spent_ride_lift": ride,
             "time_spent_traverse_down_mountain": traverse,
             "time_spent_in_queue": queue,

@@ -359,6 +359,7 @@ class ReturnEvent(Event):
             ride_dur = getattr(agent, "_ride_duration", self.lift.time_spent_ride_lift())
             traverse_dur = self.lift.time_spent_traverse_down_mountain()
             agent.experience_rideloop.add_entry(
+                agent,
                 timestamp_dt,
                 ride_dur,
                 traverse_dur,
