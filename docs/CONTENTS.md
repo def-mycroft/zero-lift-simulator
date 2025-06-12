@@ -19,6 +19,7 @@
 ## Articles
 - [How to Add Wiki Articles](adding_wiki_articles.md)
 - [Running the Alpha Simulation](alpha_sim_usage.md)
+- [As a Human: How to Code with Codex](as_a_human_how_to_code_with_codex.md)
 - [Best Practices for Coding with Codex](best_practices_coding_with_codex.md)
 - [Bugfix - Add Dependencies](bugfix_add_deps.md)
 - [Bugfix - Logger Filepath](bugfix_logger_filepath_finish.md)
