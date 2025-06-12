@@ -16,7 +16,7 @@
 - [prompt5 - full agent logging](prompt5_full_agent_logging.md)
 - [prompt6 - agent logging](prompt6_agent_logging.md)
 - [prompt7 - simulation datetime logging](prompt7_simulation_datetime.md)
-- [Prompt for Codex: Implement Multi-Lift Setup stimulating-divide 3437c905](prompt8_multi_lift_sim.md)
+- [prompt8 - Implement Multi-Lift Setup stimulating-divide 3437c905](prompt8_multi_lift_sim.md)
 
 ## Articles
 - [How to Add Wiki Articles](adding_wiki_articles.md)
@@ -41,6 +41,7 @@
 - [Running Tests Using python -m pytest](running_tests.md)
 - [Styleguide for Wiki Articles](styleguide_wiki_articles.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
+- [unnamed spurious-action 9169a44e](unnamed-spurious-action-9169a44e.md)
 - [Updating Dependencies](updating_dependencies.md)
 - [Wiki Article Creation Instructions for Codex](wiki_article_creation_for_codex.md)
 - [Article Title](wiki_article_template.md)
