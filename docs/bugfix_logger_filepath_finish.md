@@ -113,3 +113,4 @@ m on  main [!] is 📦 v0.1.0 via 🐍 v3.11.8 via 🅒 zero
 
 in file docs/bugfix_response_logger_filepath_finish.md, describe what the error was and the fix that was applied. 
 
+...then ofc fix the issue that is causing the above error.
