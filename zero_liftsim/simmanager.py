@@ -79,7 +79,8 @@ class SimulationManager:
         if self.sim is None:
             self._setup()
         assert self.sim is not None  # mypy hint
-        self.sim.run(logger=self.logger, full_agent_logging=True, start_datetime=self.start_datetime)
+        self.sim.run(logger=self.logger, full_agent_logging=True,
+                     start_datetime=self.start_datetime)
         total_wait = 0
         for agent, arrive in zip(self.agents, self.arrival_times):
             if agent.board_time is not None:
