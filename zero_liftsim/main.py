@@ -126,46 +126,39 @@ class Lift:
     # {{{
 
     # {{{
-    The Lift handles agent queuing, loading, and state transitions between
-    idle and moving. It does not schedule simulation events directly; instead,
-    it exposes methods that allow external events to enqueue agents, load
-    passengers, and mark the lift as idle after completing a cycle.
+    The Lift handles agent queuing, loading, and transitions between
+    'idle' and 'moving' states. It is a passive object: events in the
+    simulation must manipulate its state and queue via method calls.
 
     Parameters
     ----------
     capacity : int
         Maximum number of agents that can board the lift per cycle.
     cycle_time : int
-        Total time, in minutes, for the lift to complete a round trip.
+        Minutes required for the lift to complete a round trip.
 
     Attributes
     ----------
     queue : deque of Agent
-        The FIFO queue of agents waiting to board.
+        FIFO queue of agents waiting to board.
     state : str
         Current state of the lift, either 'idle' or 'moving'.
+    current_riders : list of Agent
+        Agents currently riding the lift.
+    ride_mean : float
+        Mean time to ride the lift, in minutes.
+    ride_sd : float
+        Standard deviation of ride time.
+    traverse_mean : float
+        Mean time to traverse down the mountain.
+    traverse_sd : float
+        Standard deviation of traverse time.
 
     Notes
     -----
-    Agents are removed from the queue in order of arrival. Once boarding is
-    complete, the lift enters the 'moving' state and must be marked idle by
-    an external event (typically a ReturnEvent) before boarding can resume.
-    """
-
-    """Represents a single ski lift with queue and transport behavior.
-
-    Parameters
-    ----------
-    capacity:
-        Maximum number of agents that can board per cycle.
-    cycle_time:
-        Minutes from departure to return.
-
-    Notes
-    -----
-    The lift is passive: it exposes state and queue operations but does not
-    schedule events itself. External ``Event`` objects manipulate the lift via
-    these methods.
+    Agents are boarded in arrival order when the lift is idle. After
+    boarding, the lift transitions to 'moving'. External events must
+    call `mark_idle` after a cycle completes to allow new boarding.
     # }}}
     """
     def __init__(self, capacity: int, cycle_time: int) -> None:
