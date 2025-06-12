@@ -8,13 +8,14 @@ magnetic-barnacle 4d5f3a21
 
 ***
 
-# Prompt for Codex prompt6 – Follow-up to "cobalt-sparrow d7dca612"
+# Prompt for Codex prompt6 – Follow-up to "cosmic-octopus 1f7d9e34"
 
 Implement per-agent self-logging so that each agent retains a detailed history of its activity during a simulation. The log should be optional and easy to access after the run.
 
 ## Agent log structure
-- Each `Agent` gets an attribute `activity_log` storing a list of dictionaries.
-- Every dictionary represents one event affecting the agent and must at least contain:
+- Each `Agent` gets an attribute `activity_log` storing a dict of dictionaries.
+- the dict keys are ints which correspond to the temporal order of the event (e.g. if activity_log is a dict w/ keys 0,1,2, the next entry will be 3 merely because last was 2). these keys don't map to anything else, just an ordered index (in effect). 
+- Every (value) dictionary represents one event affecting the agent and must at least contain:
   - `time`: the simulation timestamp of the event.
   - `event`: short string describing the type of event (``arrival``, ``board``, ``ride_complete`` …).
   - `agent_id`, `agent_uuid`, and `agent_uuid_codename` for traceability.

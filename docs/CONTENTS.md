@@ -12,9 +12,8 @@
 - [prompt2 - event classes](prompt2_event_classes.md)
 - [prompt3 - agent class](prompt3_agent_class.md)
 - [prompt4 - alpha simulation and logging](prompt4_implement_alpha_sim.md)
-- [prompt6 - agent logging](prompt6_agent_logging.md)
 - [prompt5 - full agent logging](prompt5_full_agent_logging.md)
-
+- [prompt6 - agent logging](prompt6_agent_logging.md)
 
 ## Articles
 - [How to Add Wiki Articles](adding_wiki_articles.md)
