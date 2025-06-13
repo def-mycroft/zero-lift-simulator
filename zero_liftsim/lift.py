@@ -11,7 +11,7 @@ from .agent import Agent
 class Lift:
     """Single ski lift managing a FIFO queue and transport cycles."""
 
-    def __init__(self, capacity: int, num_chairs: int = 1) -> None:
+    def __init__(self, capacity: int, num_chairs: int = 100) -> None:
         """Initialize lift parameters.
 
         Parameters
