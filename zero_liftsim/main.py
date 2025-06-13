@@ -244,7 +244,7 @@ class ArrivalEvent(Event):
             lift_state=self.lift.state,
         )
         events: list[tuple[Event, int]] = []
-        if self.lift.available_chairs() > 0:
+        if self.lift.state == "idle" and self.lift.available_chairs() > 0:
             events.append((BoardingEvent(self.lift), simulation.current_time))
         return events
 # }}}

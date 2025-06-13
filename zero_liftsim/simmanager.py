@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-import pandas as pd
 from datetime import datetime, timedelta
 
 from zero_liftsim.main import (
@@ -135,6 +134,7 @@ class SimulationManager:
 
     def retrieve_data(self):
         """Retrieve key dataframes that summarize simulation"""
+        import pandas as pd
         data = {}
         for k in ['exp_rideloop', 'agent_log']:
             data[k] = pd.DataFrame()
