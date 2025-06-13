@@ -16,6 +16,11 @@ def visualize_states(
 ) -> None:
     """Generate a static visualization of agent states.
 
+    The visualization groups agents into three high level states -
+    ``in_queue``, ``on_lift`` and ``down_mountain``. The latest
+    logged event for each agent prior to ``time`` is mapped to one of
+    these states and a count of agents is displayed at the state node.
+
     Parameters
     ----------
     agent_exp_log_data : dict
@@ -32,11 +37,16 @@ def visualize_states(
     import pandas as pd
 
     state_positions = {
-        "start_wait": (0, 0),
-        "board": (1, 1),
-        "ride": (2, 0),
-        "exit": (3, 1),
-        "return": (4, 0),
+        "in_queue": (0, 0),
+        "on_lift": (1, 1),
+        "down_mountain": (2, 0),
+    }
+
+    event_state_map = {
+        "start_wait": "in_queue",
+        "arrival": "in_queue",
+        "board": "on_lift",
+        "ride_complete": "down_mountain",
     }
 
     agent_log: pd.DataFrame = agent_exp_log_data.get("agent_log", pd.DataFrame())
@@ -47,30 +57,22 @@ def visualize_states(
         return
     agent_log = agent_log.sort_values("time").groupby("agent_id").tail(1)
 
-    fig, ax = plt.subplots(figsize=(10, 4))
+    state_counts = {name: 0 for name in state_positions}
+    for _, row in agent_log.iterrows():
+        state = event_state_map.get(row.get("event"))
+        if state in state_counts:
+            state_counts[state] += 1
+
+    fig, ax = plt.subplots(figsize=(6, 3))
     ax.axis("off")
 
     for name, (x, y) in state_positions.items():
-        circle = plt.Circle((x, y), 0.2, facecolor="lightgray", edgecolor="black")
+        circle = plt.Circle((x, y), 0.3, facecolor="lightgray", edgecolor="black")
         ax.add_patch(circle)
-        ax.text(x, y + 0.3, name, ha="center", va="bottom", fontsize=8)
+        ax.text(x, y + 0.35, name, ha="center", va="bottom", fontsize=8)
+        ax.text(x, y, str(state_counts[name]), ha="center", va="center", fontsize=8, weight="bold")
 
-    for _, row in agent_log.iterrows():
-        event = row.get("event")
-        if event not in state_positions:
-            continue
-        x, y = state_positions[event]
-        rect = plt.Rectangle(
-            (x - 0.15, y - 0.15),
-            0.3,
-            0.3,
-            facecolor="white",
-            edgecolor="black",
-        )
-        ax.add_patch(rect)
-        ax.text(x, y, str(row.get("agent_id")), ha="center", va="center", fontsize=6)
-
-    ax.set_xlim(-0.5, 4.5)
+    ax.set_xlim(-0.5, 2.5)
     ax.set_ylim(-0.5, 1.5)
     Path(out_path).parent.mkdir(parents=True, exist_ok=True)
     plt.tight_layout()
