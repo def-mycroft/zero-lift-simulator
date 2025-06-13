@@ -33,6 +33,7 @@
 - [Bugfix - Logger Filepath](bugfix_logger_filepath_finish.md)
 - [Bugfix Response - Logger Filepath finish](bugfix_response_logger_filepath_finish.md)
 - [Bugfix - missing riders object](bugfix_riders.md)
+- [Bugfix - Lift default chairs](bugfix_chair_default.md)
 - [The Burden of Simulation: Building Trust in Synthetic Behavior](building_trust_simulation.md)
 - [Process for Codex Dev](codex_dev_process.md)
 - [Dev Snippets](dev_snippets.md)
