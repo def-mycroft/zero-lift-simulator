@@ -15,6 +15,7 @@ dependencies = [
     "codenamize",
     "pytest",
     "pandas",
+    "matplotlib",
 ]
 
 [project.scripts]
