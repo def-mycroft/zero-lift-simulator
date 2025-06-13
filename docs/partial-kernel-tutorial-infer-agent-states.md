@@ -110,29 +110,59 @@ print('\n'.join(lines[idx+1:]))
     
 
 
-..which means that we can define three states - state_riding_lift, state_in_queue and state_traversing_down. 
-
 
 ```python
-
+state_riding_lift = "state_riding_lift"
+state_in_queue = "state_in_queue"
+state_traversing_down = "state_traversing_down"
 ```
 
+The logs in ``exp_rideloop`` record how long each ride loop took, while
+``agent_log`` lists the events an agent experienced. By looking at the most
+recent event at a particular timestamp we can classify where the agent is.
 
 ```python
+from datetime import datetime
+from zero_liftsim.sandbox import infer_agent_states
 
+SNAPSHOT_TIME = manager.start_datetime + timedelta(minutes=5)
+state_map = infer_agent_states(manager.agents, SNAPSHOT_TIME)
 ```
 
+This ``state_map`` dictionary now contains an entry for each ``agent_uuid``
+mapping to ``state_in_queue``, ``state_riding_lift`` or ``state_traversing_down``.
+You might see one agent flagged as ``state_traversing_down`` and another still in
+``state_riding_lift`` depending on ``SNAPSHOT_TIME``.
+
+Below is the helper used in the tutorial.
 
 ```python
+from datetime import datetime
+from typing import Iterable, Dict
+from zero_liftsim.agent import Agent
 
-```
+state_riding_lift = "state_riding_lift"
+state_in_queue = "state_in_queue"
+state_traversing_down = "state_traversing_down"
 
 
-```python
-
-```
-
-
-```python
-
+def infer_agent_states(agents: Iterable[Agent], dt: datetime) -> Dict[str, str]:
+    """Return a mapping of agent UUIDs to a simple state."""
+    states: Dict[str, str] = {}
+    for agent in agents:
+        last_event = None
+        last_time = None
+        for rec in agent.activity_log.values():
+            t = datetime.fromisoformat(rec["time"])
+            if t <= dt and (last_time is None or t > last_time):
+                last_time = t
+                last_event = rec["event"]
+        if last_event == "board":
+            state = state_riding_lift
+        elif last_event == "ride_complete":
+            state = state_traversing_down
+        else:
+            state = state_in_queue
+        states[agent.agent_uuid] = state
+    return states
 ```
