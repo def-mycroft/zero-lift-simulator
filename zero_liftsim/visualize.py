@@ -20,8 +20,10 @@ def visualize_states(
     ----------
     agent_exp_log_data : pandas.DataFrame or Mapping[str, pandas.DataFrame]
         Data containing an ``"agent_log"`` table. If a mapping is supplied it
-        must provide this key. The table must include ``"event"``,
-        ``"agent_uuid"`` and ``"time"`` columns.
+        must provide this key. The table must include ``"event``,
+        ``"agent_uuid`` and ``"time"`` columns. Pass the full mapping returned by
+        :py:meth:`SimulationManager.retrieve_data` or its ``"agent_log"`` table
+        directly.
     time : datetime
         Point in time to visualize.
     out_path : str, optional
@@ -41,7 +43,19 @@ def visualize_states(
     required_cols = {"event", "agent_uuid", "time"}
     missing = required_cols - set(df.columns)
     if missing:
-        raise ValueError(f"agent_log missing columns: {', '.join(sorted(missing))}")
+        # allow "description" to stand in for "event" if provided
+        if "event" in missing and "description" in df.columns:
+            df = df.rename(columns={"description": "event"})
+            missing = required_cols - set(df.columns)
+
+    if missing:
+        hint = (
+            "agent_log missing columns: "
+            f"{', '.join(sorted(missing))}. "
+            "Ensure you pass the 'agent_log' table returned by "
+            "SimulationManager.retrieve_data()."
+        )
+        raise ValueError(hint)
 
     df = df.sort_values("time")
     latest = df[df["time"] <= time].groupby("agent_uuid").tail(1)
