@@ -4,7 +4,7 @@ random codename: stimulating-divide 3437c905
 
 *** 
 
-
+NOTE I'm not ready to implement this yet, not until I get one lift working better. 
 
 
 You're working in the `zero-lift-simulator` codebase to implement a **Multi-Lift Simulation Prototype** that models a fixed two-lift network with agent routing between them. The goal is to evolve LiftSim from a single-lift simulation into a minimal-but-functional **lift network simulator**, enabling the system to demonstrate network-level congestion and throughput dynamics.
