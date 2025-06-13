@@ -10,6 +10,7 @@
 
 ## Prompt Articles
 - [prompt9 - clock simulation runtime](prompt99_clock_simulation_runtime.md)
+- [prompt11 - variable chair count](prompt11_variable_chairs.md)
 - [prompt10 - Implement Multi-Lift Setup stimulating-divide 3437c905](prompt10_multi_lift_sim.md)
 - [prompt8 - Implement AgentExperience class](prompt8_time_distribution_enhancement.md)
 - [prompt7 - simulation datetime logging](prompt7_simulation_datetime.md)
