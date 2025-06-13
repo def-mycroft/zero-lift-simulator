@@ -5,7 +5,13 @@ from datetime import datetime, timedelta
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from zero_liftsim.agent import Agent
-from zero_liftsim.sandbox import infer_agent_states, state_riding_lift, state_in_queue, state_traversing_down
+from zero_liftsim.sandbox import (
+    infer_agent_states,
+    state_riding_lift,
+    state_in_queue,
+    state_traversing_down,
+    UnknownEventError,
+)
 import pytest
 
 
@@ -35,5 +41,5 @@ def test_infer_agent_states_unknown_event():
     agent = Agent(2)
     start = datetime(2025, 3, 12, 9, 0, 0)
     agent.log_event("foo", 0, start.isoformat())
-    with pytest.raises(KeyError):
+    with pytest.raises(UnknownEventError):
         infer_agent_states([agent], start)

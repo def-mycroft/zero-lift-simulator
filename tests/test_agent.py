@@ -84,6 +84,5 @@ def test_get_latest_event_unrecognized_event():
     agent = Agent(7)
     ts = datetime(2025, 3, 12, 9, 0, 0)
     agent.activity_log[0] = {"time": ts.isoformat(), "event": "foo"}
-    with pytest.raises(KeyError):
-        agent.get_latest_event(ts)
+    assert agent.get_latest_event(ts) == "foo"
 
