@@ -4,27 +4,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .helpers import codename
-
-try:
-    from jinja2 import Environment, FileSystemLoader
-except ModuleNotFoundError:  # pragma: no cover - fallback if jinja2 missing
-    Environment = None
-    FileSystemLoader = None
+from .helpers import codename, load_asset_template
 
 
 _TEMPLATE_NAME = "new_doc_template.md.j2"
 
 
 def _load_template() -> str:
-    assets = Path(__file__).resolve().parent / "assets"
-    if Environment is None:
-        # fallback simple template
-        path = assets / _TEMPLATE_NAME
-        return path.read_text(encoding="utf-8")
-    env = Environment(loader=FileSystemLoader(str(assets)))
-    template = env.get_template(_TEMPLATE_NAME)
-    return template
+    return load_asset_template(_TEMPLATE_NAME)
 
 
 def new_doc(*, docs_dir: Path | None = None) -> Path:
