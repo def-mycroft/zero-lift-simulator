@@ -7,6 +7,7 @@ except ModuleNotFoundError:  # pragma: no cover - fallback for environments with
         return value[:8]
 from uuid import uuid4 as uuid
 from pathlib import Path
+import pandas as pd
 import inspect
 
 from typing import Any, Callable, Dict
@@ -114,6 +115,9 @@ def base_config(**overrides: Any) -> Dict[str, Any]:
 
     if overrides:
         _deep_update(cfg, overrides)
+
+    # setup dtypes for serialization 
+    cfg['Simulation']['run']['start_datetime'] = pd.to_datetime(cfg['Simulation']['run']['start_datetime']).isoformat()
     return cfg
 
 
