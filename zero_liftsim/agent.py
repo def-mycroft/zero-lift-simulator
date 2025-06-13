@@ -1,3 +1,5 @@
+"""Agent model used in the Zero Lift simulator."""
+
 from __future__ import annotations
 
 from uuid import uuid4 as uuid
@@ -38,9 +40,29 @@ class Agent:
             )
             self.logger = logger
 
-    def log_event(self, event: str, time: int, timestamp: str,
-                  return_event_uuid='', **info) -> None:
-        """Append a record to :pyattr:`activity_log` if self logging is enabled."""
+    def log_event(
+        self,
+        event: str,
+        time: int,
+        timestamp: str,
+        return_event_uuid: str = "",
+        **info,
+    ) -> None:
+        """Record an event in :attr:`activity_log`.
+
+        Parameters
+        ----------
+        event : str
+            Event name.
+        time : int
+            Simulation time of the event.
+        timestamp : str
+            ISO formatted timestamp.
+        return_event_uuid : str, optional
+            Identifier for a related :class:`ReturnEvent`.
+        **info
+            Additional metadata to record.
+        """
 
         if not self.self_logging:
             return
@@ -57,13 +79,15 @@ class Agent:
         self.activity_log[len(self.activity_log)] = record
 
     def start_wait(self, time: int, timestamp: str) -> None:
-        """Record the time the agent begins waiting in the queue."""
+        """Record when the agent enters the queue."""
 
         self.wait_start = time
         self.log_event("start_wait", time, timestamp)
 
-    def finish_ride(self, time: int, timestamp: str, return_event_uuid='') -> int:
-        """Mark the current ride complete and return the wait time."""
+    def finish_ride(
+        self, time: int, timestamp: str, return_event_uuid: str = ""
+    ) -> int:
+        """Mark the ride complete and return wait time."""
 
         wait_start = self.wait_start if self.wait_start is not None else time
         wait_time = time - wait_start

@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Utilities for working with documentation."""
+
+from __future__ import annotations
 
 from pathlib import Path
 
