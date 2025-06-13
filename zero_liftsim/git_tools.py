@@ -7,10 +7,23 @@ from pathlib import Path
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from datetime import timezone, timedelta
 
-from git import Repo
+import subprocess
+
+try:
+    from git import Repo
+except ModuleNotFoundError:  # pragma: no cover - fallback without GitPython
+    Repo = None
 
 
-_REPO = Repo(Path(__file__).resolve().parents[1])
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if Repo is not None:
+    _REPO = Repo(_REPO_ROOT)
+    HEAD_COMMIT = _REPO.head.commit.hexsha
+else:
+    _REPO = None
+    HEAD_COMMIT = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=_REPO_ROOT, text=True
+    ).strip()
 
 try:
     DENVER_TZ = ZoneInfo("US/Denver")
@@ -26,10 +39,24 @@ def last_commit_info(path: Path) -> tuple[str, datetime]:
     path:
         File path to inspect. It must be within the project repository.
     """
-    rel = path.relative_to(_REPO.working_tree_dir)
-    commit = next(_REPO.iter_commits(paths=str(rel), max_count=1))
-    dt = commit.committed_datetime.astimezone(DENVER_TZ)
-    return commit.hexsha, dt
+    rel = path.relative_to(_REPO_ROOT)
+    if Repo is not None:
+        commit = next(_REPO.iter_commits(paths=str(rel), max_count=1))
+        dt = commit.committed_datetime.astimezone(DENVER_TZ)
+        sha = commit.hexsha
+    else:
+        sha = subprocess.check_output(
+            ["git", "log", "-n", "1", "--pretty=format:%H", "--", str(rel)],
+            cwd=_REPO_ROOT,
+            text=True,
+        ).strip()
+        dt_str = subprocess.check_output(
+            ["git", "log", "-n", "1", "--pretty=format:%cI", "--", str(rel)],
+            cwd=_REPO_ROOT,
+            text=True,
+        ).strip()
+        dt = datetime.fromisoformat(dt_str).astimezone(DENVER_TZ)
+    return sha, dt
 
 
 def append_git_info(path: Path) -> None:
@@ -50,5 +77,9 @@ def append_git_info(path: Path) -> None:
 
 def tracked_files() -> list[Path]:
     """Return all file paths tracked by the git repository."""
-    return [Path(p) for p in _REPO.git.ls_files().splitlines()]
+    if Repo is not None:
+        files = _REPO.git.ls_files().splitlines()
+    else:
+        files = subprocess.check_output(["git", "ls-files"], cwd=_REPO_ROOT, text=True).splitlines()
+    return [Path(p) for p in files]
 

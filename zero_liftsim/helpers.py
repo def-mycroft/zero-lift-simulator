@@ -77,7 +77,7 @@ def base_config(**overrides: Any) -> Dict[str, Any]:
     from .agent import Agent
 
     cfg: Dict[str, Any] = {
-        "git_commit": git_tools._REPO.head.commit.hexsha,
+        "git_commit": git_tools.HEAD_COMMIT,
         "SimulationManager": {
             "__init__": _defaults_from_callable(SimulationManager.__init__),
             "run": _defaults_from_callable(SimulationManager.run),
@@ -92,12 +92,24 @@ def base_config(**overrides: Any) -> Dict[str, Any]:
     }
 
     # include common runtime attributes for lift that are not part of __init__
-    lift_attrs = {
-        "ride_mean": Lift.ride_mean,
-        "ride_sd": Lift.ride_sd,
-        "traverse_mean": Lift.traverse_mean,
-        "traverse_sd": Lift.traverse_sd,
-    }
+    if all(
+        hasattr(Lift, attr)
+        for attr in ("ride_mean", "ride_sd", "traverse_mean", "traverse_sd")
+    ):
+        lift_attrs = {
+            "ride_mean": Lift.ride_mean,
+            "ride_sd": Lift.ride_sd,
+            "traverse_mean": Lift.traverse_mean,
+            "traverse_sd": Lift.traverse_sd,
+        }
+    else:
+        default_lift = Lift(capacity=1)
+        lift_attrs = {
+            "ride_mean": default_lift.ride_mean,
+            "ride_sd": default_lift.ride_sd,
+            "traverse_mean": default_lift.traverse_mean,
+            "traverse_sd": default_lift.traverse_sd,
+        }
     cfg["Lift"].update(lift_attrs)
 
     if overrides:
