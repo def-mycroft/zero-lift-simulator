@@ -5,3 +5,4 @@ __version__ = "0.1.0"
 
 from . import main
 from . import state_viz
+from . import pandas_ext  # noqa: F401 -- register pandas accessor
