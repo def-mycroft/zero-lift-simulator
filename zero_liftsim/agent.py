@@ -121,13 +121,8 @@ class Agent:
         ------
         ValueError
             If no event occurred at or before ``dt``.
-        KeyError
-            If the resulting event is not recognized by :data:`_EVENT_STATE_MAP`.
         """
-
         from datetime import datetime as _dt
-        # lazy import to avoid circular dependency
-        from .sandbox import _EVENT_STATE_MAP
 
         latest_event = None
         latest_time = None
@@ -139,8 +134,6 @@ class Agent:
 
         if latest_event is None:
             raise ValueError("no event before provided datetime")
-        if latest_event not in _EVENT_STATE_MAP:
-            raise KeyError(latest_event)
 
         return latest_event
 

@@ -1,5 +1,9 @@
 # Investigating Wait Time with Many Chairs
 
+codename: obsequious-tear 07e76bfa
+
+***
+
 When running `SimulationManager(n_agents=10, lift_capacity=2)` the lift allocates fifty chairs by default. Intuitively this should eliminate queues, yet the summary reports an average wait around two minutes.
 
 The cause lies in how arrivals trigger boarding. `ArrivalEvent.execute` only schedules `BoardingEvent` when the lift state is `"idle"`:
