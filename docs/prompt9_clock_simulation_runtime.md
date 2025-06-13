@@ -1,4 +1,4 @@
-# prompt99 - clock simulation runtime
+# prompt9 - clock simulation runtime
 
 random codename:
 
