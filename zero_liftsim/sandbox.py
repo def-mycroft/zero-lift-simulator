@@ -23,7 +23,6 @@ _EVENT_STATE_MAP = {
 }
 
 def infer_agent_states(agents: Iterable[Agent], dt: datetime) -> Dict[str, str]:
-    raise NotImplementedError('codex: you must fix this')
     """Categorize agents based on their activity log at ``dt``.
 
     Parameters
@@ -40,9 +39,7 @@ def infer_agent_states(agents: Iterable[Agent], dt: datetime) -> Dict[str, str]:
     """
     results: Dict[str, str] = {}
     for agent in agents:
-
-        # define latest event 
-        latest_event = agent.get_latest_event() # TODO - codex should implement this, i.e. agent.get_latest_event doesn't exist yet and should be added to agent class. 
+        latest_event = agent.get_latest_event(dt)
         results[agent.agent_uuid] = _EVENT_STATE_MAP[latest_event]
 
     return results

@@ -4,6 +4,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from datetime import datetime, timedelta
+import pytest
 from zero_liftsim.main import Agent, Simulation, ArrivalEvent
 from zero_liftsim.lift import Lift
 
@@ -61,4 +62,28 @@ def test_activity_log_disabled():
     agent.boarded = True
     agent.finish_ride(5, (start + timedelta(minutes=5)).isoformat())
     assert agent.activity_log == {}
+
+
+def test_get_latest_event_basic():
+    agent = Agent(5)
+    start = datetime(2025, 3, 12, 9, 0, 0)
+    agent.log_event("start_wait", 0, start.isoformat())
+    agent.log_event("board", 1, (start + timedelta(minutes=1)).isoformat())
+
+    dt = start + timedelta(minutes=2)
+    assert agent.get_latest_event(dt) == "board"
+
+
+def test_get_latest_event_no_event():
+    agent = Agent(6)
+    with pytest.raises(ValueError):
+        agent.get_latest_event(datetime(2025, 3, 12, 9, 0, 0))
+
+
+def test_get_latest_event_unrecognized_event():
+    agent = Agent(7)
+    ts = datetime(2025, 3, 12, 9, 0, 0)
+    agent.activity_log[0] = {"time": ts.isoformat(), "event": "foo"}
+    with pytest.raises(KeyError):
+        agent.get_latest_event(ts)
 
