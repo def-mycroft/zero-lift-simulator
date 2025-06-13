@@ -6,13 +6,9 @@ import json
 from pathlib import Path
 from datetime import datetime, timedelta
 
-from zero_liftsim.main import (
-    Simulation,
-    Agent,
-    ArrivalEvent,
-    BoardingEvent,
-    ReturnEvent,
-)
+from zero_liftsim.simulation import Simulation
+from zero_liftsim.agent import Agent
+from zero_liftsim.events import ArrivalEvent, BoardingEvent, ReturnEvent
 from zero_liftsim.lift import Lift
 from zero_liftsim.logging import Logger
 
@@ -160,13 +156,8 @@ class SimulationManager:
 
 
     def subset_agent_logs(self, agent):
-        """Return subset dataframe of agent logs
-
-        i.e. only agent_exp_log_data['agent_log'] (dataframe) where 
-        agent uuid matches. 
-
-        """
+        """Return log entries for ``agent`` as a DataFrame."""
         self.retrieve_data()
-        df = self.agent_exp_log_data['agent_log'].copy(deep=True)
-
-
+        df = self.agent_exp_log_data["agent_log"].copy(deep=True)
+        m = df["agent_uuid"] == agent.agent_uuid
+        return df[m]
