@@ -92,9 +92,15 @@ def run_alpha_sim(
     """Run a small simulation and return metrics."""
     from zero_liftsim.simmanager import SimulationManager
 
-    manager = SimulationManager(
-        n_agents=n_agents,
-        lift_capacity=lift_capacity,
-        start_datetime=start_datetime,
+    from zero_liftsim.helpers import base_config
+
+    cfg = base_config()
+    cfg["SimulationManager"]["__init__"].update(
+        {
+            "n_agents": n_agents,
+            "lift_capacity": lift_capacity,
+            "start_datetime": start_datetime,
+        }
     )
+    manager = SimulationManager(cfg)
     return manager.run(runtime_minutes=runtime_minutes)

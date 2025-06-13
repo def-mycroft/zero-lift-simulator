@@ -46,6 +46,7 @@
 - [codex: Update the Table of Contents](for_codex_update_toc.md)
 - [Git Tools](git-tools.md)
 - [Investigating Wait Time with Many Chairs](high_wait_analysis.md)
+- [Launching a Simulation](launching_a_simulation.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
 - [Tutorial - Infer Agent State](partial-kernel-tutorial-infer-agent-states.md)
 - [Project Questions stingy-orange - answered](project_questions_orange.md)

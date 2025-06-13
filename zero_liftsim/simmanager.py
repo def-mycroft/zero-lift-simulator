@@ -16,21 +16,15 @@ from zero_liftsim.logging import Logger
 class SimulationManager:
     """Configure and execute a lift simulation.
 
-    This class manages the setup, execution, and result archiving
-    of an agent-based ski lift simulation. It handles agent creation,
-    lift initialization, event scheduling, and result summarization. Use
-    :py:meth:`run` to execute the simulation for a given time window.
+    This class manages the setup, execution, and result archiving of an
+    agent-based ski lift simulation. Parameters are supplied via a nested
+    configuration dictionary matching the structure returned by
+    :func:`zero_liftsim.helpers.base_config`.
 
     Parameters
     ----------
-    n_agents : int
-        Number of agents that will participate in the simulation.
-    lift_capacity : int
-        Number of agents a lift can board per cycle.
-    start_datetime : datetime, optional
-        When the simulation begins. Defaults to 2025-03-12 09:00.
-    logger : Logger, optional
-        Logger used during the run. Created automatically if omitted.
+    config : dict
+        Configuration dictionary used to initialize the manager.
 
     Attributes
     ----------
@@ -43,18 +37,25 @@ class SimulationManager:
     arrival_times : list of int
         Scheduled arrival times for agents.
     """
-    def __init__(
-        self,
-        *,
-        n_agents: int,
-        lift_capacity: int,
-        start_datetime: datetime | None = None,
-        logger: Logger | None = None,
-    ) -> None:
-        self.n_agents = n_agents
-        self.lift_capacity = lift_capacity
-        self.start_datetime = start_datetime or datetime(2025, 3, 12, 9, 0, 0)
-        self.logger = logger or Logger()
+
+    def __init__(self, config: dict) -> None:
+        sm_cfg = config.get("SimulationManager", {}).get("__init__", {})
+        self.n_agents = sm_cfg.get("n_agents", 1)
+        self.lift_capacity = sm_cfg.get("lift_capacity", 1)
+
+        start_dt = sm_cfg.get("start_datetime")
+        if isinstance(start_dt, str):
+            start_dt = datetime.fromisoformat(start_dt)
+        self.start_datetime = start_dt or datetime(2025, 3, 12, 9, 0, 0)
+
+        logger = sm_cfg.get("logger")
+        self.logger = logger if isinstance(logger, Logger) else Logger()
+
+        self._run_cfg = config.get("SimulationManager", {}).get("run", {})
+        self._sim_cfg = config.get("Simulation", {}).get("run", {})
+        self._lift_cfg = config.get("Lift", {})
+        self._agent_cfg = config.get("Agent", {}).get("__init__", {})
+
         self.sim: Simulation | None = None
         self.lift: Lift | None = None
         self.agents: list[Agent] = []
@@ -63,8 +64,15 @@ class SimulationManager:
 
     def _setup(self) -> None:
         self.sim = Simulation()
-        self.lift = Lift(self.lift_capacity)
-        self.agents = [Agent(i + 1, logger=self.logger) for i in range(self.n_agents)]
+        num_chairs = self._lift_cfg.get("num_chairs", 50)
+        self.lift = Lift(self.lift_capacity, num_chairs)
+        for attr in ("ride_mean", "ride_sd", "traverse_mean", "traverse_sd"):
+            if attr in self._lift_cfg:
+                setattr(self.lift, attr, self._lift_cfg[attr])
+        agent_kwargs = {"logger": self.logger}
+        if "self_logging" in self._agent_cfg:
+            agent_kwargs["self_logging"] = self._agent_cfg["self_logging"]
+        self.agents = [Agent(i + 1, **agent_kwargs) for i in range(self.n_agents)]
         self.arrival_times = []
         for i, agent in enumerate(self.agents):
             self.arrival_times.append(i)
@@ -92,6 +100,18 @@ class SimulationManager:
         if self.sim is None:
             self._setup()
         assert self.sim is not None  # mypy hint
+
+        if end_datetime is None:
+            cfg_end = self._run_cfg.get("end_datetime")
+            if isinstance(cfg_end, str):
+                end_datetime = datetime.fromisoformat(cfg_end)
+            else:
+                end_datetime = cfg_end
+
+        if runtime_minutes is None:
+            cfg_runtime = self._run_cfg.get("runtime_minutes")
+            runtime_minutes = cfg_runtime
+
         if runtime_minutes is None:
             if end_datetime is None:
                 default_end = self.start_datetime.replace(hour=16, minute=0, second=0, microsecond=0)
@@ -101,7 +121,7 @@ class SimulationManager:
         self.sim.run(
             stop_time=stop,
             logger=self.logger,
-            full_agent_logging=True,
+            full_agent_logging=self._sim_cfg.get("full_agent_logging", False),
             start_datetime=self.start_datetime,
         )
         total_wait = 0.0
