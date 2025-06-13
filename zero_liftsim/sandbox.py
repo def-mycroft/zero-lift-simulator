@@ -14,6 +14,7 @@ state_traversing_down = "traversing_down"
 
 
 # Explicit mapping from activity log events to the above states
+# NOTE: Agent.get_latest_event should return exactly one of these keys in _EVENT_STATE_MAP below
 _EVENT_STATE_MAP = {
     "board": state_riding_lift,
     "ride_complete": state_traversing_down,
@@ -22,6 +23,7 @@ _EVENT_STATE_MAP = {
 }
 
 def infer_agent_states(agents: Iterable[Agent], dt: datetime) -> Dict[str, str]:
+    raise NotImplementedError('codex: you must fix this')
     """Categorize agents based on their activity log at ``dt``.
 
     Parameters
@@ -38,19 +40,9 @@ def infer_agent_states(agents: Iterable[Agent], dt: datetime) -> Dict[str, str]:
     """
     results: Dict[str, str] = {}
     for agent in agents:
-        latest_time = None
-        latest_event = None
-        for entry in agent.activity_log.values():
-            t = datetime.fromisoformat(entry["time"])
-            if t <= dt and (latest_time is None or t > latest_time):
-                latest_time = t
-                latest_event = entry.get("event")
-        if latest_event is None:
-            # if no event has occurred yet, the agent is still waiting in queue
-            state = state_in_queue
-        else:
-            state = _EVENT_STATE_MAP.get(latest_event, state_in_queue)
-        results[agent.agent_uuid] = state
+
+        # define latest event 
+        latest_event = agent.get_latest_event() # TODO - codex should implement this, i.e. agent.get_latest_event doesn't exist yet and should be added to agent class. 
+        results[agent.agent_uuid] = _EVENT_STATE_MAP[latest_event]
+
     return results
-
-

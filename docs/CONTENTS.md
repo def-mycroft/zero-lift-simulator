@@ -9,6 +9,7 @@
 - [Initial Develop Description - Zero Lift Simulator](main_notes_implementation.md)
 
 ## Prompt Articles
+- [prompt14 - Force Agent State Map unnamed aggressive-week 801baa1b](prompt14_agent_explicit_fail_aggressive_week.md)
 - [prompt13 - Integrate .zero pandas custom accessor](prompt13_pandas_custom.md)
 - [prompt12 - state diagram dev lonely-camera 125058f3](prompt12_lonely_camera_125058f3.md)
 - [prompt11 - variable chair count](prompt11_variable_chairs.md)
@@ -52,6 +53,7 @@
 - [Using SimulationManager](simulation_manager_tutorial.md)
 - [Styleguide for Wiki Articles](styleguide_wiki_articles.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
+- [unnamed present-land 9c598ab8](unnamed-present-land-9c598ab8.md)
 - [Updating Dependencies](updating_dependencies.md)
 - [Wiki Article Creation Instructions for Codex](wiki_article_creation_for_codex.md)
 - [Article Title](wiki_article_template.md)
