@@ -45,6 +45,7 @@
 - [codex: Update the Table of Contents](for_codex_update_toc.md)
 - [Git Tools](git-tools.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
+- [unnamed obsequious-spend 3d8813f7](partial-kernel-tutorial-infer-agent-states.md)
 - [Project Questions stingy-orange - answered](project_questions_orange.md)
 - [Simulation Motivations](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
 - [Running Tests Using python -m pytest](running_tests.md)
