@@ -80,7 +80,12 @@ def base_config(**overrides: Any) -> Dict[str, Any]:
     cfg: Dict[str, Any] = {
         "git_commit": git_tools.HEAD_COMMIT,
         "SimulationManager": {
-            "__init__": _defaults_from_callable(SimulationManager.__init__),
+            "__init__": {
+                "n_agents": 1,
+                "lift_capacity": 1,
+                "start_datetime": None,
+                "logger": None,
+            },
             "run": _defaults_from_callable(SimulationManager.run),
         },
         "Simulation": {
