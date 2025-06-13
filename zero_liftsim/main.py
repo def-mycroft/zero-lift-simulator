@@ -344,6 +344,7 @@ class ReturnEvent(Event):
     def __init__(self, lift: Lift, boarded: list[Agent] | None = None) -> None:
         self.lift = lift
         self.boarded = boarded or []
+        self.return_event_uuid = str(uuid())
 
     def execute(self, simulation: Simulation) -> list[tuple[Event, int]]:
         """Mark the lift idle and trigger new boarding if needed."""
@@ -360,12 +361,14 @@ class ReturnEvent(Event):
             traverse_dur = self.lift.time_spent_traverse_down_mountain()
             agent.experience_rideloop.add_entry(
                 agent,
+                self.return_event_uuid, # this can be repeated across agents
                 timestamp_dt,
                 ride_dur,
                 traverse_dur,
                 queue_duration,
             )
-            agent.finish_ride(simulation.current_time, timestamp_dt.isoformat())
+            agent.finish_ride(simulation.current_time, timestamp_dt.isoformat(), 
+                              self.return_event_uuid)
             next_arrival = simulation.current_time + int(traverse_dur)
             if simulation.stop_time is not None and next_arrival < simulation.stop_time:
                 ts = (

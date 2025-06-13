@@ -38,12 +38,14 @@ class Agent:
             )
             self.logger = logger
 
-    def log_event(self, event: str, time: int, timestamp: str, **info) -> None:
+    def log_event(self, event: str, time: int, timestamp: str,
+                  return_event_uuid='', **info) -> None:
         """Append a record to :pyattr:`activity_log` if self logging is enabled."""
 
         if not self.self_logging:
             return
         record = {
+            "return_event_uuid":return_event_uuid,
             "time": timestamp,
             "time_offset": time,
             "event": event,
@@ -60,7 +62,7 @@ class Agent:
         self.wait_start = time
         self.log_event("start_wait", time, timestamp)
 
-    def finish_ride(self, time: int, timestamp: str) -> int:
+    def finish_ride(self, time: int, timestamp: str, return_event_uuid='') -> int:
         """Mark the current ride complete and return the wait time."""
 
         wait_start = self.wait_start if self.wait_start is not None else time
@@ -74,8 +76,9 @@ class Agent:
             timestamp,
             wait_time=wait_time,
             wait_time_readable=f"{wait_time} minutes",
+            return_event_uuid=return_event_uuid,
         )
         return wait_time
 
     def __repr__(self) -> str:  # pragma: no cover - convenience
-        return f"Agent({self.agent_id})"
+        return f"Agent({self.agent_id}) {self.agent_uuid_codename} {self.agent_uuid}"

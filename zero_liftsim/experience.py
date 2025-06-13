@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
+from uuid import uuid4 as uuid
 
 
 class AgentExperienceHistory:
@@ -42,9 +43,11 @@ class AgentRideLoopExperience(AgentExperienceHistory):
     queue : float
         Time spent waiting in queue for the lift, in minutes.
     """
-    def add_entry(self, agent, dt: datetime, ride: float, traverse: float, 
+    def add_entry(self, agent, return_event_uuid, dt: datetime, ride: float, traverse: float, 
                   queue: float) -> None:
         self.log[dt] = {
+            "exp_id": str(uuid()), 
+            "return_event_uuid": return_event_uuid,
             "agent_uuid": agent.agent_uuid,
             "agent_uuid_codename": agent.agent_uuid_codename,
             "time_spent_ride_lift": ride,

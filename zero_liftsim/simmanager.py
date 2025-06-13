@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import pandas as pd
 from datetime import datetime, timedelta
 
 from zero_liftsim.main import (
@@ -63,6 +64,7 @@ class SimulationManager:
         self.lift: Lift | None = None
         self.agents: list[Agent] = []
         self.arrival_times: list[int] = []
+        self.agent_exp_log_data = {}
 
     def _setup(self) -> None:
         self.sim = Simulation()
@@ -122,7 +124,38 @@ class SimulationManager:
         path.mkdir(parents=True, exist_ok=True)
         for agent in self.agents:
             data = {dt.isoformat(): info for dt, info in agent.experience_rideloop.log.items()}
-            outfile = path / f"agent_{agent.agent_id}.json"
+            outfile = path / f"agent-id-{agent.agent_id}-uuid-{agent.agent_uuid}.json"
             with outfile.open("w", encoding="utf-8") as fh:
                 json.dump(data, fh, indent=2)
+
+    def lookup_agent(self, agent_uuid):
+        """Return agent class given agent_uuid"""
+        d = {i:v for i,v in [(a.agent_uuid, a) for a in self.agents]}
+        return d[agent_uuid]
+
+    def retrieve_data(self):
+        """Retrieve key dataframes that summarize simulation"""
+        data = {}
+        for k in ['exp_rideloop', 'agent_log']:
+            data[k] = pd.DataFrame()
+        for agent in self.agents:
+            exp_rideloop = {dt.isoformat(): info 
+                            for dt, info in agent.experience_rideloop.log.items()}
+            e = pd.DataFrame(exp_rideloop).T
+            data['exp_rideloop'] = pd.concat([e, data['exp_rideloop']])
+
+            # agent log 
+            l = pd.DataFrame(agent.activity_log).T
+            data['agent_log'] = pd.concat([l, data['agent_log']])
+
+        data['exp_rideloop'] = (data['exp_rideloop'].reset_index(drop=False)
+                                                    .rename(columns={'index':'time'})
+                                )
+        for k in data.keys():
+            data[k]['time'] = pd.to_datetime(data[k]['time'])
+
+        self.agent_exp_log_data = data
+
+        return data
+
 
