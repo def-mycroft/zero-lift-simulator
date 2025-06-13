@@ -9,6 +9,7 @@
 - [Initial Develop Description - Zero Lift Simulator](main_notes_implementation.md)
 
 ## Prompt Articles
+- [prompt13 - Integrate .zero pandas custom accessor](prompt13_pandas_custom.md)
 - [prompt12 - state diagram dev lonely-camera 125058f3](prompt12_lonely_camera_125058f3.md)
 - [prompt11 - variable chair count](prompt11_variable_chairs.md)
 - [prompt10 - Implement Multi-Lift Setup stimulating-divide 3437c905](prompt10_multi_lift_sim.md)
