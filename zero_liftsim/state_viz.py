@@ -75,4 +75,4 @@ def visualize_states(
     Path(out_path).parent.mkdir(parents=True, exist_ok=True)
     plt.tight_layout()
     plt.savefig(out_path, dpi=200)
-    plt.close(fig)
+    return fig
