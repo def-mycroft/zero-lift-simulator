@@ -5,6 +5,10 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Iterable, Dict
 
+
+class UnknownEventError(Exception):
+    """Raised when :func:`infer_agent_states` encounters an unknown event."""
+
 from .agent import Agent
 
 # State constants used when categorizing agents
@@ -40,6 +44,8 @@ def infer_agent_states(agents: Iterable[Agent], dt: datetime) -> Dict[str, str]:
     results: Dict[str, str] = {}
     for agent in agents:
         latest_event = agent.get_latest_event(dt)
+        if latest_event not in _EVENT_STATE_MAP:
+            raise UnknownEventError(latest_event)
         results[agent.agent_uuid] = _EVENT_STATE_MAP[latest_event]
 
     return results
