@@ -7,6 +7,9 @@ except ModuleNotFoundError:  # pragma: no cover - fallback for environments with
         return value[:8]
 from uuid import uuid4 as uuid
 from pathlib import Path
+import inspect
+
+from typing import Any, Callable, Dict
 
 try:
     from jinja2 import Environment, FileSystemLoader
@@ -39,4 +42,70 @@ def load_asset_template(name: str):
     env = Environment(loader=FileSystemLoader(str(assets)))
     template = env.get_template(name)
     return template
+
+
+def _defaults_from_callable(obj: Callable[..., Any]) -> Dict[str, Any]:
+    """Return a dictionary of parameter defaults for ``obj``."""
+    sig = inspect.signature(obj)
+    defaults: Dict[str, Any] = {}
+    for name, param in sig.parameters.items():
+        if param.kind in (param.POSITIONAL_OR_KEYWORD, param.KEYWORD_ONLY):
+            if param.default is not inspect.Parameter.empty:
+                defaults[name] = param.default
+    return defaults
+
+
+def _deep_update(base: Dict[str, Any], updates: Dict[str, Any]) -> Dict[str, Any]:
+    """Recursively update ``base`` with ``updates`` and return ``base``."""
+    for key, value in updates.items():
+        if (
+            isinstance(value, dict)
+            and isinstance(base.get(key), dict)
+        ):
+            _deep_update(base[key], value)
+        else:
+            base[key] = value
+    return base
+
+
+def base_config(**overrides: Any) -> Dict[str, Any]:
+    """Return the base simulation configuration with optional overrides."""
+    from . import git_tools
+    from .simmanager import SimulationManager
+    from .simulation import Simulation
+    from .lift import Lift
+    from .agent import Agent
+
+    cfg: Dict[str, Any] = {
+        "git_commit": git_tools._REPO.head.commit.hexsha,
+        "SimulationManager": {
+            "__init__": _defaults_from_callable(SimulationManager.__init__),
+            "run": _defaults_from_callable(SimulationManager.run),
+        },
+        "Simulation": {
+            "run": _defaults_from_callable(Simulation.run),
+        },
+        "Lift": _defaults_from_callable(Lift.__init__),
+        "Agent": {
+            "__init__": _defaults_from_callable(Agent.__init__),
+        },
+    }
+
+    # include common runtime attributes for lift that are not part of __init__
+    lift_attrs = {
+        "ride_mean": Lift.ride_mean,
+        "ride_sd": Lift.ride_sd,
+        "traverse_mean": Lift.traverse_mean,
+        "traverse_sd": Lift.traverse_sd,
+    }
+    cfg["Lift"].update(lift_attrs)
+
+    if overrides:
+        _deep_update(cfg, overrides)
+    return cfg
+
+
+def update_params(**kwargs: Any) -> Dict[str, Any]:
+    """Return the default config updated with ``kwargs`` (recursive)."""
+    return base_config(**kwargs)
 
