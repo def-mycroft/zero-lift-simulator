@@ -46,3 +46,9 @@ def append_git_info(path: Path) -> None:
     lines.append(f"Commit: {sha}")
     lines.append(f"Date: {dt.isoformat()}")
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def tracked_files() -> list[Path]:
+    """Return all file paths tracked by the git repository."""
+    return [Path(p) for p in _REPO.git.ls_files().splitlines()]
+
