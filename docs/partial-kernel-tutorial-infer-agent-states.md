@@ -1,4 +1,4 @@
-# Infer State from Agent Log and Exp (Tutorial Stub)
+# Tutorial - Infer Agent State
 
 random codename: obsequious-spend 3d8813f7
 

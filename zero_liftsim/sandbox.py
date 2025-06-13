@@ -8,9 +8,10 @@ from typing import Iterable, Dict
 from .agent import Agent
 
 # State constants used when categorizing agents
-state_riding_lift = "state_riding_lift"
-state_in_queue = "state_in_queue"
-state_traversing_down = "state_traversing_down"
+state_riding_lift = "riding_lift"
+state_in_queue = "in_queue"
+state_traversing_down = "traversing_down"
+
 
 def infer_agent_states(agents: Iterable[Agent], dt: datetime) -> Dict[str, str]:
     """Categorize agents based on their activity log at ``dt``.
@@ -37,10 +38,12 @@ def infer_agent_states(agents: Iterable[Agent], dt: datetime) -> Dict[str, str]:
                 latest_time = t
                 latest_event = entry.get("event")
         if latest_event == "board":
-            state = state_riding_lift
+            state = state_riding_lift # <- this one
         elif latest_event == "ride_complete":
-            state = state_traversing_down
+            state = state_traversing_down # <- this one
         else:
-            state = state_in_queue
+            state = state_in_queue # <- this is the problem
         results[agent.agent_uuid] = state
     return results
+
+
