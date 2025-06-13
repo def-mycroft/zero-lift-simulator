@@ -3,8 +3,19 @@ import pandas as pd
 from datetime import datetime
 
 
-def visualize_states(agent_exp_log_data: dict, time: datetime, out_path="state_diagram.png") -> None:
-    """Visualize agent states as blocks on a state machine diagram."""
+def visualize_states(agent_exp_log_data, time: datetime, out_path="state_diagram.png") -> None:
+    """Visualize agent states as blocks on a state machine diagram.
+
+    Parameters
+    ----------
+    agent_exp_log_data:
+        Either a dictionary containing a DataFrame under the ``"agent_log"`` key
+        or a DataFrame itself.
+    time:
+        Point in time to visualize.
+    out_path:
+        File path for the output PNG.
+    """
     # Fixed layout for states
     state_positions = {
         "start_wait": (0, 0),
@@ -24,7 +35,16 @@ def visualize_states(agent_exp_log_data: dict, time: datetime, out_path="state_d
         ax.add_patch(plt.Circle((x, y), 0.2, color='gray', zorder=1))
         ax.text(x, y + 0.3, state, ha='center', fontsize=10)
 
-    df = agent_exp_log_data["agent_log"]
+    if isinstance(agent_exp_log_data, pd.DataFrame):
+        df = agent_exp_log_data
+    else:
+        try:
+            df = agent_exp_log_data["agent_log"]
+        except (TypeError, KeyError) as exc:
+            raise ValueError(
+                "agent_exp_log_data must be a DataFrame or a dict containing 'agent_log'"
+            ) from exc
+
     df = df.sort_values("time")  # Ensure time ordering
 
     # Latest event per agent before or at the given time
