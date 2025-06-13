@@ -6,7 +6,7 @@ Use `run_alpha_sim` to execute a short run and gather basic metrics.
 ```python
 from zero_liftsim.main import run_alpha_sim
 
-summary = run_alpha_sim(n_agents=3, lift_capacity=2, cycle_time=5)
+summary = run_alpha_sim(n_agents=3, lift_capacity=2)
 print(summary)
 ```
 
@@ -25,12 +25,15 @@ from zero_liftsim.main import Simulation, Lift, Agent, ArrivalEvent
 
 logger = Logger()
 sim = Simulation()
-lift = Lift(capacity=1, cycle_time=5)
+lift = Lift(capacity=1, num_chairs=1)
 agent = Agent(1)
 sim.schedule(ArrivalEvent(agent, lift), 0)
 sim.run(logger=logger)
 print(logger.records())
 ```
+
+The ``num_chairs`` parameter controls how many lift chairs circulate
+simultaneously. Loading occurs only when a chair is available.
 
 Each logged entry is also appended to ``logs/main.log`` by default.
 You can supply a different filename to ``Logger`` and it will be
@@ -59,5 +62,5 @@ The file ``logs/debug.log`` will contain a line similar to::
 2025-06-19T12:00:00 initializing setup
 ```
 # Git Info
-Commit: 2123fb0b47c5df266f76bdbf8a0f945c1fcc72b6
-Date: 2025-06-11T18:41:52-07:00
+Commit: 61e0c90086234dee06b15b744dc31f212592a15f
+Date: 2025-06-13T00:35:24+00:00
