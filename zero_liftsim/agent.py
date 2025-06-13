@@ -104,5 +104,45 @@ class Agent:
         )
         return wait_time
 
+    def get_latest_event(self, dt: datetime) -> str:
+        """Return the most recent event not after ``dt``.
+
+        Parameters
+        ----------
+        dt:
+            Timestamp cutoff.
+
+        Returns
+        -------
+        str
+            Event name from the agent's activity log.
+
+        Raises
+        ------
+        ValueError
+            If no event occurred at or before ``dt``.
+        KeyError
+            If the resulting event is not recognized by :data:`_EVENT_STATE_MAP`.
+        """
+
+        from datetime import datetime as _dt
+        # lazy import to avoid circular dependency
+        from .sandbox import _EVENT_STATE_MAP
+
+        latest_event = None
+        latest_time = None
+        for record in self.activity_log.values():
+            record_time = _dt.fromisoformat(record["time"])
+            if record_time <= dt and (latest_time is None or record_time > latest_time):
+                latest_time = record_time
+                latest_event = record.get("event")
+
+        if latest_event is None:
+            raise ValueError("no event before provided datetime")
+        if latest_event not in _EVENT_STATE_MAP:
+            raise KeyError(latest_event)
+
+        return latest_event
+
     def __repr__(self) -> str:  # pragma: no cover - convenience
         return f"Agent({self.agent_id}) {self.agent_uuid_codename} {self.agent_uuid}"
