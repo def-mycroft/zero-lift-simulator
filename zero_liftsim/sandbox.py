@@ -8,9 +8,10 @@ from typing import Iterable, Dict
 from .agent import Agent
 
 # State constants used when categorizing agents
-state_riding_lift = "state_riding_lift"
-state_in_queue = "state_in_queue"
-state_traversing_down = "state_traversing_down"
+state_riding_lift = "riding_lift"
+state_in_queue = "in_queue"
+state_traversing_down = "traversing_down"
+
 
 # Explicit mapping from activity log events to the above states
 _EVENT_STATE_MAP = {
@@ -44,7 +45,6 @@ def infer_agent_states(agents: Iterable[Agent], dt: datetime) -> Dict[str, str]:
             if t <= dt and (latest_time is None or t > latest_time):
                 latest_time = t
                 latest_event = entry.get("event")
-
         if latest_event is None:
             # if no event has occurred yet, the agent is still waiting in queue
             state = state_in_queue
@@ -52,3 +52,5 @@ def infer_agent_states(agents: Iterable[Agent], dt: datetime) -> Dict[str, str]:
             state = _EVENT_STATE_MAP.get(latest_event, state_in_queue)
         results[agent.agent_uuid] = state
     return results
+
+
