@@ -43,3 +43,26 @@ def test_load_when_fewer_agents_than_capacity():
     assert boarded == [a1]
     assert lift.queue_length() == 0
     assert lift.state == "moving"
+
+
+def test_multiple_chairs_limit_loading_and_return():
+    lift = Lift(capacity=1, num_chairs=2)
+    a1, a2, a3 = Agent(1), Agent(2), Agent(3)
+    for a in (a1, a2, a3):
+        lift.enqueue(a)
+
+    first = lift.load()
+    second = lift.load()
+    third = lift.load()
+
+    assert len(first) == 1
+    assert len(second) == 1
+    assert third == []
+    assert lift.available_chairs() == 0
+    assert lift.riders_in_transit() == 2
+
+    lift.chair_return(first)
+    assert lift.available_chairs() == 1
+
+    boarded = lift.load()
+    assert boarded == [a3]
