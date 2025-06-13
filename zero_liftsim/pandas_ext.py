@@ -8,7 +8,7 @@ import pandas as pd
 from pandas.api.types import is_datetime64_any_dtype
 
 
-@pd.api.extensions.register_dataframe_accessor("zero")
+@pd.api.extensions.register_dataframe_accessor("zero_liftsim")
 class ZeroAccessor:
     """Provide Zero Lift helper methods for :class:`pandas.DataFrame`."""
 
@@ -35,3 +35,11 @@ class ZeroAccessor:
         col = self._find_time_column()
         diffs = (self._obj[col] - pd.Timestamp(index_time)).abs()
         return diffs.idxmin()
+
+    def subset_agent_uuid(self, agent_uuid):
+        """Return copy dataframe subset for agent_uuid"""
+        if 'agent_uuid' not in self._obj.columns:
+            raise Exception('Must have agent_uuid. ')
+        m = self._obj['agent_uuid'] == agent_uuid
+        return self._obj[m].copy(deep=True)
+

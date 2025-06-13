@@ -159,3 +159,14 @@ class SimulationManager:
         return data
 
 
+    def subset_agent_logs(self, agent):
+        """Return subset dataframe of agent logs
+
+        i.e. only agent_exp_log_data['agent_log'] (dataframe) where 
+        agent uuid matches. 
+
+        """
+        self.retrieve_data()
+        df = self.agent_exp_log_data['agent_log'].copy(deep=True)
+
+
