@@ -137,5 +137,36 @@ class Agent:
 
         return latest_event
 
+    def traceback_experience(self, experience_id: str) -> str:
+        """Return a formatted summary for the given experience.
+
+        Parameters
+        ----------
+        experience_id : str
+            Identifier of the experience entry to summarize.
+
+        Returns
+        -------
+        str
+            Rendered text describing the experience.
+
+        Raises
+        ------
+        KeyError
+            If ``experience_id`` does not exist.
+        """
+
+        from .helpers import load_asset_template
+
+        for dt, info in self.experience_rideloop.log.items():
+            if info.get("exp_id") == experience_id:
+                context = {"time": dt.isoformat(), **info}
+                tmpl = load_asset_template("agent-ride-exp.md.j2")
+                if hasattr(tmpl, "render"):
+                    return tmpl.render(**context)
+                return tmpl.format(**context)
+
+        raise KeyError(experience_id)
+
     def __repr__(self) -> str:  # pragma: no cover - convenience
         return f"Agent({self.agent_id}) {self.agent_uuid_codename} {self.agent_uuid}"
