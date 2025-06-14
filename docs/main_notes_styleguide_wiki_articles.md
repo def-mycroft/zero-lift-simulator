@@ -111,3 +111,5 @@ When documenting code, use fenced code comments to include metadata (especially 
 # Git Info
 Commit: 7ece82eb85482921db107f9a7df8c379e2313409
 Date: 2025-06-12T06:40:57-07:00
+
+#process-notes

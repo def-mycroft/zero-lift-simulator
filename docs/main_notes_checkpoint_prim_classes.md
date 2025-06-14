@@ -19,3 +19,5 @@ The immediate goal is to run a very simple "alpha" simulation that exercises thi
 # Git Info
 Commit: 7e5a82fe4c0a267340e3ce7526811a76490a895c
 Date: 2025-06-11T13:29:18-07:00
+
+#process-notes

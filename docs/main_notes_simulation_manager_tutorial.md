@@ -18,3 +18,5 @@ print(result)
 
 The returned dictionary matches ``run_alpha_sim`` but ``SimulationManager``
 exposes additional helpers like :py:meth:`archive_agent_rideloop_experience`.
+
+#process-notes
