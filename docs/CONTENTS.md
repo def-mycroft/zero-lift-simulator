@@ -1,6 +1,7 @@
 # Table of Contents
 
 ## Main Notes
+- [As a Human: How to Code with Codex](main_notes_as_a_human_how_to_code_with_codex.md)
 - [Research Output: Business Value from LiftSim](main_notes_business_value_research.md)
 - [Checkpoint - Primary Classes Implemented - pink-walk](main_notes_checkpoint_prim_classes.md)
 - [Project Rules/Conventions for Codex](main_notes_codex_must_read_this_rules_for_codex.md)
@@ -29,7 +30,6 @@
 - [How to Add Wiki Articles](adding_wiki_articles.md)
 - [Agent Experience](agent-experience.md)
 - [Running the Alpha Simulation](alpha_sim_usage.md)
-- [As a Human: How to Code with Codex](as_a_human_how_to_code_with_codex.md)
 - [Best Practices for Coding with Codex](best_practices_coding_with_codex.md)
 - [Bugfix - Add Dependencies](bugfix_add_deps.md)
 - [Bugfix - Lift default chairs](bugfix_chair_default.md)
@@ -46,7 +46,6 @@
 - [codex: Update the Table of Contents](for_codex_update_toc.md)
 - [Git Tools](git-tools.md)
 - [Investigating Wait Time with Many Chairs](high_wait_analysis.md)
-- [Launching a Simulation](launching_a_simulation.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
 - [Tutorial - Infer Agent State](partial-kernel-tutorial-infer-agent-states.md)
 - [Project Questions stingy-orange - answered](project_questions_orange.md)
@@ -55,7 +54,6 @@
 - [Using SimulationManager](simulation_manager_tutorial.md)
 - [Styleguide for Wiki Articles](styleguide_wiki_articles.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
-- [unnamed present-land 9c598ab8](unnamed-present-land-9c598ab8.md)
 - [Updating Dependencies](updating_dependencies.md)
 - [Wiki Article Creation Instructions for Codex](wiki_article_creation_for_codex.md)
 - [Article Title](wiki_article_template.md)
