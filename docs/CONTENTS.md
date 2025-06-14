@@ -1,6 +1,7 @@
 # Table of Contents
 
 ## Main Notes
+- [00 Project Action Anchor](00projectanchor-liftsim.md)
 - [How to Add Wiki Articles](main_notes_adding_wiki_articles.md)
 - [As a Human: How to Code with Codex](main_notes_as_a_human_how_to_code_with_codex.md)
 - [Best Practices for Coding with Codex](main_notes_best_practices_coding_with_codex.md)
@@ -19,6 +20,7 @@
 - [Wiki Article Template - Article Title Here](main_notes_wiki_article_template.md)
 
 ## Prompt Articles
+- [prompt15 - Create Agent Traceback Method](prompt_15_prompt-agent-traceback-ritzy-call-7e649afc.md)
 - [prompt14 - Force Agent State Map unnamed aggressive-week 801baa1b](prompt14_agent_explicit_fail_aggressive_week.md)
 - [prompt13 - Integrate .zero pandas custom accessor](prompt13_pandas_custom.md)
 - [prompt12 - state diagram dev lonely-camera 125058f3](prompt12_lonely_camera_125058f3.md)
