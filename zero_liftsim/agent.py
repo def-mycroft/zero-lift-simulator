@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import pandas as pd
+import json
 from uuid import uuid4 as uuid
 from datetime import datetime, timedelta
 
@@ -161,12 +163,30 @@ class Agent:
         for dt, info in self.experience_rideloop.log.items():
             if info.get("exp_id") == experience_id:
                 context = {"time": dt.isoformat(), **info}
+
+                context['full_dict'] = json.dumps(info, indent=4)
+                context['agent_log_str'] = self.recent_agent_log_return_event_uuid(info["return_event_uuid"])
                 tmpl = load_asset_template("agent-ride-exp.md.j2")
                 if hasattr(tmpl, "render"):
                     return tmpl.render(**context)
                 return tmpl.format(**context)
 
         raise KeyError(experience_id)
+
+
+    def recent_agent_log_return_event_uuid(self, return_event_uuid):
+        """Create a subset of log and return readable json string"""
+        data = self.activity_log
+        data = {str(uuid()):v for k,v in data.items()}
+        df = pd.DataFrame.from_dict(data, orient='index')
+
+        time = df[df['return_event_uuid'] == return_event_uuid]['time'].iloc[0]
+        idx = (df[df['time'] <= time].sort_values(by=['time'], ascending=False)
+                 .head(5).index.tolist())
+        agent_log_str = json.dumps({k:v for k,v in data.items() if k in idx}, 
+                                   indent=4)
+        return agent_log_str
+
 
     def __repr__(self) -> str:  # pragma: no cover - convenience
         return f"Agent({self.agent_id}) {self.agent_uuid_codename} {self.agent_uuid}"

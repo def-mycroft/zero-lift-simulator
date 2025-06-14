@@ -54,6 +54,7 @@
 - [Simulation Modeling Book Notes](law_simulation_book.md)
 - [Tutorial - Infer Agent State](partial-kernel-tutorial-infer-agent-states.md)
 - [Project Questions stingy-orange - answered](project_questions_orange.md)
+- [prompt16 - infer problem from pytest and apply fix](prompt16_-dapper-leading-f5ed905a.md)
 - [Simulation Motivations](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
 - [Running Tests Using python -m pytest](running_tests.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
