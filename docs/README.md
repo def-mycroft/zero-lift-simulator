@@ -1,25 +1,19 @@
 # Project Wiki
 
-Welcome to the project wiki. Navigate using the links below:
-
-- [Best Practices for Coding with Codex](best_practices_coding_with_codex.md)
-- [How to Add Wiki Articles](adding_wiki_articles.md)
-- [Wiki Article Template](wiki_article_template.md)
-- [Updating Dependencies](updating_dependencies.md)
+This wiki contains general guidelines and notes for working on the repository. The focus is now on shared utilities rather than the original lift simulation. Use the links below to navigate the most relevant articles.
 
 ## Table of Contents
 
+- [Project Rules/Conventions for Codex](main_notes_codex_must_read_this_rules_for_codex.md)
 - [Adding Wiki Articles](adding_wiki_articles.md)
-- [Best Practices Coding With Codex](best_practices_coding_with_codex.md)
-- [Law Simulation Book](law_simulation_book.md)
+- [Best Practices for Coding with Codex](best_practices_coding_with_codex.md)
+- [Docstring Style Guide](docstring_style_guide.md)
+- [Styleguide for Wiki Articles](styleguide_wiki_articles.md)
+- [Running Tests Using python -m pytest](running_tests.md)
+- [Updating Dependencies](updating_dependencies.md)
 - [Wiki Article Template](wiki_article_template.md)
-- [Prompt2 Event Classes](prompt2_event_classes.md)
-- [Prompt3 Agent Class](prompt3_agent_class.md)
-- [Prompt4 Alpha Simulation and Logging](prompt4_implement_alpha_sim.md)
-- [Checkpoint - Primary Classes Implemented - pink-walk](main_notes_checkpoint_prim_classes.md)
-- [Running the Alpha Simulation](alpha_sim_usage.md)
 
-- [Project Questions](project_questions_orange.md)
 # Git Info
-Commit: 29d1fd93b3593a909bd51c980bf2b1d4d33a8310
-Date: 2025-06-12T07:01:38-07:00
+Commit: a2a2edea36d31e4e6b3fb4c50780917af1f9008b
+Date: 2025-06-14T04:08:07+00:00
+
