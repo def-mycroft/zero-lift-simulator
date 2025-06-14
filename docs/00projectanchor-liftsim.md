@@ -45,11 +45,13 @@ write a method on agent class. will return a simple text string which provides a
 
 [[prompt_15_prompt-agent-traceback-ritzy-call-7e649afc]]
 
+2025-06-14 11:27:05 -0600 - still working on the prompt 
 
+## checklist
 %% REGION %% 
 2025-06-14 10:04:09 -0600
 
-- [ ] **Write the Prompt**  
+- [x] **Write the Prompt**  
   _What does this code need to do?_  
   `...describe the target behavior, interface, or bug...`
 
