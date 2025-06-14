@@ -79,8 +79,8 @@ def main(argv: list[str] | None = None) -> None:
 def run(args) -> None:
     """Handle CLI commands."""
     if getattr(args, "command", None) == "dev" and args.update_toc:
-        from . import dev
-        dev.update_toc()
+        from . import docs_tools
+        docs_tools.update_toc()
     if getattr(args, "command", None) == "dev" and args.exec_hook:
         from git import Repo
         print('loaded git.Repo')
@@ -106,12 +106,12 @@ def run(args) -> None:
         #print(a.activity_log)
         ########################################################################
     if getattr(args, "command", None) == "dev" and args.analyze_docs:
-        from . import dev
-        dev.analyze_docs()
+        from . import docs_tools
+        docs_tools.analyze_docs()
     if getattr(args, "command", None) == "dev" and args.new_doc:
-        from . import docs_tools, dev
+        from . import docs_tools
         docs_tools.new_doc()
-        dev.update_toc()
+        docs_tools.update_toc()
 
 
 if __name__ == "__main__":  # pragma: no cover - manual invocation
