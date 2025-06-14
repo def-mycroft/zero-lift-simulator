@@ -71,6 +71,16 @@ def _title_from_filename(name: str) -> str:
 _PROMPT_RE = re.compile(r"^prompt[_-]?(\d+)")
 
 
+def _tags_from_file(path: Path) -> set[str]:
+    """Return a set of tag strings found in ``path``."""
+    tags: set[str] = set()
+    for line in path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if re.fullmatch(r"#[A-Za-z0-9_-]+", stripped):
+            tags.add(stripped)
+    return tags
+
+
 def _prompt_number(path: Path) -> int:
     """Return the integer prompt index extracted from ``path``."""
     match = _PROMPT_RE.match(path.stem)
@@ -82,17 +92,23 @@ def _prompt_number(path: Path) -> int:
 def generate_docs_toc(*, docs_dir: Path | None = None) -> str:
     """Generate a Markdown table of contents for Markdown files."""
     docs_dir = docs_dir or _DEFAULT_DOCS_DIR
-    main_paths: list[Path] = sorted(docs_dir.glob("main_notes*md"))
-    prompt_paths = list(docs_dir.glob("prompt*md"))
-    prompt_paths.sort(key=_prompt_number, reverse=True)
+    main_paths: list[Path] = []
+    prompt_paths: list[Path] = []
     other_paths: list[Path] = []
 
-    used = set(main_paths) | set(prompt_paths)
     for path in sorted(docs_dir.glob("*.md")):
         name = path.name.lower()
-        if name in {"readme.md", "contents.md"} or path in used:
+        if name in {"readme.md", "contents.md"}:
             continue
-        other_paths.append(path)
+        tags = _tags_from_file(path)
+        if "#process-notes" in tags:
+            main_paths.append(path)
+        elif "#prompt" in tags:
+            prompt_paths.append(path)
+        else:
+            other_paths.append(path)
+
+    prompt_paths.sort(key=_prompt_number, reverse=True)
 
     lines = []
     lines.append("## Main Notes")

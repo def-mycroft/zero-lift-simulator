@@ -1,5 +1,6 @@
-Devplan - Current
+# Devplan - Current
 
+#process-notes
 capable-push
 34aa005b-cc44-4778-99c1-c915875bd517
 2025-06-10T16:57:30.568761-06:00
@@ -206,4 +207,3 @@ Let me know when you’re ready to prompt Codex and want help crafting the first
 Commit: c936e3318795d8493c35cb3f8299b583141a5be0
 Date: 2025-06-11T08:52:59-07:00
 
-#process-notes

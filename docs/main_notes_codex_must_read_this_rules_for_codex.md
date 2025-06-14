@@ -1,5 +1,6 @@
 # Project Rules/Conventions for Codex
 
+#process-notes
 This document should help guide codex behavior, i.e. "codex, will you please
 read this and follow as you're editing this codebase". 
 
@@ -33,4 +34,3 @@ be esp sure to follow instructions here: [[zero/999-chaotic/zero-liftsim-docs/wi
 Commit: 29d1fd93b3593a909bd51c980bf2b1d4d33a8310
 Date: 2025-06-12T07:01:38-07:00
 
-#process-notes

@@ -1,5 +1,6 @@
 # As a Human: How to Code with Codex
 
+#process-notes
 random codename: afraid-award b7af63fb
 
 ***
@@ -43,4 +44,3 @@ Writing prompts in the repo keeps a persistent record of what Codex was asked to
 Commit: 43db73f7df84193785b045c7924387d0090ba6e5
 Date: 2025-06-12T10:20:31-07:00
 
-#process-notes

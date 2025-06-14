@@ -1,4 +1,6 @@
 # Using SimulationManager
+
+#process-notes
 random codename: animated-event e6b82433
 ***
 The `SimulationManager` class orchestrates configuration and execution
@@ -19,4 +21,3 @@ print(result)
 The returned dictionary matches ``run_alpha_sim`` but ``SimulationManager``
 exposes additional helpers like :py:meth:`archive_agent_rideloop_experience`.
 
-#process-notes
