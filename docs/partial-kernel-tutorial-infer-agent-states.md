@@ -2,65 +2,68 @@
 
 random codename: obsequious-spend 3d8813f7
 
+#process-notes 
+
 ***
 
 
-```python
-%load_ext autoreload
-%autoreload 2
-```
-
-
-```python
-from zero_helpers.imports import * 
-```
-
+# Imports 
 
 ```python
 from zero_liftsim.simmanager import SimulationManager
+from zero_liftsim.helpers import base_config
 from zero_liftsim.experience import AgentRideLoopExperience
-import inspect
 from zero_liftsim.helpers import load_asset_template
+from zero_liftsim import helpers as hp
+from zero_liftsim.lift import Lift
+
+from zero_helpers.imports import * 
+import inspect
 ```
 
 # Run Simulation
 
 
 ```python
-# setup and run simulation
-manager = SimulationManager(
-    n_agents=10,
-    lift_capacity=2,
-)
-result = manager.run()
+cfg = base_config()
+cfg["SimulationManager"]["__init__"].update({"n_agents": 3, "lift_capacity": 2})
+manager = SimulationManager(cfg)
+result = manager.run(runtime_minutes=60)
 print(result)
 ```
 
-    {'total_rides': 331, 'average_wait': 1.5166163141993958, 'agents': [Agent(1) unequaled-point 59a0a711-e839-4e3a-b747-2aa1d264e387, Agent(2) abhorrent-tourist 6dc3ace6-2752-41e1-be34-6260acf962be, Agent(3) thoughtful-charge 6fb2ff63-ac6b-4e82-9216-2c5f8fbe17bb, Agent(4) parsimonious-sensitive 11eebf05-fd19-4cef-b36a-5136c5d65c85, Agent(5) halting-fat d9250988-5517-4523-a012-708330e7d2a2, Agent(6) awesome-style 3d10c05e-470e-4abd-8540-92b84b95258d, Agent(7) unable-drama 5cea574a-a1ec-489d-9f25-21cfe3bec394, Agent(8) marvelous-hearing d583e0cd-853c-43d9-bb4e-595c821313cd, Agent(9) crowded-piano cf2ca7ca-436e-4160-b248-36bd51e701aa, Agent(10) valuable-physical 7a998518-ffc3-441d-952f-4ca173581440]}
 
 
 
-```python
-lift = manager.lift
-lift.total_chairs()
-```
-
-
-
-
-    50
-
-
-
-## Retrieve Data from Simulation
+# Retrieve Data from Simulation
 
 
 ```python
 # get rideloop explogs and agent event log
 exp_log_data = manager.retrieve_data()
-e = exp_log_data['exp_rideloop']
-l = exp_log_data['agent_log']
+exp = exp_log_data['exp_rideloop']
+log = exp_log_data['agent_log']
 ```
+
+# Get agent log and explog
+
+```python
+# sample agent and subset exp/log to e/l for agent subset of those
+m = log['event'] == 'ride_complete'
+event_ride_comp = log[m].sample().iloc[0].to_dict()
+agent = manager.lookup_agent(event_ride_comp['agent_uuid'])
+l = log[log['agent_uuid'] == agent.agent_uuid]
+idx = (exp['time'] - event_ride_comp['time']).dt.total_seconds().abs().idxmin()
+e = exp.loc[idx].to_dict()
+```
+
+# Agent experience traceback
+
+```python
+x = agent.traceback_experience(e['exp_id'])
+print(x)
+```
+
 
 # Identify Agent State
 
