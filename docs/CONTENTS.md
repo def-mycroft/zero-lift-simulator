@@ -18,6 +18,7 @@
 - [Styleguide for Wiki Articles](main_notes_styleguide_wiki_articles.md)
 - [Wiki Article Creation Instructions for Codex](main_notes_wiki_article_creation_for_codex.md)
 - [Wiki Article Template - Article Title Here](main_notes_wiki_article_template.md)
+- [Tutorial - Infer Agent State](partial-kernel-tutorial-infer-agent-states.md)
 
 ## Prompt Articles
 - [prompt16 - infer problem from pytest and apply fix](prompt16_dapper_leading_f5ed905a.md)
@@ -53,7 +54,6 @@
 - [Git Tools](git-tools.md)
 - [Investigating Wait Time with Many Chairs](high_wait_analysis.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
-- [Tutorial - Infer Agent State](partial-kernel-tutorial-infer-agent-states.md)
 - [Project Questions stingy-orange - answered](project_questions_orange.md)
 - [Simulation Motivations](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
 - [Running Tests Using python -m pytest](running_tests.md)

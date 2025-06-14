@@ -71,20 +71,20 @@ print(x)
 ```python
 # get ride loop logs and agent event logs
 log = manager.retrieve_data()
-rlog = log['exp_rideloop'] # dataframe of all agent rideloop experiences 
-alog = log['agent_log'] # combined agent logs (i.e. activity logs for all agents)
+exp = log['exp_rideloop'] # dataframe of all agent rideloop experiences 
+log = log['agent_log'] # combined agent logs (i.e. activity logs for all agents)
 
 # sample a random timestamp within the agent log timeframe
-INDEX_TIME = pd.Series(pd.date_range(alog['time'].min(), alog['time'].max(), freq='1s')).sample().iloc[0]
+INDEX_TIME = pd.Series(pd.date_range(log['time'].min(), log['time'].max(), freq='1s')).sample().iloc[0]
 
 # sample a random agent from ride loop log
-row = rlog.sample().iloc[0]
+row = exp.sample().iloc[0]
 aid = row['agent_uuid']
 agent = manager.lookup_agent(aid)
 
 # find the nearest time index in the agent log
-l = alog.zero_liftsim.subset_agent_uuid(agent.agent_uuid)
-e = rlog.zero_liftsim.subset_agent_uuid(agent.agent_uuid)
+l = log.zero_liftsim.subset_agent_uuid(agent.agent_uuid)
+e = exp.zero_liftsim.subset_agent_uuid(agent.agent_uuid)
 idx = l.zero_liftsim.get_nearest_time_index(INDEX_TIME)
 ```
 
