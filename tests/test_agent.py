@@ -86,3 +86,15 @@ def test_get_latest_event_unrecognized_event():
     agent.activity_log[0] = {"time": ts.isoformat(), "event": "foo"}
     assert agent.get_latest_event(ts) == "foo"
 
+
+def test_traceback_experience_returns_summary():
+    agent = Agent(8)
+    dt = datetime(2025, 6, 14, 9, 0, 0)
+    agent.experience_rideloop.add_entry(agent, "ret", dt, 5, 2, 3)
+    info = next(iter(agent.experience_rideloop.log.values()))
+    exp_id = info["exp_id"]
+    summary = agent.traceback_experience(exp_id)
+    assert str(exp_id) in summary
+    assert "time_spent_in_queue" in summary
+    with pytest.raises(KeyError):
+        agent.traceback_experience("does-not-exist")
