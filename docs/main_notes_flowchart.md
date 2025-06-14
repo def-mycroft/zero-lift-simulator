@@ -1,5 +1,6 @@
 # LiftSim Flowchart
 
+#process-notes
 This diagram illustrates how `zero_liftsim.main` orchestrates a simple, single-lift simulation. The `Simulation` engine executes queued `Event` objects. Agents arrive via `ArrivalEvent`, board using `BoardingEvent`, and the lift completes cycles through `ReturnEvent`.
 
 ```mermaid
@@ -35,4 +36,3 @@ The flow captures the interaction of core classes:
 Commit: c936e3318795d8493c35cb3f8299b583141a5be0
 Date: 2025-06-11T08:52:59-07:00
 
-#process-notes

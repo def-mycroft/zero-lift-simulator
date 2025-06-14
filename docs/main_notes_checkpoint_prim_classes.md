@@ -1,5 +1,6 @@
 # Checkpoint - Primary Classes Implemented - pink-walk
 
+#process-notes
 This article (codename `pink-walk 44320cd6`) summarizes the progress made so far in the LiftSim project and outlines immediate next steps.
 
 ## Progress So Far
@@ -20,4 +21,3 @@ The immediate goal is to run a very simple "alpha" simulation that exercises thi
 Commit: 7e5a82fe4c0a267340e3ce7526811a76490a895c
 Date: 2025-06-11T13:29:18-07:00
 
-#process-notes

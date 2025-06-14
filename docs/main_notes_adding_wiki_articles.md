@@ -1,5 +1,6 @@
 # How to Add Wiki Articles
 
+#process-notes
 To contribute new articles to this wiki:
 
 1. Create a Markdown file in the `docs` directory. Use a short, descriptive file name with dashes or underscores.
@@ -10,4 +11,3 @@ To contribute new articles to this wiki:
 Commit: 1b3bf669fde173b2c5f630523fef8c84d36843d2
 Date: 2025-06-10T16:18:30-07:00
 
-#process-notes
