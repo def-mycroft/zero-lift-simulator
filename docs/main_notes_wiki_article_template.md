@@ -1,4 +1,4 @@
-# Article Title
+# Wiki Article Template - Article Title Here
 
 _A brief introductory paragraph._
 

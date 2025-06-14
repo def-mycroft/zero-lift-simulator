@@ -1,13 +1,22 @@
 # Table of Contents
 
 ## Main Notes
+- [How to Add Wiki Articles](main_notes_adding_wiki_articles.md)
 - [As a Human: How to Code with Codex](main_notes_as_a_human_how_to_code_with_codex.md)
+- [Best Practices for Coding with Codex](main_notes_best_practices_coding_with_codex.md)
 - [Research Output: Business Value from LiftSim](main_notes_business_value_research.md)
 - [Checkpoint - Primary Classes Implemented - pink-walk](main_notes_checkpoint_prim_classes.md)
 - [Project Rules/Conventions for Codex](main_notes_codex_must_read_this_rules_for_codex.md)
+- [Development Reference for Prompts](main_notes_development_ref_for_prompts.md)
 - [Devplan - Current](main_notes_devplan.md)
+- [Docstring Style Guide](main_notes_docstring_style_guide.md)
 - [LiftSim Flowchart](main_notes_flowchart.md)
+- [codex: Update the Table of Contents](main_notes_for_codex_update_toc.md)
 - [Initial Develop Description - Zero Lift Simulator](main_notes_implementation.md)
+- [Using SimulationManager](main_notes_simulation_manager_tutorial.md)
+- [Styleguide for Wiki Articles](main_notes_styleguide_wiki_articles.md)
+- [Wiki Article Creation Instructions for Codex](main_notes_wiki_article_creation_for_codex.md)
+- [Wiki Article Template - Article Title Here](main_notes_wiki_article_template.md)
 
 ## Prompt Articles
 - [prompt14 - Force Agent State Map unnamed aggressive-week 801baa1b](prompt14_agent_explicit_fail_aggressive_week.md)
@@ -27,10 +36,8 @@
 - [prompt0 - simulation class](prompt0_dev_init_class.md)
 
 ## Articles
-- [How to Add Wiki Articles](adding_wiki_articles.md)
 - [Agent Experience](agent-experience.md)
 - [Running the Alpha Simulation](alpha_sim_usage.md)
-- [Best Practices for Coding with Codex](best_practices_coding_with_codex.md)
 - [Bugfix - Add Dependencies](bugfix_add_deps.md)
 - [Bugfix - Lift default chairs](bugfix_chair_default.md)
 - [Bugfix - GitPython implementation](bugfix_git_agreeable.md)
@@ -38,12 +45,8 @@
 - [Bugfix Response - Logger Filepath finish](bugfix_response_logger_filepath_finish.md)
 - [Bugfix - missing riders object](bugfix_riders.md)
 - [The Burden of Simulation: Building Trust in Synthetic Behavior](building_trust_simulation.md)
-- [Process for Codex Dev](codex_dev_process.md)
 - [Dev Snippets](dev_snippets.md)
-- [Development Reference for Prompts](development_ref_for_prompts.md)
-- [Docstring Style Guide](docstring_style_guide.md)
 - [codex: Maintain SimulationManager Documentation](for_codex_simmanager_docs.md)
-- [codex: Update the Table of Contents](for_codex_update_toc.md)
 - [Git Tools](git-tools.md)
 - [Investigating Wait Time with Many Chairs](high_wait_analysis.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
@@ -51,9 +54,5 @@
 - [Project Questions stingy-orange - answered](project_questions_orange.md)
 - [Simulation Motivations](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
 - [Running Tests Using python -m pytest](running_tests.md)
-- [Using SimulationManager](simulation_manager_tutorial.md)
-- [Styleguide for Wiki Articles](styleguide_wiki_articles.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
 - [Updating Dependencies](updating_dependencies.md)
-- [Wiki Article Creation Instructions for Codex](wiki_article_creation_for_codex.md)
-- [Article Title](wiki_article_template.md)
