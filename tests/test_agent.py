@@ -91,6 +91,7 @@ def test_traceback_experience_returns_summary():
     agent = Agent(8)
     dt = datetime(2025, 6, 14, 9, 0, 0)
     agent.experience_rideloop.add_entry(agent, "ret", dt, 5, 2, 3)
+    agent.log_event("ride_complete", 0, dt.isoformat(), return_event_uuid="ret")
     info = next(iter(agent.experience_rideloop.log.values()))
     exp_id = info["exp_id"]
     summary = agent.traceback_experience(exp_id)
