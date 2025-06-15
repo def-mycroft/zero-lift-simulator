@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from zero_liftsim.agent import Agent
-from zero_liftsim.sandbox import (
+from zero_liftsim.agent_state_id import (
     infer_agent_states,
     state_riding_lift,
     state_in_queue,
