@@ -18,8 +18,41 @@ from .experience import AgentRideLoopExperience
 
 
 class Agent:
-    """Represents an individual skier within the simulation."""
+    """Represents an individual participant in the Zero Lift simulation.
 
+    Each Agent maintains a unique identity, an internal log of events,
+    and an encapsulated record of experiential data. Agents can log
+    simulation events, track waiting and ride durations, and summarize
+    past experiences for analysis or debugging.
+
+    Parameters
+    ----------
+    agent_id : int
+        Integer identifier for the agent.
+    logger : Logger, optional
+        If provided, used for structured development logging.
+    self_logging : bool, default=True
+        Enables or disables internal event logging.
+
+    Attributes
+    ----------
+    agent_uuid : str
+        Globally unique identifier for the agent.
+    agent_uuid_codename : str
+        Shortened mnemonic form of the UUID.
+    boarded : bool
+        Indicates whether the agent is currently on a ride.
+    wait_start : int or None
+        Simulation time when the agent entered a queue.
+    board_time : int or None
+        Simulation time when the agent boarded the lift.
+    rides_completed : int
+        Count of completed ride cycles.
+    activity_log : dict of int to dict
+        Ordered log of simulation events and metadata.
+    experience_rideloop : AgentRideLoopExperience
+        Stores summaries of each lift ride experience.
+    """
     def __init__(
         self,
         agent_id: int,
@@ -187,6 +220,9 @@ class Agent:
                                    indent=4)
         return agent_log_str
 
+    def get_state(self, time):
+        """Given a time, get agent state"""
+        return 0
 
     def __repr__(self) -> str:  # pragma: no cover - convenience
         return f"Agent({self.agent_id}) {self.agent_uuid_codename} {self.agent_uuid}"
