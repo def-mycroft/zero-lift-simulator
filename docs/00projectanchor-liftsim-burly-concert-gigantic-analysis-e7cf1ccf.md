@@ -71,7 +71,7 @@ I moved a function out of sandbox and into an agent method. update test
   _Where is the long-term context?_  
   `promptX_name.md` → codename: `[codename hash]`
 
-- [ ] **Describe the Purpose**  
+- [x] **Describe the Purpose**  
   _Why am I doing this?_  
   `One sentence: This enables/clarifies/supports...`
 
