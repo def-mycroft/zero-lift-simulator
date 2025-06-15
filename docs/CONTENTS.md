@@ -21,6 +21,7 @@
 - [Tutorial - Infer Agent State](partial-kernel-tutorial-infer-agent-states.md)
 
 ## Prompt Articles
+- [prompt17 sandbox module test issue enchanting-curve ff38f89e](prompt17_enchanting-curve-ff38f89e.md)
 - [prompt16 - infer problem from pytest and apply fix](prompt16_dapper_leading_f5ed905a.md)
 - [prompt15 - Create Agent Traceback Method](prompt_15_prompt-agent-traceback-ritzy-call-7e649afc.md)
 - [prompt14 - Force Agent State Map unnamed aggressive-week 801baa1b](prompt14_agent_explicit_fail_aggressive_week.md)
@@ -61,4 +62,7 @@
 - [🧠 Anchor: Agent Log – verdant-variety 405ed937 (x/5)](unnamed-cowardly-leather-d8f8b337.md)
 - [🧠 Anchor: bugfix test – grandiose-secretary 10554173 (5/5)](unnamed-crooked-revenue-67c6c0ef.md)
 - [unnamed dapper-leading f5ed905a](unnamed-dapper-leading-f5ed905a.md)
+- [unnamed guttural-place 5c711918](unnamed-guttural-place-5c711918.md)
+- [unnamed lyrical-development efd3227f](unnamed-lyrical-development-efd3227f.md)
+- [unnamed steady-exit e6ebfe98](unnamed-steady-exit-e6ebfe98.md)
 - [Updating Dependencies](updating_dependencies.md)
