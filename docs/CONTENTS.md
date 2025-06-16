@@ -51,6 +51,7 @@
 - [Bugfix - Logger Filepath](bugfix_logger_filepath_finish.md)
 - [Bugfix Response - Logger Filepath finish](bugfix_response_logger_filepath_finish.md)
 - [Bugfix - missing riders object](bugfix_riders.md)
+- [Bugfix - Agent state circular import](bugfix_agent_state_circular_import.md)
 - [The Burden of Simulation: Building Trust in Synthetic Behavior](building_trust_simulation.md)
 - [Dev Snippets](dev_snippets.md)
 - [codex: Maintain SimulationManager Documentation](for_codex_simmanager_docs.md)

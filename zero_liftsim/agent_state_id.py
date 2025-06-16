@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Iterable, Dict
+from typing import Iterable, Dict, TYPE_CHECKING, Union
 
 
 class UnknownEventError(Exception):
     """Raised when :func:`infer_agent_states` encounters an unknown event."""
 
-from .agent import Agent
+if TYPE_CHECKING:  # pragma: no cover - for type hints only
+    from .agent import Agent
 
 # State constants used when categorizing agents
 state_riding_lift = "riding_lift"
@@ -27,7 +28,7 @@ _EVENT_STATE_MAP = {
 }
 
 def infer_agent_states(
-    agents: Union[Agent, Iterable[Agent]], 
+    agents: Union["Agent", Iterable["Agent"]],
     dt: datetime
 ) -> Dict[str, str]:
     """Categorize agents based on their latest event at a given time.
@@ -52,6 +53,8 @@ def infer_agent_states(
     UnknownEventError
         If an agent's latest event is not recognized.
     """
+    from .agent import Agent
+
     results: Dict[str, str] = {}
     if isinstance(agents, Agent):
         agents = [agents]
