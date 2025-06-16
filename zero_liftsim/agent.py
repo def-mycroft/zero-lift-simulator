@@ -15,6 +15,7 @@ except ModuleNotFoundError:  # pragma: no cover
 
 from .logging import Logger
 from .experience import AgentRideLoopExperience
+from .agent_state_id import infer_agent_states
 
 
 class Agent:
@@ -54,6 +55,7 @@ class Agent:
         Stores summaries of each lift ride experience.
     """
     def __init__(
+# {{{
         self,
         agent_id: int,
         logger: "Logger" | None = None,
@@ -74,8 +76,11 @@ class Agent:
                 f"init agent {self.agent_uuid} {self.agent_uuid_codename}"
             )
             self.logger = logger
+# }}}
 
+    # Record an event in :attr:`activity_log`.
     def log_event(
+# {{{
         self,
         event: str,
         time: int,
@@ -83,22 +88,24 @@ class Agent:
         return_event_uuid: str = "",
         **info,
     ) -> None:
-        """Record an event in :attr:`activity_log`.
+        """Record an event in the agent's activity log.
+
+        Adds a structured entry to the internal log, capturing simulation
+        time, timestamp, event name, agent metadata, and optional details.
 
         Parameters
         ----------
         event : str
-            Event name.
+            Name of the event to record.
         time : int
             Simulation time of the event.
         timestamp : str
-            ISO formatted timestamp.
+            ISO 8601-formatted real-time string.
         return_event_uuid : str, optional
-            Identifier for a related :class:`ReturnEvent`.
+            Identifier of a corresponding return event, if any.
         **info
-            Additional metadata to record.
+            Additional metadata fields to include in the log.
         """
-
         if not self.self_logging:
             return
         record = {
@@ -113,13 +120,21 @@ class Agent:
         record.update(info)
         self.activity_log[len(self.activity_log)] = record
 
+# }}}
+# {{{
+    # """Record when the agent enters the queue."""
+    # TODO - the name of this function should be different, it is 
+    # too hard to infer what that means, would rather say 
+    # "entered queue"
     def start_wait(self, time: int, timestamp: str) -> None:
         """Record when the agent enters the queue."""
 
         self.wait_start = time
         self.log_event("start_wait", time, timestamp)
-
+# }}}
+    # Mark the ride complete and return wait time."""
     def finish_ride(
+# {{{
         self, time: int, timestamp: str, return_event_uuid: str = ""
     ) -> int:
         """Mark the ride complete and return wait time."""
@@ -139,6 +154,9 @@ class Agent:
         )
         return wait_time
 
+# }}}
+    # Return the most recent event not after ``dt``.
+# {{{
     def get_latest_event(self, dt: datetime) -> str:
         """Return the most recent event not after ``dt``.
 
@@ -163,7 +181,8 @@ class Agent:
         latest_time = None
         for record in self.activity_log.values():
             record_time = _dt.fromisoformat(record["time"])
-            if record_time <= dt and (latest_time is None or record_time > latest_time):
+            if (record_time <= dt and 
+                    (latest_time is None or record_time > latest_time)):
                 latest_time = record_time
                 latest_event = record.get("event")
 
@@ -172,8 +191,16 @@ class Agent:
 
         return latest_event
 
+# }}}
+# {{{
+    # Return a formatted summary for the given experience.
     def traceback_experience(self, experience_id: str) -> str:
-        """Return a formatted summary for the given experience.
+        """Return a formatted summary for a specific agent experience.
+
+        Retrieves the experience log matching the given ID and formats it
+        into a human-readable report using a Jinja2 or string template. The
+        report includes the logged metadata and a slice of recent agent
+        activity for context.
 
         Parameters
         ----------
@@ -183,14 +210,13 @@ class Agent:
         Returns
         -------
         str
-            Rendered text describing the experience.
+            Rendered text describing the experience and context.
 
         Raises
         ------
         KeyError
-            If ``experience_id`` does not exist.
+            If no experience matches the provided ID.
         """
-
         from .helpers import load_asset_template
 
         for dt, info in self.experience_rideloop.log.items():
@@ -198,7 +224,8 @@ class Agent:
                 context = {"time": dt.isoformat(), **info}
 
                 context['full_dict'] = json.dumps(info, indent=4)
-                context['agent_log_str'] = self.recent_agent_log_return_event_uuid(info["return_event_uuid"])
+                context['agent_log_str'] = \
+                    self.recent_agent_log_return_event_uuid(info["return_event_uuid"])
                 tmpl = load_asset_template("agent-ride-exp.md.j2")
                 if hasattr(tmpl, "render"):
                     return tmpl.render(**context)
@@ -206,9 +233,26 @@ class Agent:
 
         raise KeyError(experience_id)
 
-
+# }}}
+# {{{
+    # Return a formatted slice of the agent log for a given return event.
     def recent_agent_log_return_event_uuid(self, return_event_uuid):
-        """Create a subset of log and return readable json string"""
+        """Return a formatted slice of the agent log for a given return event.
+
+        Finds the log entry matching the specified return event UUID and
+        extracts a small window of prior events for context. Returns the
+        subset as a pretty-printed JSON string.
+
+        Parameters
+        ----------
+        return_event_uuid : str
+            UUID of the return event to anchor the log slice.
+
+        Returns
+        -------
+        str
+            JSON-formatted string of recent log entries leading up to the event.
+        """
         data = self.activity_log
         data = {str(uuid()):v for k,v in data.items()}
         df = pd.DataFrame.from_dict(data, orient='index')
@@ -219,10 +263,28 @@ class Agent:
         agent_log_str = json.dumps({k:v for k,v in data.items() if k in idx}, 
                                    indent=4)
         return agent_log_str
+# }}}
 
     def get_state(self, time):
         """Given a time, get agent state"""
-        return 0
+        # TODO - if this needs to be exec cost optimized, can do a couple things
+        # here 
+        self.assert_possible_log_time(time)
+        d = infer_agent_states(self, time)
+        assert len(d) == 1
+        self.current_state = next(iter(d)) 
+
+    def assert_possible_log_time(self, time):
+        """Raise exception if given time not within bounds of act log"""
+        df = self.get_activity_log_df()
+        msg = 'given time should be within limits'
+        assert time >= df['time'].min() and time <= df['time'].max(), msg
+
+    def get_activity_log_df(self):
+        """Return dataframe version of activity log"""
+        df = pd.DataFrame.from_dict(self.activity_log, orient='index')
+        df['time'] = pd.to_datetime(df['time'])
+        return df
 
     def __repr__(self) -> str:  # pragma: no cover - convenience
         return f"Agent({self.agent_id}) {self.agent_uuid_codename} {self.agent_uuid}"

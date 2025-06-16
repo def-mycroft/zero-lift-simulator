@@ -7,6 +7,7 @@ from pathlib import Path
 from datetime import datetime
 
 from zero_liftsim import main as zls, __version__
+from zero_liftsim.helpers import docstring_prompt
 
 
 _DEF_HELP = None
@@ -66,6 +67,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Create a blank documentation stub in docs/.",
     )
+    dev.add_argument(
+        "--docstring-prompt", "-dp",
+        action="store_true",
+        help="prompt for updating docstring. ",
+    )
     return parser
 
 
@@ -81,6 +87,9 @@ def run(args) -> None:
     if getattr(args, "command", None) == "dev" and args.update_toc:
         from . import docs_tools
         docs_tools.update_toc()
+    if getattr(args, "command", None) == "dev" and args.docstring_prompt:
+        # get docs prompt
+        docstring_prompt()
     if getattr(args, "command", None) == "dev" and args.exec_hook:
         from git import Repo
         print('loaded git.Repo')

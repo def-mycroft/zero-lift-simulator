@@ -50,18 +50,22 @@ xxx
 %% ENDREGION %%
 
 
+*** 
 
 
 
+# 🧠 Anchor: rename start_wait – hanging-silly (3/5)
 
-# 🧠 Anchor: sandbox module  – enchanting-curve ff38f89e (0/5)
+2025-06-15 12:07:59 -0600
+func `Agent.start_wait` has poor naming. this should be named something more substantial and understandable, where can easily understand "okay agent has now entered the start of the line". 
+[[prompt19_update _func_name-hanging-silly-001b3e58]]
 
+## Log
 
+2025-06-15 12:12:17 -0600 - waiting for a complete sync on this one 
 
-2025-06-14 20:27:16 -0600
-I moved a function out of sandbox and into an agent method. update test 
+## Checklist
 
-[[prompt17_enchanting-curve-ff38f89e|prompt17_enchanting-curve-ff38f89e]]
 %% REGION %% 
 - [x] **Write the Prompt**  
   _What does this code need to do?_  
@@ -85,12 +89,46 @@ I moved a function out of sandbox and into an agent method. update test
 %% ENDREGION %%
 
 
+# 🧠 Anchor: p18 auto docs – drab-question (1/5)
 
-# 🧠 Anchor: bugfix test – grandiose-secretary 10554173 (5/5)
+2025-06-15 11:30:52 -0600
+add auto docs
+[[prompt18_drab-question-bb832036]]
 
-[[unnamed-crooked-revenue-67c6c0ef.md]]
 
-# 🧠 Anchor: Agent Log – verdant-variety 405ed937 (x/5)
+## Log 
 
-[[unnamed-cowardly-leather-d8f8b337.md]]
+2025-06-15 11:37:47 -0600 - wrote prompt, added to gh. will wait until I can just push whole repo easily. 
 
+## Checklist
+
+%% REGION %% 
+- [x] **Write the Prompt**  
+  _What does this code need to do?_  
+  `...describe the target behavior, interface, or bug...`
+
+- [x] **Log the Prompt to `docs/`**  
+  _Where is the long-term context?_  
+  `promptX_name.md` → codename: `[codename hash]`
+
+- [ ] **Describe the Purpose**  
+  _Why am I doing this?_  
+  `One sentence: This enables/clarifies/supports...`
+
+- [ ] **Execute the Change**  
+  _What will I edit, run, or generate?_  
+  `...brief note on the script/module/test touched...`
+
+- [ ] **Return Point**  
+  _Where do I pick up next?_  
+  `Next step is to... / Pending: ... / Waiting on: ...`
+%% ENDREGION %%
+
+
+
+
+*** 
+# Archive
+[[archived-project-anchors-ultra-tomorrow-1f27d36c]]
+
+*** 

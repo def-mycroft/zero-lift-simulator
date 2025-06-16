@@ -26,22 +26,35 @@ _EVENT_STATE_MAP = {
     "arrival": state_in_queue,
 }
 
-def infer_agent_states(agents: Iterable[Agent], dt: datetime) -> Dict[str, str]:
-    """Categorize agents based on their activity log at ``dt``.
+def infer_agent_states(
+    agents: Union[Agent, Iterable[Agent]], 
+    dt: datetime
+) -> Dict[str, str]:
+    """Categorize agents based on their latest event at a given time.
+
+    Evaluates each agent's most recent activity and assigns a semantic
+    state label such as 'in_queue', 'riding_lift', or 'traversing_down'.
 
     Parameters
     ----------
-    agents:
-        Iterable of :class:`Agent` instances.
-    dt:
-        Timestamp to evaluate.
+    agents : Agent or iterable of Agent
+        One or more agents to evaluate.
+    dt : datetime
+        The timestamp at which to evaluate each agent's latest event.
 
     Returns
     -------
-    dict
-        Mapping of ``agent_uuid`` to one of the three state constants.
+    dict of str to str
+        Mapping from agent UUID to inferred state.
+
+    Raises
+    ------
+    UnknownEventError
+        If an agent's latest event is not recognized.
     """
     results: Dict[str, str] = {}
+    if isinstance(agents, Agent):
+        agents = [agents]
     for agent in agents:
         latest_event = agent.get_latest_event(dt)
         if latest_event not in _EVENT_STATE_MAP:
@@ -49,3 +62,4 @@ def infer_agent_states(agents: Iterable[Agent], dt: datetime) -> Dict[str, str]:
         results[agent.agent_uuid] = _EVENT_STATE_MAP[latest_event]
 
     return results
+

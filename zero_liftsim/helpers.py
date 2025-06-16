@@ -5,6 +5,10 @@ except ModuleNotFoundError:  # pragma: no cover - fallback for environments with
     def cd(value: str) -> str:
         """Simplistic fallback that returns the first eight characters."""
         return value[:8]
+
+from zero_helpers.imports import *  
+from zero_helpers.main import string_to_clipboard
+
 from uuid import uuid4 as uuid
 from pathlib import Path
 import pandas as pd
@@ -17,6 +21,26 @@ try:
 except ModuleNotFoundError:  # pragma: no cover - fallback if jinja2 missing
     Environment = None
     FileSystemLoader = None
+
+
+def docstring_prompt():
+    """Load project docstring spec and write out prompt"""
+    # TODO - this is hard coded and should be loaded locally
+    # just a dev func though 
+    fp_docs = join(expanduser('~'),  ('code-repos/zero-lift-simulator/docs/'
+                                      'main_notes_docstring_style_guide.md'))
+    assert exists(fp_docs)
+    with open(fp_docs, 'r') as f:
+        docs_text = f.read()
+    text = (f"here is a styleguide for docstrings in this project: \n***\n"
+            f"\n{docs_text}\n\n***\nnow use this to write a new docstring "
+            f"\n for this: \n```python\nxxx\n```\n\nreturn the docstring without"
+            f"\n comment so that I can easily paste it into source. ")
+    print(text)
+    fp = '/l/tmp/prompt.md'
+    with open(fp, 'w') as f:
+        f.write(text)
+    print(f"wrote '{fp}'")
 
 
 def codename():

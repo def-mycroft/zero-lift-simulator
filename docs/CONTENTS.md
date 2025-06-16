@@ -21,6 +21,7 @@
 - [Tutorial - Infer Agent State](partial-kernel-tutorial-infer-agent-states.md)
 
 ## Prompt Articles
+- [prompt18 - introduce auto docs drab-question bb832036](prompt18_drab-question-bb832036.md)
 - [prompt17 sandbox module test issue enchanting-curve ff38f89e](prompt17_enchanting-curve-ff38f89e.md)
 - [prompt16 - infer problem from pytest and apply fix](prompt16_dapper_leading_f5ed905a.md)
 - [prompt15 - Create Agent Traceback Method](prompt_15_prompt-agent-traceback-ritzy-call-7e649afc.md)
@@ -43,6 +44,7 @@
 ## Articles
 - [Agent Experience](agent-experience.md)
 - [Running the Alpha Simulation](alpha_sim_usage.md)
+- [archived project anchors ultra-tomorrow 1f27d36c](archived-project-anchors-ultra-tomorrow-1f27d36c.md)
 - [Bugfix - Add Dependencies](bugfix_add_deps.md)
 - [Bugfix - Lift default chairs](bugfix_chair_default.md)
 - [Bugfix - GitPython implementation](bugfix_git_agreeable.md)
@@ -56,6 +58,7 @@
 - [Investigating Wait Time with Many Chairs](high_wait_analysis.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
 - [Project Questions stingy-orange - answered](project_questions_orange.md)
+- [prompt19 rename start_wait hanging-silly 001b3e58](prompt19_update _func_name-hanging-silly-001b3e58.md)
 - [Simulation Motivations](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
 - [Running Tests Using python -m pytest](running_tests.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
