@@ -11,7 +11,7 @@ from __future__ import annotations
 from pathlib import Path
 import shutil
 import re
-from typing import Optional
+from typing import Optional, Iterable
 
 from sphinx.cmd.build import main as sphinx_build
 from sphinx.ext.apidoc import main as sphinx_apidoc
@@ -95,6 +95,33 @@ def _prompt_number(path: Path) -> int:
     if match:
         return int(match.group(1))
     return -1
+
+
+def generate_prompts_index(*, docs_dir: Path, target_dir: Path) -> None:
+    """Copy prompt docs and create a toctree index in ``target_dir``."""
+    if target_dir.exists():
+        shutil.rmtree(target_dir)
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    prompt_paths: list[Path] = []
+    for md in docs_dir.glob("*.md"):
+        if "#prompt" in _tags_from_file(md):
+            prompt_paths.append(md)
+            shutil.copy2(md, target_dir / md.name)
+
+    prompt_paths.sort(key=_prompt_number, reverse=True)
+
+    lines: list[str] = [
+        "Prompt Reference",
+        "================",
+        "",
+        ".. toctree::",
+        "   :maxdepth: 1",
+        "",
+    ]
+    for path in prompt_paths:
+        lines.append(f"   {path.name}")
+    (target_dir / "index.rst").write_text("\n".join(lines), encoding="utf-8")
 
 
 def generate_docs_toc(*, docs_dir: Path | None = None) -> str:
@@ -184,6 +211,9 @@ def build_docs(
     for md in docs_dir.glob("*.md"):
         shutil.copy2(md, wiki_dir / md.name)
 
+    prompts_dir = src_dir / "prompts"
+    generate_prompts_index(docs_dir=docs_dir, target_dir=prompts_dir)
+
     api_dir = src_dir / "api"
     api_dir.mkdir(parents=True, exist_ok=True)
     sphinx_apidoc(["-o", str(api_dir), str(_ROOT / "zero_liftsim")])
@@ -198,5 +228,6 @@ __all__ = [
     "generate_docs_toc",
     "update_toc",
     "analyze_docs",
+    "generate_prompts_index",
     "build_docs",
 ]
