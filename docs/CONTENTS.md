@@ -21,8 +21,9 @@
 - [Tutorial - Infer Agent State](partial-kernel-tutorial-infer-agent-states.md)
 
 ## Prompt Articles
-
-- [[prompt19_update _func_name-hanging-silly-001b3e58]]
+- [prompt21 traceback sampling error  wary-bitter 1b487118](prompt21_wary-bitter-1b487118.md)
+- [prompt20 pytest tossup breakable-scratch 689c423e](prompt20_breakable_scratch-689c423e.md)
+- [prompt19 rename start_wait hanging-silly 001b3e58](prompt19_update _func_name-hanging-silly-001b3e58.md)
 - [prompt18 - introduce auto docs drab-question bb832036](prompt18_drab-question-bb832036.md)
 - [prompt17 sandbox module test issue enchanting-curve ff38f89e](prompt17_enchanting-curve-ff38f89e.md)
 - [prompt16 - infer problem from pytest and apply fix](prompt16_dapper_leading_f5ed905a.md)
@@ -64,7 +65,6 @@
 - [Simulation Motivations](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
 - [Running Tests Using python -m pytest](running_tests.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
-- [unnamed breakable-scratch 689c423e](prompt20_breakable_scratch-689c423e.md)
 - [🧠 Anchor: Agent Log – verdant-variety 405ed937 (x/5)](unnamed-cowardly-leather-d8f8b337.md)
 - [🧠 Anchor: bugfix test – grandiose-secretary 10554173 (5/5)](unnamed-crooked-revenue-67c6c0ef.md)
 - [unnamed dapper-leading f5ed905a](unnamed-dapper-leading-f5ed905a.md)

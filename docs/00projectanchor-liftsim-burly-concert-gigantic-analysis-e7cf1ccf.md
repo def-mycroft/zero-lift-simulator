@@ -52,18 +52,25 @@ xxx
 
 *** 
 
+[[prompt21_wary-bitter-1b487118]]
 
 
-# 🧠 Anchor: pytest tossup – breakable-scratch (5/5)
+# 🧠 Anchor: p18 auto docs – drab-question (1/5)
 
-2025-06-16 20:43:00 -0600
-pytest throws an error and I'm just going to just ask codex to fix it. 
-[[prompt20_breakable_scratch-689c423e]]
+2025-06-15 11:30:52 -0600
+add auto docs to allow for easy browsing for myself and others
+[[prompt18_drab-question-bb832036]]
+
 
 ## Log 
 
-2025-06-16 20:56:16 -0600
-passted test 
+2025-06-16 21:05:22 -0600
+"Setup Sphinx docs with Furo theme"
+
+2025-06-16 21:05:08 -0600
+
+
+2025-06-15 11:37:47 -0600 - wrote prompt, added to gh. will wait until I can just push whole repo easily. 
 
 ## Checklist
 
@@ -76,18 +83,20 @@ passted test
   _Where is the long-term context?_  
   `promptX_name.md` → codename: `[codename hash]`
 
-- [x] **Describe the Purpose**  
+- [ ] **Describe the Purpose**  
   _Why am I doing this?_  
   `One sentence: This enables/clarifies/supports...`
 
-- [x] **Execute the Change**  
+- [ ] **Execute the Change**  
   _What will I edit, run, or generate?_  
   `...brief note on the script/module/test touched...`
 
-- [x] **Return Point**  
+- [ ] **Return Point**  
   _Where do I pick up next?_  
   `Next step is to... / Pending: ... / Waiting on: ...`
 %% ENDREGION %%
+
+
 
 
 # 🧠 Anchor: chatbot log tests – hellish-point (0/5)
@@ -123,80 +132,6 @@ xxx
   _Where do I pick up next?_  
   `Next step is to... / Pending: ... / Waiting on: ...`
 %% ENDREGION %%
-
-
-
-# 🧠 Anchor: rename start_wait – hanging-silly (5/5)
-
-2025-06-15 12:07:59 -0600
-func `Agent.start_wait` has poor naming. this should be named something more substantial and understandable, where can easily understand "okay agent has now entered the start of the line".
-It has now been renamed to ``enter_queue``.
-[[prompt19_update _func_name-hanging-silly-001b3e58]]
-
-## Log
-
-2025-06-15 12:12:17 -0600 - waiting for a complete sync on this one 
-
-## Checklist
-
-%% REGION %% 
-- [x] **Write the Prompt**  
-  _What does this code need to do?_  
-  `...describe the target behavior, interface, or bug...`
-
-- [x] **Log the Prompt to `docs/`**  
-  _Where is the long-term context?_  
-  `promptX_name.md` → codename: `[codename hash]`
-
-- [x] **Describe the Purpose**  
-  _Why am I doing this?_  
-  `One sentence: This enables/clarifies/supports...`
-
-- [x] **Execute the Change**  
-  _What will I edit, run, or generate?_  
-  `...brief note on the script/module/test touched...`
-
-- [x] **Return Point**  
-  _Where do I pick up next?_  
-  `Next step is to... / Pending: ... / Waiting on: ...`
-%% ENDREGION %%
-
-
-# 🧠 Anchor: p18 auto docs – drab-question (1/5)
-
-2025-06-15 11:30:52 -0600
-add auto docs
-[[prompt18_drab-question-bb832036]]
-
-
-## Log 
-
-2025-06-15 11:37:47 -0600 - wrote prompt, added to gh. will wait until I can just push whole repo easily. 
-
-## Checklist
-
-%% REGION %% 
-- [x] **Write the Prompt**  
-  _What does this code need to do?_  
-  `...describe the target behavior, interface, or bug...`
-
-- [x] **Log the Prompt to `docs/`**  
-  _Where is the long-term context?_  
-  `promptX_name.md` → codename: `[codename hash]`
-
-- [ ] **Describe the Purpose**  
-  _Why am I doing this?_  
-  `One sentence: This enables/clarifies/supports...`
-
-- [ ] **Execute the Change**  
-  _What will I edit, run, or generate?_  
-  `...brief note on the script/module/test touched...`
-
-- [ ] **Return Point**  
-  _Where do I pick up next?_  
-  `Next step is to... / Pending: ... / Waiting on: ...`
-%% ENDREGION %%
-
 
 
 
