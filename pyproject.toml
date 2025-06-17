@@ -16,6 +16,9 @@ dependencies = [
     "pytest",
     "pandas",
     "matplotlib",
+    "sphinx",
+    "furo",
+    "myst-parser",
 ]
 
 [project.scripts]
