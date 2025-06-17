@@ -165,7 +165,7 @@ class ReturnEvent(Event):
                     simulation.start_datetime
                     + timedelta(minutes=next_arrival)
                 ).isoformat()
-                agent.start_wait(next_arrival, ts)
+                agent.enter_queue(next_arrival, ts)
                 events.append((ArrivalEvent(agent, self.lift), next_arrival))
         self.lift.chair_return(self.boarded)
         for agent in self.boarded:

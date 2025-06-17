@@ -31,7 +31,7 @@ Implement per-agent self-logging so that each agent retains a detailed history o
   - ``ArrivalEvent.execute`` after the agent is enqueued.
   - ``BoardingEvent.execute`` for each agent that boards the lift.
   - ``ReturnEvent.execute`` when each boarded agent finishes a ride (this may require passing the boarded agent list from ``BoardingEvent`` to ``ReturnEvent``).
-  - Inside ``Agent.start_wait`` and ``Agent.finish_ride`` so manual uses also record events.
+  - Inside ``Agent.enter_queue`` and ``Agent.finish_ride`` so manual uses also record events.
 
 ## Accessing logs
 - After ``run_alpha_sim`` or any simulation run, users can examine ``agent.activity_log`` for a chronological history of that agent’s actions.

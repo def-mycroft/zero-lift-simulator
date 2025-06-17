@@ -18,7 +18,7 @@ import pytest
 def test_infer_agent_states_basic():
     agent = Agent(1)
     start = datetime(2025, 3, 12, 9, 0, 0)
-    agent.start_wait(0, start.isoformat())
+    agent.enter_queue(0, start.isoformat())
     agent.log_event("arrival", 0, start.isoformat())
     agent.log_event("board", 1, (start + timedelta(minutes=1)).isoformat())
 
@@ -31,7 +31,7 @@ def test_infer_agent_states_basic():
     result2 = infer_agent_states([agent], dt2)
     assert result2[agent.agent_uuid] == state_traversing_down
 
-    agent.start_wait(7, (start + timedelta(minutes=7)).isoformat())
+    agent.enter_queue(7, (start + timedelta(minutes=7)).isoformat())
     dt3 = start + timedelta(minutes=8)
     result3 = infer_agent_states([agent], dt3)
     assert result3[agent.agent_uuid] == state_in_queue

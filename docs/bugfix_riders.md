@@ -22,7 +22,7 @@ _____________________ test_activity_log_enabled_via_events _____________________
         sim = Simulation()
         lift = Lift(capacity=1, cycle_time=5)
         agent = Agent(3)
-        agent.start_wait(0)
+        agent.enter_queue(0)
         sim.schedule(ArrivalEvent(agent, lift), 0)
 >       sim.run()
 
