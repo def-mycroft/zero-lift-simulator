@@ -57,7 +57,8 @@ xxx
 # 🧠 Anchor: rename start_wait – hanging-silly (3/5)
 
 2025-06-15 12:07:59 -0600
-func `Agent.start_wait` has poor naming. this should be named something more substantial and understandable, where can easily understand "okay agent has now entered the start of the line". 
+func `Agent.start_wait` has poor naming. this should be named something more substantial and understandable, where can easily understand "okay agent has now entered the start of the line".
+It has now been renamed to ``enter_queue``.
 [[prompt19_update _func_name-hanging-silly-001b3e58]]
 
 ## Log

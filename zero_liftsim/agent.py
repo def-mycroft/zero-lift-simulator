@@ -123,10 +123,7 @@ class Agent:
 # }}}
 # {{{
     # """Record when the agent enters the queue."""
-    # TODO - the name of this function should be different, it is 
-    # too hard to infer what that means, would rather say 
-    # "entered queue"
-    def start_wait(self, time: int, timestamp: str) -> None:
+    def enter_queue(self, time: int, timestamp: str) -> None:
         """Record when the agent enters the queue."""
 
         self.wait_start = time

@@ -12,7 +12,7 @@ from zero_liftsim.lift import Lift
 def test_wait_and_finish_ride():
     agent = Agent(1)
     start = datetime(2025, 3, 12, 9, 0, 0)
-    agent.start_wait(0, start.isoformat())
+    agent.enter_queue(0, start.isoformat())
     agent.boarded = True
     ts = (start + timedelta(minutes=5)).isoformat()
     wait = agent.finish_ride(5, ts)
@@ -24,14 +24,14 @@ def test_wait_and_finish_ride():
 def test_multiple_rides():
     agent = Agent(2)
     start = datetime(2025, 3, 12, 9, 0, 0)
-    agent.start_wait(0, start.isoformat())
+    agent.enter_queue(0, start.isoformat())
     agent.boarded = True
     ts1 = (start + timedelta(minutes=3)).isoformat()
     wait1 = agent.finish_ride(3, ts1)
     assert wait1 == 3
     assert agent.rides_completed == 1
 
-    agent.start_wait(10, (start + timedelta(minutes=10)).isoformat())
+    agent.enter_queue(10, (start + timedelta(minutes=10)).isoformat())
     agent.boarded = True
     ts2 = (start + timedelta(minutes=15)).isoformat()
     wait2 = agent.finish_ride(15, ts2)
@@ -45,7 +45,7 @@ def test_activity_log_enabled_via_events():
     lift.time_spent_ride_lift = lambda: 5
     agent = Agent(3)
     start = datetime(2025, 3, 12, 9, 0, 0)
-    agent.start_wait(0, start.isoformat())
+    agent.enter_queue(0, start.isoformat())
     sim.schedule(ArrivalEvent(agent, lift), 0)
     sim.run(start_datetime=start)
     events = [entry["event"] for entry in agent.activity_log.values()]
@@ -58,7 +58,7 @@ def test_activity_log_enabled_via_events():
 def test_activity_log_disabled():
     agent = Agent(4, self_logging=False)
     start = datetime(2025, 3, 12, 9, 0, 0)
-    agent.start_wait(0, start.isoformat())
+    agent.enter_queue(0, start.isoformat())
     agent.boarded = True
     agent.finish_ride(5, (start + timedelta(minutes=5)).isoformat())
     assert agent.activity_log == {}

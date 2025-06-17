@@ -77,7 +77,7 @@ class SimulationManager:
         for i, agent in enumerate(self.agents):
             self.arrival_times.append(i)
             ts = (self.start_datetime + timedelta(minutes=i)).isoformat()
-            agent.start_wait(i, ts)
+            agent.enter_queue(i, ts)
             self.sim.schedule(ArrivalEvent(agent, self.lift), i)
 
     def run(
