@@ -1,0 +1,424 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>Initial Develop Description - Zero Lift Simulator - Zero Lift Simulator documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Zero Lift Simulator  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">Zero Lift Simulator  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/modules.html">zero_liftsim</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of zero_liftsim</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/zero_liftsim.html">zero_liftsim package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/zero_liftsim.html">zero_liftsim package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/wiki/main_notes_implementation.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="initial-develop-description-zero-lift-simulator">
+<h1>Initial Develop Description - Zero Lift Simulator<a class="headerlink" href="#initial-develop-description-zero-lift-simulator" title="Link to this heading">¶</a></h1>
+<p>#process-notes</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>Zero Lift Simulator (“LiftSim”) is an agent-based simulation of skier-lift dynamics at a ski resort. The goal is to model individual skier behavior interacting with constrained lift infrastructure over a simulated day. The system is built around an event-driven simulation engine where agents arrive, queue for a single lift, ride, ski down, and repeat.</p>
+<p>The simulation is designed to help explore operational bottlenecks, especially how arrival patterns, lift capacities, and cycle times affect queue lengths, wait times, and throughput. Eventually, this platform will serve as the foundation for more complex modeling including pricing schemes, weather variability, and multi-lift resort maps.</p>
+</section>
+<section id="core-concepts">
+<h2>Core Concepts<a class="headerlink" href="#core-concepts" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Discrete Event Simulation</strong>: Simulation clock advances based on time-stamped events (e.g., agent arrival, lift boarding, lift return). This avoids unnecessary time-stepping.</p></li>
+<li><p><strong>Agent-Based Modeling</strong>: Each skier is an agent with their own state (arrival time, number of rides, wait times, etc.). Agent behavior is deterministic for now, but future versions will include probabilistic rules.</p></li>
+<li><p><strong>Single-Lift System</strong>: For the kernel, we assume one lift with fixed capacity and fixed round-trip duration.</p></li>
+</ul>
+</section>
+<section id="initial-goals">
+<h2>Initial Goals<a class="headerlink" href="#initial-goals" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Run a valid simulation of N agents arriving over time.</p></li>
+<li><p>Compute and log: average wait time, lift utilization, queue length over time.</p></li>
+<li><p>Use a FIFO queue at the lift.</p></li>
+<li><p>Assume deterministic lift cycle time and constant ski-down time (or fixed distribution).</p></li>
+</ul>
+</section>
+<section id="object-model">
+<h2>Object Model<a class="headerlink" href="#object-model" title="Link to this heading">¶</a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Simulation</span></code>: Core engine holding the clock and event queue.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Event</span></code> (abstract): Base class for all events.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">ArrivalEvent</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BoardingEvent</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ReturnEvent</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Agent</span></code>: Represents a skier and their evolving state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Lift</span></code>: Tracks queue, capacity, state (idle/moving).</p></li>
+</ul>
+</section>
+<section id="agent-lifecycle">
+<h3>Agent Lifecycle<a class="headerlink" href="#agent-lifecycle" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Arrives at resort via <code class="docutils literal notranslate"><span class="pre">ArrivalEvent</span></code>.</p></li>
+<li><p>Joins lift queue.</p></li>
+<li><p>Boards lift in <code class="docutils literal notranslate"><span class="pre">BoardingEvent</span></code> (if within capacity).</p></li>
+<li><p>Lift departs; lift becomes unavailable.</p></li>
+<li><p>Lift returns in <code class="docutils literal notranslate"><span class="pre">ReturnEvent</span></code>.</p></li>
+<li><p>Skier skis down (either implicit or via another event).</p></li>
+<li><p>Agent re-queues (if there’s enough time in the day).</p></li>
+</ol>
+</section>
+</section>
+<section id="key-parameters">
+<h2>Key Parameters<a class="headerlink" href="#key-parameters" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">n_agents</span></code>: total number of simulated agents</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arrival_distribution</span></code>: uniform or exponential</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lift_capacity</span></code>: fixed number of skiers per ride</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lift_cycle_time</span></code>: time from departure to return</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ski_down_time</span></code>: time spent skiing before rejoining queue</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sim_duration</span></code>: total simulated time (e.g., 480 minutes)</p></li>
+</ul>
+</section>
+<section id="planned-phases">
+<h2>Planned Phases<a class="headerlink" href="#planned-phases" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Minimal Working Kernel</strong>: functional event loop, 1 lift, valid outputs</p></li>
+<li><p><strong>Agent Looping</strong>: ski down + rejoin queue</p></li>
+<li><p><strong>Data Logging</strong>: metrics per agent, per lift</p></li>
+<li><p><strong>Visualization</strong>: queue size over time, wait time histograms</p></li>
+<li><p><strong>Complexity</strong>: new events (breaks, leave early), stateful agents</p></li>
+<li><p><strong>Persistence</strong>: results into SQLite or parquet via DuckDB</p></li>
+<li><p><strong>Scenario Testing</strong>: simulate free lift day, delayed openings, etc.</p></li>
+</ol>
+</section>
+<section id="dev-practices">
+<h2>Dev Practices<a class="headerlink" href="#dev-practices" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Code is modular and testable. Avoid global state.</p></li>
+<li><p>Use class-by-class implementation with rich docstrings.</p></li>
+<li><p>Unit test each event execution logic.</p></li>
+<li><p>Maintain clear separation between simulation engine and domain logic.</p></li>
+</ul>
+</section>
+<section id="notes-for-codex-or-llm-based-agents">
+<h2>Notes for Codex or LLM-Based Agents<a class="headerlink" href="#notes-for-codex-or-llm-based-agents" title="Link to this heading">¶</a></h2>
+<p>If you’re generating or expanding code from these notes:</p>
+<ul class="simple">
+<li><p>Always refer to class-level docstrings for intended behavior.</p></li>
+<li><p>Preserve naming conventions (<code class="docutils literal notranslate"><span class="pre">ArrivalEvent</span></code>, <code class="docutils literal notranslate"><span class="pre">execute(simulation)</span></code>, etc.).</p></li>
+<li><p>Keep the simulation loop event-driven (do not introduce tick-based logic).</p></li>
+<li><p>Assume FIFO semantics in the lift queue unless stated otherwise.</p></li>
+<li><p>All simulation time is in integer minutes unless extended.</p></li>
+</ul>
+<hr class="docutils" />
+<p>This document should be included in the repo as a core reference alongside the initial kernel module and expanded incrementally as the project grows.</p>
+</section>
+</section>
+<section id="git-info">
+<h1>Git Info<a class="headerlink" href="#git-info" title="Link to this heading">¶</a></h1>
+<p>Commit: c936e3318795d8493c35cb3f8299b583141a5be0
+Date: 2025-06-11T08:52:59-07:00</p>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Initial Develop Description - Zero Lift Simulator</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#core-concepts">Core Concepts</a></li>
+<li><a class="reference internal" href="#initial-goals">Initial Goals</a></li>
+<li><a class="reference internal" href="#object-model">Object Model</a><ul>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#agent-lifecycle">Agent Lifecycle</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#key-parameters">Key Parameters</a></li>
+<li><a class="reference internal" href="#planned-phases">Planned Phases</a></li>
+<li><a class="reference internal" href="#dev-practices">Dev Practices</a></li>
+<li><a class="reference internal" href="#notes-for-codex-or-llm-based-agents">Notes for Codex or LLM-Based Agents</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#git-info">Git Info</a></li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

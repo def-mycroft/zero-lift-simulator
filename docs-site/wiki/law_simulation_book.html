@@ -1,0 +1,412 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>Simulation Modeling Book Notes - Zero Lift Simulator documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Zero Lift Simulator  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">Zero Lift Simulator  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/modules.html">zero_liftsim</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of zero_liftsim</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/zero_liftsim.html">zero_liftsim package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/zero_liftsim.html">zero_liftsim package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/wiki/law_simulation_book.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="simulation-modeling-book-notes">
+<h1>Simulation Modeling Book Notes<a class="headerlink" href="#simulation-modeling-book-notes" title="Link to this heading">¶</a></h1>
+</section>
+<section id="response">
+<h1>Response<a class="headerlink" href="#response" title="Link to this heading">¶</a></h1>
+<p>Here’s a focused writeup synthesizing general simulation principles from Law’s <em>Simulation Modeling and Analysis</em> with specific takeaways relevant to the Zero Lift Simulator project:</p>
+<hr class="docutils" />
+<section id="general-simulation-principles-from-laws-book">
+<h2>General Simulation Principles from Law’s Book<a class="headerlink" href="#general-simulation-principles-from-laws-book" title="Link to this heading">¶</a></h2>
+<p><strong>1. Discrete-Event Simulation (DES)</strong>
+Law frames DES as the dominant method for modeling systems like LiftSim, where the system evolves at discrete points in time due to specific events (e.g., arrival, boarding, lift return). You’ve already aligned with this, using an event queue and advancing the clock to each scheduled event.</p>
+<p><strong>2. Event List Management (Future Event List, FEL)</strong>
+Efficient management of the event list (priority queue) is central. Law emphasizes maintaining it in time-sorted order, often using a heap. Your design’s use of a min-heap priority queue in <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> is textbook correct. Law also notes the importance of tie-breaking logic to ensure deterministic execution order, which your planned counter satisfies.</p>
+<p><strong>3. System State vs. Event Types</strong>
+State variables (e.g. lift status, queue contents) should be cleanly separated from event logic. Law recommends centralizing all changes to system state within event execution, never outside. Your plan matches this: events are the only mechanism by which state updates occur.</p>
+<p><strong>4. Simulation Clock Discipline</strong>
+Only one global simulation clock exists. All event scheduling and state updates must use it consistently. Law warns against hidden time dependencies. You’re handling this with clear <code class="docutils literal notranslate"><span class="pre">current_time</span></code> logic in the <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> class.</p>
+<p><strong>5. Initialization and Warm-Up</strong>
+Law stresses the difference between transient and steady-state simulations. For LiftSim, which runs over a single simulated day, you’ll be mostly transient. But if you later study long-term behavior (e.g. daily operations over a season), you’d need a warm-up phase to avoid initialization bias.</p>
+<p><strong>6. Random Variate Generation</strong>
+Arrival times, ski-down times, and potentially agent traits should use controlled random generation. Law notes the importance of using well-tested RNGs and being able to re-seed simulations for replicability. Codex can help implement deterministic RNG wrappers or seeding logic to support experiments.</p>
+<p><strong>7. Output Analysis and Confidence Intervals</strong>
+Law dedicates major attention to <em>statistical output analysis</em>. Even though you’re starting with a single run, it’s best to design for batch runs with replicated simulations. That lets you later calculate confidence intervals for means (e.g., mean wait time, lift utilization). Your lift metrics and per-agent logs should be collected with this in mind.</p>
+<p><strong>8. Avoiding Common Pitfalls</strong>
+Law lists common mistakes that your design mostly avoids:</p>
+<ul class="simple">
+<li><p>Mismanaging simultaneous events (your tie-breaker counters prevent this)</p></li>
+<li><p>Mixing model logic with control logic (you’ve modularized well)</p></li>
+<li><p>Using continuous simulation techniques (e.g., differential equations) inappropriately</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+<section id="specific-takeaways-for-liftsim">
+<h2>Specific Takeaways for LiftSim<a class="headerlink" href="#specific-takeaways-for-liftsim" title="Link to this heading">¶</a></h2>
+<p><strong>Agent Reentry as Regenerative Events</strong>
+Law highlights “regenerative systems”—those that reset to a similar state after certain events. Your agents looping back into the queue act like regenerative triggers. This framing helps justify using each loop as a unit of analysis (ride-wait-ride cycles), which can help with logging and diagnostics.</p>
+<p><strong>Time-Stamped Logging</strong>
+Law advocates for structured output: logging each event with timestamps and affected entities. This aligns with your queue-length tracking and agent wait-time analysis. Consider having each event write to a structured log record so that post-hoc analysis doesn’t rely on in-memory inspection.</p>
+<p><strong>Simulation Termination Conditions</strong>
+Law distinguishes between time-driven terminations (run for 8 hours) and event-driven ones (e.g. all agents leave). LiftSim is currently time-driven, but Law suggests building in dual termination criteria in case future scenarios involve fatigue, early exits, or abandonment behavior.</p>
+<p><strong>Performance Metrics Design</strong>
+Law emphasizes that <em>how</em> you define and collect metrics influences interpretation. For example:</p>
+<ul class="simple">
+<li><p>Lift utilization should be time-weighted (time-moving / total-time).</p></li>
+<li><p>Queue size over time should be logged periodically (e.g. after each event) to compute a time-average queue length, not just a snapshot at event times.</p></li>
+</ul>
+<p><strong>Modular Experiments</strong>
+Law discusses building simulation models to support <em>experimental designs</em>—varying parameters systematically. This supports your eventual plan for YAML/CLI configs. You can ask Codex to write wrappers that run multiple seeds for a given param set and return distributions.</p>
+<p><strong>Future Scaling Warning</strong>
+When you expand to multi-lift or terrain-aware simulations, Law recommends using object-oriented DES engines to avoid logic duplication. Your current modular layout will make this transition easier, but plan for <code class="docutils literal notranslate"><span class="pre">Lift</span></code> objects to communicate or share global resources (e.g., skier distribution rules) later.</p>
+<hr class="docutils" />
+</section>
+<section id="summary-of-actionable-codex-aligned-practices">
+<h2>Summary of Actionable Codex-Aligned Practices<a class="headerlink" href="#summary-of-actionable-codex-aligned-practices" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Implement a consistent simulation clock via a single time field in <code class="docutils literal notranslate"><span class="pre">Simulation</span></code>.</p></li>
+<li><p>Ensure all randomness is wrapped for easy re-seeding.</p></li>
+<li><p>Track per-event logs with timestamps and affected entities.</p></li>
+<li><p>Add metrics as time-averaged where appropriate (e.g. queue length).</p></li>
+<li><p>Design the simulation to allow N replications per scenario for confidence intervals.</p></li>
+<li><p>Maintain separation of concerns: agents hold state, events update state, simulation controls time.</p></li>
+</ul>
+<p>Let me know if you want this written into the <code class="docutils literal notranslate"><span class="pre">dev_notes.md</span></code>, a <code class="docutils literal notranslate"><span class="pre">metrics_spec.md</span></code>, or a dedicated <code class="docutils literal notranslate"><span class="pre">analysis_guide.md</span></code>.</p>
+</section>
+</section>
+<section id="context-of-law-book-synthesis-prompt">
+<h1>Context of Law Book Synthesis Prompt<a class="headerlink" href="#context-of-law-book-synthesis-prompt" title="Link to this heading">¶</a></h1>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Link to this heading">¶</a></h2>
+<p>The user is developing an event-driven, agent-based simulation project called <strong>Zero Lift Simulator (LiftSim)</strong>. The project aims to model skier behavior and operational bottlenecks at a ski resort, focusing on how agents interact with a single lift over the course of a simulated day. The project is modular, using a core set of classes (<code class="docutils literal notranslate"><span class="pre">Simulation</span></code>, <code class="docutils literal notranslate"><span class="pre">Event</span></code>, <code class="docutils literal notranslate"><span class="pre">Agent</span></code>, <code class="docutils literal notranslate"><span class="pre">Lift</span></code>, and subclasses of <code class="docutils literal notranslate"><span class="pre">Event</span></code>) designed to facilitate a discrete-event simulation architecture.</p>
+<p>In earlier prompts, the user established:</p>
+<ul class="simple">
+<li><p>A well-structured <strong>scaffold module</strong> with placeholder classes and rich docstrings.</p></li>
+<li><p>A <strong>simulation concept document</strong> detailing inputs, agent lifecycle, and event logic.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">dev_notes.md</span></code> file outlining the software engineering and modeling intent.</p></li>
+<li><p>An intention to use <strong>Codex</strong> or another LLM as a co-developer, issuing scoped prompts per class or module.</p></li>
+<li><p>Interest in adding realistic performance tracking, visualizations, and eventually persistent logging to tools like DuckDB.</p></li>
+</ul>
+<p>To support this, the user uploaded a full text version of <strong>Averill M. Law’s <em>Simulation Modeling and Analysis</em></strong>, a foundational text in simulation methodology. They then requested a detailed summary of <strong>general principles</strong> from the book <strong>as well as specific takeaways</strong> for the LiftSim project.</p>
+</section>
+<section id="motivation-behind-the-request">
+<h2>Motivation Behind the Request<a class="headerlink" href="#motivation-behind-the-request" title="Link to this heading">¶</a></h2>
+<p>Several speculative reasons likely motivated this prompt:</p>
+<section id="establishing-simulation-best-practices">
+<h3>1. <strong>Establishing Simulation Best Practices</strong><a class="headerlink" href="#establishing-simulation-best-practices" title="Link to this heading">¶</a></h3>
+<p>The user wants to ensure their simulation design adheres to canonical best practices in discrete-event simulation. Rather than reinventing patterns or relying on ad hoc intuition, they are using the Law book as a source of grounding and rigor.</p>
+</section>
+<section id="codex-alignment">
+<h3>2. <strong>Codex Alignment</strong><a class="headerlink" href="#codex-alignment" title="Link to this heading">¶</a></h3>
+<p>By synthesizing domain knowledge from Law’s book, the user can ensure Codex-generated code is aligned with simulation theory. The hope is that inserting best-practice commentary into <code class="docutils literal notranslate"><span class="pre">dev_notes.md</span></code> or related documentation will increase the semantic coherence of downstream completions.</p>
+</section>
+<section id="guiding-future-features">
+<h3>3. <strong>Guiding Future Features</strong><a class="headerlink" href="#guiding-future-features" title="Link to this heading">¶</a></h3>
+<p>Law’s concepts (e.g., warm-up periods, confidence intervals, regenerative systems) provide a vocabulary and structure for more advanced simulation features that the user plans to implement—such as re-entry logic, replication runs, or output analysis modules.</p>
+</section>
+<section id="refining-metric-design">
+<h3>4. <strong>Refining Metric Design</strong><a class="headerlink" href="#refining-metric-design" title="Link to this heading">¶</a></h3>
+<p>The user appears concerned with <strong>how</strong> metrics like lift utilization and average queue length are defined and measured. Law’s emphasis on output analysis, event-based logging, and time-weighted averages speaks directly to those needs.</p>
+</section>
+<section id="anticipating-scaling-issues">
+<h3>5. <strong>Anticipating Scaling Issues</strong><a class="headerlink" href="#anticipating-scaling-issues" title="Link to this heading">¶</a></h3>
+<p>The user has expressed intent to eventually move toward <strong>multi-lift</strong>, <strong>weather-aware</strong>, or <strong>resource-sharing</strong> simulations. Law’s emphasis on modular object-oriented simulation design offers foresight into problems of architectural coupling and scalability.</p>
+</section>
+<section id="justifying-modeling-choices">
+<h3>6. <strong>Justifying Modeling Choices</strong><a class="headerlink" href="#justifying-modeling-choices" title="Link to this heading">¶</a></h3>
+<p>By grounding decisions in Law’s text, the user creates a kind of theoretical audit trail that can be cited in documentation, presentations, or job interviews. It transforms LiftSim from a toy project into a serious applied simulation framework.</p>
+</section>
+</section>
+<section id="likely-next-steps">
+<h2>Likely Next Steps<a class="headerlink" href="#likely-next-steps" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Codifying these insights into either <code class="docutils literal notranslate"><span class="pre">dev_notes.md</span></code> or separate files like <code class="docutils literal notranslate"><span class="pre">metrics_spec.md</span></code> or <code class="docutils literal notranslate"><span class="pre">simulation_principles.md</span></code>.</p></li>
+<li><p>Using these principles to guide Codex prompts for implementing <code class="docutils literal notranslate"><span class="pre">Simulation.run()</span></code>, <code class="docutils literal notranslate"><span class="pre">ArrivalEvent.execute()</span></code>, or metric collectors.</p></li>
+<li><p>Building an experiment runner that supports multiple seeded simulation runs for statistical analysis.</p></li>
+<li><p>Introducing structured logging per agent or event to support downstream DuckDB analysis.</p></li>
+<li><p>Scaling the design to support additional resources (e.g., multi-lift systems) with minimal refactoring.</p></li>
+</ul>
+<p>This context is crucial for Codex or any collaborative agent working on the project, as it frames not just the <em>what</em> of the code, but the <em>why</em> behind the design decisions.</p>
+</section>
+</section>
+<section id="git-info">
+<h1>Git Info<a class="headerlink" href="#git-info" title="Link to this heading">¶</a></h1>
+<p>Commit: 5d1b8fc272862f681630794dde40ab3d1892f192
+Date: 2025-06-10T16:25:57-07:00</p>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>
