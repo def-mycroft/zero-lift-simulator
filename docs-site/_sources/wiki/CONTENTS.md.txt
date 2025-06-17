@@ -1,5 +1,14 @@
 # Table of Contents
 
+```meta-bind-button
+style: primary
+label: 道 
+action:
+  type: open
+  link: "[[00projectanchor-liftsim-burly-concert-gigantic-analysis-e7cf1ccf]]"
+```
+
+
 ## Main Notes
 - [00 Project Action Anchor](00projectanchor-liftsim-burly-concert-gigantic-analysis-e7cf1ccf.md)
 - [How to Add Wiki Articles](main_notes_adding_wiki_articles.md)
@@ -21,6 +30,7 @@
 - [Tutorial - Infer Agent State](partial-kernel-tutorial-infer-agent-states.md)
 
 ## Prompt Articles
+- [prompt22  add prompt section to docs dreary-watch b68eecea](prompt22_dreary-watch-b68eecea.md)
 - [prompt21 traceback sampling error  wary-bitter 1b487118](prompt21_wary-bitter-1b487118.md)
 - [prompt20 pytest tossup breakable-scratch 689c423e](prompt20_breakable_scratch-689c423e.md)
 - [prompt19 rename start_wait hanging-silly 001b3e58](prompt19_update _func_name-hanging-silly-001b3e58.md)
@@ -68,7 +78,6 @@
 - [🧠 Anchor: Agent Log – verdant-variety 405ed937 (x/5)](unnamed-cowardly-leather-d8f8b337.md)
 - [🧠 Anchor: bugfix test – grandiose-secretary 10554173 (5/5)](unnamed-crooked-revenue-67c6c0ef.md)
 - [unnamed dapper-leading f5ed905a](unnamed-dapper-leading-f5ed905a.md)
-- [unnamed dreary-watch b68eecea](prompt22_dreary-watch-b68eecea.md)
 - [unnamed guttural-place 5c711918](unnamed-guttural-place-5c711918.md)
 - [unnamed hellish-point 7ff2842e](unnamed-hellish-point-7ff2842e.md)
 - [unnamed lyrical-development efd3227f](unnamed-lyrical-development-efd3227f.md)

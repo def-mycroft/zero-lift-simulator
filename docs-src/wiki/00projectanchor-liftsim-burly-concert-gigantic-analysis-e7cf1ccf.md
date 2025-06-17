@@ -6,6 +6,15 @@ gigantic-analysis-e7cf1ccf
 
 [[CONTENTS]]
 
+```meta-bind-button
+style: primary
+label: 道 
+action:
+  type: open
+  link: "[[00projectanchor-liftsim-burly-concert-gigantic-analysis-e7cf1ccf]]"
+```
+
+
 ***
 
 
@@ -53,7 +62,6 @@ xxx
 *** 
 
 [[prompt21_wary-bitter-1b487118]]
-
 
 
 

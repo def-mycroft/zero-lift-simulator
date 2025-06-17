@@ -5,6 +5,44 @@ random codename: ultra-tomorrow 1f27d36c
 ***
 
 
+# 🧠 Anchor: add prompt section to docs – pink-row 036e77ca (5/5)
+**seems to be working. have a pytest fail now** 
+2025-06-17 13:37:13 -0600
+pink-row 036e77ca
+[[prompt22_dreary-watch-b68eecea]]
+
+
+## Log 
+
+xxx 
+
+## Checklist
+
+%% REGION %% 
+- [ ] **Write the Prompt**  
+  _What does this code need to do?_  
+  `...describe the target behavior, interface, or bug...`
+
+- [ ] **Log the Prompt to `docs/`**  
+  _Where is the long-term context?_  
+  `promptX_name.md` → codename: `[codename hash]`
+
+- [ ] **Describe the Purpose**  
+  _Why am I doing this?_  
+  `One sentence: This enables/clarifies/supports...`
+
+- [ ] **Execute the Change**  
+  _What will I edit, run, or generate?_  
+  `...brief note on the script/module/test touched...`
+
+- [x] **Return Point**  
+  _Where do I pick up next?_  
+  `Next step is to... / Pending: ... / Waiting on: ...`
+%% ENDREGION %%
+
+
+
+
 # 🧠 Anchor: p18 auto docs – drab-question (5/5)
 **fucking exciting: have great docs. this should be very useful, like a huge efficiency and effectiveness lift. immediately going to add a section listing prompts** 
 

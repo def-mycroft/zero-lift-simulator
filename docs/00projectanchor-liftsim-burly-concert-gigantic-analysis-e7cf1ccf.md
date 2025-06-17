@@ -6,6 +6,15 @@ gigantic-analysis-e7cf1ccf
 
 [[CONTENTS]]
 
+```meta-bind-button
+style: primary
+label: 道 
+action:
+  type: open
+  link: "[[00projectanchor-liftsim-burly-concert-gigantic-analysis-e7cf1ccf]]"
+```
+
+
 ***
 
 
@@ -52,18 +61,16 @@ xxx
 
 *** 
 
+#todo the docs here are working really well, should be able to make this into a module which can work for any codebase built on cool-jacket. 
+#todo not sure if this needs to be updated or not 
+
 [[prompt21_wary-bitter-1b487118]]
 
 
+# 🧠 Anchor: pytest tossup –  (0/5)
 
-
-# 🧠 Anchor: add prompt section to docs – pink-row 036e77ca (0/5)
-
-2025-06-17 13:37:13 -0600
-pink-row 036e77ca
-[[prompt22_dreary-watch-b68eecea]]
-
-
+2025-06-17 14:18:07 -0600
+pytest fail. sent log 
 
 ## Log 
 
@@ -92,6 +99,7 @@ xxx
   _Where do I pick up next?_  
   `Next step is to... / Pending: ... / Waiting on: ...`
 %% ENDREGION %%
+
 
 
 # 🧠 Anchor: chatbot log tests – hellish-point (0/5)

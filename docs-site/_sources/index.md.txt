@@ -5,4 +5,5 @@
 
 wiki/index
 api/index
+prompts/index
 ```

@@ -1,0 +1,360 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="prompt13 - Integrate .zero pandas custom accessor" href="prompt13_pandas_custom.html" /><link rel="prev" title="prompt15 - Create Agent Traceback Method" href="prompt_15_prompt-agent-traceback-ritzy-call-7e649afc.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>prompt14 - Force Agent State Map unnamed aggressive-week 801baa1b - Zero Lift Simulator documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Zero Lift Simulator  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">Zero Lift Simulator  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/modules.html">zero_liftsim</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of zero_liftsim</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/zero_liftsim.html">zero_liftsim package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/zero_liftsim.html">zero_liftsim package</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Prompt Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Prompt Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="prompt22_dreary-watch-b68eecea.html">prompt22  add prompt section to docs dreary-watch b68eecea</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt21_wary-bitter-1b487118.html">prompt21 traceback sampling error  wary-bitter 1b487118</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt20_breakable_scratch-689c423e.html">prompt20 pytest tossup breakable-scratch 689c423e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt19_update%20_func_name-hanging-silly-001b3e58.html">prompt19 rename start_wait hanging-silly 001b3e58</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt18_drab-question-bb832036.html">prompt18 - introduce auto docs drab-question bb832036</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt17_enchanting-curve-ff38f89e.html">prompt17 sandbox module test issue enchanting-curve ff38f89e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt16_dapper_leading_f5ed905a.html">prompt16 - infer problem from pytest and apply fix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt_15_prompt-agent-traceback-ritzy-call-7e649afc.html">prompt15 - Create Agent Traceback Method</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">prompt14 - Force Agent State Map unnamed aggressive-week 801baa1b</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt13_pandas_custom.html">prompt13 - Integrate .zero pandas custom accessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt12_lonely_camera_125058f3.html">prompt12 - state diagram dev lonely-camera 125058f3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt11_variable_chairs.html">prompt11 - variable chair count</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt11_variable_chairs.html#prompt-for-codex-prompt11-extend-lift-with-chairs">Prompt for Codex prompt11 – Extend Lift with Chairs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt11_variable_chairs.html#git-info">Git Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt10_multi_lift_sim.html">prompt10 - Implement Multi-Lift Setup stimulating-divide 3437c905</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt9_clock_simulation_runtime.html">prompt9 - clock simulation runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt9_clock_simulation_runtime.html#prompt-for-codex-prompt99-run-simulation-for-a-daily-time-window">Prompt for Codex prompt99 – Run Simulation for a Daily Time Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt8_time_distribution_enhancement.html">prompt8 - Implement AgentExperience class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt8_time_distribution_enhancement.html#prompt">Prompt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt8_time_distribution_enhancement.html#raw-voice-memo-transcript">Raw Voice Memo Transcript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt7_simulation_datetime.html">prompt7 - simulation datetime logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt7_simulation_datetime.html#prompt-for-codex-prompt7-follow-up-to-enhanced-time-tracking">Prompt for Codex prompt7 – Follow-up to enhanced time tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt7_simulation_datetime.html#git-info">Git Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt6_agent_logging.html">prompt6 - agent logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt6_agent_logging.html#prompt-for-codex-prompt6-follow-up-to-cosmic-octopus-1f7d9e34">Prompt for Codex prompt6 – Follow-up to “cosmic-octopus 1f7d9e34”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt6_agent_logging.html#git-info">Git Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt5_full_agent_logging.html">prompt5 - full agent logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt5_full_agent_logging.html#prompt-for-codex-prompt5-follow-up-to-cobalt-sparrow-d7dca612">Prompt for Codex prompt5 – Follow-up to “cobalt-sparrow d7dca612”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt5_full_agent_logging.html#git-info">Git Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt4_implement_alpha_sim.html">prompt4 - alpha simulation and logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt4_implement_alpha_sim.html#prompt-for-codex-prompt4-follow-up-to-wandering-marmot-3897c21d">Prompt for Codex prompt4 – Follow-up to “wandering-marmot 3897c21d”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt4_implement_alpha_sim.html#git-info">Git Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt3_agent_class.html">prompt3 - agent class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt3_agent_class.html#prompt-for-codex-prompt3-follow-up-to-buoyant-yeti-9463ae29">Prompt for Codex prompt3 – Follow-up to “buoyant-yeti 9463ae29”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt3_agent_class.html#git-info">Git Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt2_event_classes.html">prompt2 - event classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt2_event_classes.html#prompt-for-codex-prompt2-follow-up-to-ruthless-ladder-3238db4e">Prompt for Codex prompt2 – Follow-up to “ruthless-ladder 3238db4e”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt2_event_classes.html#git-info">Git Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt1_implement_lift.html">prompt1 - lift class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt1_implement_lift.html#prompt-for-codex-prompt1-followup-to-ajar-passenger-2738f5a9">Prompt for Codex prompt1 – Follow‑up to “ajar-passenger 2738f5a9”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt1_implement_lift.html#git-info">Git Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt0_dev_init_class.html">prompt0 - simulation class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt0_dev_init_class.html#git-info">Git Info</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/prompts/prompt14_agent_explicit_fail_aggressive_week.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="prompt14-force-agent-state-map-unnamed-aggressive-week-801baa1b">
+<h1>prompt14 - Force Agent State Map unnamed aggressive-week 801baa1b<a class="headerlink" href="#prompt14-force-agent-state-map-unnamed-aggressive-week-801baa1b" title="Link to this heading">¶</a></h1>
+<p>#prompt
+random codename: aggressive-week 801baa1b</p>
+<hr class="docutils" />
+<p>Implement <code class="docutils literal notranslate"><span class="pre">Agent.get_latest_event(dt:</span> <span class="pre">datetime)</span> <span class="pre">-&gt;</span> <span class="pre">str</span></code> which returns the event string for the latest activity log entry whose timestamp is less than or equal to <code class="docutils literal notranslate"><span class="pre">dt</span></code>. The agent has an attribute <code class="docutils literal notranslate"><span class="pre">activity_log</span></code>, a dict mapping integer indices to dicts containing at least a <code class="docutils literal notranslate"><span class="pre">&quot;time&quot;</span></code> (ISO string) and <code class="docutils literal notranslate"><span class="pre">&quot;event&quot;</span></code> (str). Raise a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if no valid event exists before <code class="docutils literal notranslate"><span class="pre">dt</span></code>. The returned string must be a key in <code class="docutils literal notranslate"><span class="pre">_EVENT_STATE_MAP</span></code>; if it’s not, raise <code class="docutils literal notranslate"><span class="pre">KeyError</span></code>. This method is used by <code class="docutils literal notranslate"><span class="pre">infer_agent_states</span></code>, which assumes correctness and completeness of the log, and maps each agent to an unambiguous state. This enforces that state inference relies only on recognized events, with failure being explicit.</p>
+<p>note that I’ve disabled sandbox/infer_agent_states with NotImplementedError; but you should be re-writing to fix and then remove that line.</p>
+<p>note that this should be pulling from agent’s own activity log too.</p>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="prompt13_pandas_custom.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">prompt13 - Integrate .zero pandas custom accessor</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="prompt_15_prompt-agent-traceback-ritzy-call-7e649afc.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">prompt15 - Create Agent Traceback Method</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>
