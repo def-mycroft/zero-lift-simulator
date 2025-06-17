@@ -125,8 +125,9 @@ class Agent:
     def enter_queue(self, time: int, timestamp: str) -> None:
 # {{{
         """Record when the agent enters the queue."""
-        # TODO - codex: the entire phrase "start_wait" is ambigious. use 
+        # TODO - codex: the entire phrase "start_wait" is ambigious. use
         # less ambiguous language.
+        self.wait_start = time
         self.log_event("start_wait", time, timestamp)
 # }}}
     # Mark the ride complete and return wait time."""
