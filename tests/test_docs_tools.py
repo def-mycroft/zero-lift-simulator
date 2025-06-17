@@ -4,7 +4,11 @@ import re
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from zero_liftsim.docs_tools import new_doc, generate_docs_toc
+from zero_liftsim.docs_tools import (
+    new_doc,
+    generate_docs_toc,
+    generate_prompts_index,
+)
 from zero_liftsim.cli import build_parser
 
 
@@ -40,4 +44,17 @@ def test_generate_docs_toc_includes_all_prompts():
         numbers.append(num)
     assert numbers == sorted(numbers, reverse=True)
     assert len(prompt_lines) >= 10
+
+
+def test_generate_prompts_index(tmp_path):
+    docs = tmp_path / "docs"
+    target = tmp_path / "src" / "prompts"
+    docs.mkdir(parents=True)
+    (docs / "prompt1_a.md").write_text("#prompt\n", encoding="utf-8")
+    (docs / "prompt2_b.md").write_text("#prompt\n", encoding="utf-8")
+    generate_prompts_index(docs_dir=docs, target_dir=target)
+    assert (target / "prompt2_b.md").exists()
+    index_text = (target / "index.rst").read_text()
+    order = [line.strip() for line in index_text.splitlines() if line.startswith("   ")]
+    assert order == ["prompt2_b.md", "prompt1_a.md"]
 
