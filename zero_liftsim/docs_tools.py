@@ -116,7 +116,6 @@ def generate_prompts_index(*, docs_dir: Path, target_dir: Path) -> None:
         "================",
         "",
         ".. toctree::",
-        "   :maxdepth: 1",
         "",
     ]
     for path in prompt_paths:
