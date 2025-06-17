@@ -69,6 +69,7 @@ class Agent:
         self.board_time: int | None = None
         self.rides_completed: int = 0
         self.self_logging = self_logging
+        self.current_state = ''
         self.activity_log: dict[int, dict] = {}
         self.experience_rideloop = AgentRideLoopExperience()
         if logger is not None:
@@ -77,7 +78,6 @@ class Agent:
             )
             self.logger = logger
 # }}}
-
     # Record an event in :attr:`activity_log`.
     def log_event(
 # {{{
@@ -121,12 +121,12 @@ class Agent:
         self.activity_log[len(self.activity_log)] = record
 
 # }}}
-# {{{
     # """Record when the agent enters the queue."""
     def enter_queue(self, time: int, timestamp: str) -> None:
+# {{{
         """Record when the agent enters the queue."""
-
-        self.wait_start = time
+        # TODO - codex: the entire phrase "start_wait" is ambigious. use 
+        # less ambiguous language.
         self.log_event("start_wait", time, timestamp)
 # }}}
     # Mark the ride complete and return wait time."""
@@ -134,8 +134,26 @@ class Agent:
 # {{{
         self, time: int, timestamp: str, return_event_uuid: str = ""
     ) -> int:
-        """Mark the ride complete and return wait time."""
+        """Complete the agent's current ride and record experience data.
 
+        Marks the end of a ride cycle, updates ride counters, and logs a
+        'ride_complete' event. Calculates the wait time based on when the
+        agent entered the queue and resets relevant state fields.
+
+        Parameters
+        ----------
+        time : int
+            Simulation time at which the ride ends.
+        timestamp : str
+            ISO 8601-formatted real-time string.
+        return_event_uuid : str, optional
+            Identifier linking this ride completion to a prior event.
+
+        Returns
+        -------
+        int
+            Wait time in minutes from queue entry to ride completion.
+        """
         wait_start = self.wait_start if self.wait_start is not None else time
         wait_time = time - wait_start
         self.rides_completed += 1
@@ -153,8 +171,8 @@ class Agent:
 
 # }}}
     # Return the most recent event not after ``dt``.
-# {{{
     def get_latest_event(self, dt: datetime) -> str:
+# {{{
         """Return the most recent event not after ``dt``.
 
         Parameters
@@ -189,9 +207,9 @@ class Agent:
         return latest_event
 
 # }}}
-# {{{
     # Return a formatted summary for the given experience.
     def traceback_experience(self, experience_id: str) -> str:
+# {{{
         """Return a formatted summary for a specific agent experience.
 
         Retrieves the experience log matching the given ID and formats it
@@ -231,9 +249,9 @@ class Agent:
         raise KeyError(experience_id)
 
 # }}}
-# {{{
     # Return a formatted slice of the agent log for a given return event.
     def recent_agent_log_return_event_uuid(self, return_event_uuid):
+# {{{
         """Return a formatted slice of the agent log for a given return event.
 
         Finds the log entry matching the specified return event UUID and
@@ -261,27 +279,33 @@ class Agent:
                                    indent=4)
         return agent_log_str
 # }}}
-
+    # Given a time, get agent state"""
     def get_state(self, time):
+# {{{
         """Given a time, get agent state"""
         # TODO - if this needs to be exec cost optimized, can do a couple things
         # here 
         self.assert_possible_log_time(time)
         d = infer_agent_states(self, time)
         assert len(d) == 1
-        self.current_state = next(iter(d)) 
-
+        self.current_state = next(iter(d.values())) 
+        return self.current_state
+# }}}
+    # Raise exception if given time not within bounds of act log"""
     def assert_possible_log_time(self, time):
+# {{{
         """Raise exception if given time not within bounds of act log"""
         df = self.get_activity_log_df()
         msg = 'given time should be within limits'
         assert time >= df['time'].min() and time <= df['time'].max(), msg
-
+# }}}
     def get_activity_log_df(self):
+# {{{
         """Return dataframe version of activity log"""
         df = pd.DataFrame.from_dict(self.activity_log, orient='index')
         df['time'] = pd.to_datetime(df['time'])
         return df
+# }}}
 
     def __repr__(self) -> str:  # pragma: no cover - convenience
         return f"Agent({self.agent_id}) {self.agent_uuid_codename} {self.agent_uuid}"

@@ -54,6 +54,77 @@ xxx
 
 
 
+# 🧠 Anchor: pytest tossup – breakable-scratch (0/5)
+
+2025-06-16 20:43:00 -0600
+pytest throws an error and I'm just going to just ask codex to fix it. 
+[[prompt20_breakable_scratch-689c423e]]
+
+## Log 
+
+xxx 
+
+## Checklist
+
+%% REGION %% 
+- [x] **Write the Prompt**  
+  _What does this code need to do?_  
+  `...describe the target behavior, interface, or bug...`
+
+- [x] **Log the Prompt to `docs/`**  
+  _Where is the long-term context?_  
+  `promptX_name.md` → codename: `[codename hash]`
+
+- [x] **Describe the Purpose**  
+  _Why am I doing this?_  
+  `One sentence: This enables/clarifies/supports...`
+
+- [ ] **Execute the Change**  
+  _What will I edit, run, or generate?_  
+  `...brief note on the script/module/test touched...`
+
+- [ ] **Return Point**  
+  _Where do I pick up next?_  
+  `Next step is to... / Pending: ... / Waiting on: ...`
+%% ENDREGION %%
+
+
+# 🧠 Anchor: chatbot log tests – hellish-point (0/5)
+
+2025-06-16 20:22:27 -0600
+research way to exploit chatbot to test validity of simulation samples. possibly with API, or maybe that will likely be required. 
+hellish-point-7ff2842e
+
+## Log 
+
+xxx 
+
+## Checklist
+
+%% REGION %% 
+- [ ] **Write the Prompt**  
+  _What does this code need to do?_  
+  `...describe the target behavior, interface, or bug...`
+
+- [ ] **Log the Prompt to `docs/`**  
+  _Where is the long-term context?_  
+  `promptX_name.md` → codename: `[codename hash]`
+
+- [ ] **Describe the Purpose**  
+  _Why am I doing this?_  
+  `One sentence: This enables/clarifies/supports...`
+
+- [ ] **Execute the Change**  
+  _What will I edit, run, or generate?_  
+  `...brief note on the script/module/test touched...`
+
+- [ ] **Return Point**  
+  _Where do I pick up next?_  
+  `Next step is to... / Pending: ... / Waiting on: ...`
+%% ENDREGION %%
+
+
+
 # 🧠 Anchor: rename start_wait – hanging-silly (3/5)
 
 2025-06-15 12:07:59 -0600
@@ -80,7 +151,7 @@ It has now been renamed to ``enter_queue``.
   _Why am I doing this?_  
   `One sentence: This enables/clarifies/supports...`
 
-- [ ] **Execute the Change**  
+- [x] **Execute the Change**  
   _What will I edit, run, or generate?_  
   `...brief note on the script/module/test touched...`
 
