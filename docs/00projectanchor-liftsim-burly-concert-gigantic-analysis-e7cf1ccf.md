@@ -54,7 +54,7 @@ xxx
 
 
 
-# 🧠 Anchor: pytest tossup – breakable-scratch (0/5)
+# 🧠 Anchor: pytest tossup – breakable-scratch (5/5)
 
 2025-06-16 20:43:00 -0600
 pytest throws an error and I'm just going to just ask codex to fix it. 
@@ -62,7 +62,8 @@ pytest throws an error and I'm just going to just ask codex to fix it.
 
 ## Log 
 
-xxx 
+2025-06-16 20:56:16 -0600
+passted test 
 
 ## Checklist
 
@@ -79,11 +80,11 @@ xxx
   _Why am I doing this?_  
   `One sentence: This enables/clarifies/supports...`
 
-- [ ] **Execute the Change**  
+- [x] **Execute the Change**  
   _What will I edit, run, or generate?_  
   `...brief note on the script/module/test touched...`
 
-- [ ] **Return Point**  
+- [x] **Return Point**  
   _Where do I pick up next?_  
   `Next step is to... / Pending: ... / Waiting on: ...`
 %% ENDREGION %%
@@ -125,7 +126,7 @@ xxx
 
 
 
-# 🧠 Anchor: rename start_wait – hanging-silly (3/5)
+# 🧠 Anchor: rename start_wait – hanging-silly (5/5)
 
 2025-06-15 12:07:59 -0600
 func `Agent.start_wait` has poor naming. this should be named something more substantial and understandable, where can easily understand "okay agent has now entered the start of the line".
@@ -155,7 +156,7 @@ It has now been renamed to ``enter_queue``.
   _What will I edit, run, or generate?_  
   `...brief note on the script/module/test touched...`
 
-- [ ] **Return Point**  
+- [x] **Return Point**  
   _Where do I pick up next?_  
   `Next step is to... / Pending: ... / Waiting on: ...`
 %% ENDREGION %%
