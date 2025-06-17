@@ -67,40 +67,6 @@ xxx
 [[prompt21_wary-bitter-1b487118]]
 
 
-# 🧠 Anchor: pytest tossup –  (0/5)
-
-2025-06-17 14:18:07 -0600
-pytest fail. sent log 
-
-## Log 
-
-xxx 
-
-## Checklist
-
-%% REGION %% 
-- [ ] **Write the Prompt**  
-  _What does this code need to do?_  
-  `...describe the target behavior, interface, or bug...`
-
-- [ ] **Log the Prompt to `docs/`**  
-  _Where is the long-term context?_  
-  `promptX_name.md` → codename: `[codename hash]`
-
-- [ ] **Describe the Purpose**  
-  _Why am I doing this?_  
-  `One sentence: This enables/clarifies/supports...`
-
-- [ ] **Execute the Change**  
-  _What will I edit, run, or generate?_  
-  `...brief note on the script/module/test touched...`
-
-- [ ] **Return Point**  
-  _Where do I pick up next?_  
-  `Next step is to... / Pending: ... / Waiting on: ...`
-%% ENDREGION %%
-
-
 
 # 🧠 Anchor: chatbot log tests – hellish-point (0/5)
 

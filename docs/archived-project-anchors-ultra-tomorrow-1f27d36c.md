@@ -5,6 +5,41 @@ random codename: ultra-tomorrow 1f27d36c
 ***
 
 
+# 🧠 Anchor: pytest tossup –  (5/5)
+**fixed** 
+
+2025-06-17 14:18:07 -0600
+pytest fail. sent log 
+
+## Log 
+
+xxx 
+
+## Checklist
+
+%% REGION %% 
+- [ ] **Write the Prompt**  
+  _What does this code need to do?_  
+  `...describe the target behavior, interface, or bug...`
+
+- [ ] **Log the Prompt to `docs/`**  
+  _Where is the long-term context?_  
+  `promptX_name.md` → codename: `[codename hash]`
+
+- [ ] **Describe the Purpose**  
+  _Why am I doing this?_  
+  `One sentence: This enables/clarifies/supports...`
+
+- [ ] **Execute the Change**  
+  _What will I edit, run, or generate?_  
+  `...brief note on the script/module/test touched...`
+
+- [ ] **Return Point**  
+  _Where do I pick up next?_  
+  `Next step is to... / Pending: ... / Waiting on: ...`
+%% ENDREGION %%
+
+
 # 🧠 Anchor: add prompt section to docs – pink-row 036e77ca (5/5)
 **seems to be working. have a pytest fail now** 
 2025-06-17 13:37:13 -0600
