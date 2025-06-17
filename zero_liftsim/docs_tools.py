@@ -9,7 +9,12 @@ this package.
 from __future__ import annotations
 
 from pathlib import Path
+import shutil
 import re
+from typing import Optional
+
+from sphinx.cmd.build import main as sphinx_build
+from sphinx.ext.apidoc import main as sphinx_apidoc
 
 from . import git_tools
 
@@ -19,7 +24,10 @@ from .helpers import codename, load_asset_template
 _TEMPLATE_NAME = "new_doc_template.md.j2"
 
 # default documentation directory relative to the package root
-_DEFAULT_DOCS_DIR = Path(__file__).resolve().parents[1] / "docs"
+_ROOT = Path(__file__).resolve().parents[1]
+_DEFAULT_DOCS_DIR = _ROOT / "docs"
+_DEFAULT_DOCS_SRC = _ROOT / "docs-src"
+_DEFAULT_DOCS_SITE = _ROOT / "docs-site"
 
 
 def _load_template() -> str:
@@ -158,9 +166,37 @@ def analyze_docs(*, docs_dir: Path | None = None) -> None:
         git_tools.append_git_info(path)
 
 
+def build_docs(
+    *,
+    src_dir: Optional[Path] = None,
+    site_dir: Optional[Path] = None,
+    docs_dir: Optional[Path] = None,
+) -> None:
+    """Build the Sphinx documentation."""
+    src_dir = src_dir or _DEFAULT_DOCS_SRC
+    site_dir = site_dir or _DEFAULT_DOCS_SITE
+    docs_dir = docs_dir or _DEFAULT_DOCS_DIR
+
+    wiki_dir = src_dir / "wiki"
+    if wiki_dir.exists():
+        shutil.rmtree(wiki_dir)
+    wiki_dir.mkdir(parents=True, exist_ok=True)
+    for md in docs_dir.glob("*.md"):
+        shutil.copy2(md, wiki_dir / md.name)
+
+    api_dir = src_dir / "api"
+    api_dir.mkdir(parents=True, exist_ok=True)
+    sphinx_apidoc(["-o", str(api_dir), str(_ROOT / "zero_liftsim")])
+
+    if site_dir.exists():
+        shutil.rmtree(site_dir)
+    sphinx_build(["-b", "html", str(src_dir), str(site_dir)])
+
+
 __all__ = [
     "new_doc",
     "generate_docs_toc",
     "update_toc",
     "analyze_docs",
+    "build_docs",
 ]

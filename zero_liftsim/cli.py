@@ -68,6 +68,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Create a blank documentation stub in docs/.",
     )
     dev.add_argument(
+        "--build-docs",
+        action="store_true",
+        help="Build Sphinx documentation.",
+    )
+    dev.add_argument(
         "--docstring-prompt", "-dp",
         action="store_true",
         help="prompt for updating docstring. ",
@@ -121,6 +126,9 @@ def run(args) -> None:
         from . import docs_tools
         docs_tools.new_doc()
         docs_tools.update_toc()
+    if getattr(args, "command", None) == "dev" and args.build_docs:
+        from . import docs_tools
+        docs_tools.build_docs()
 
 
 if __name__ == "__main__":  # pragma: no cover - manual invocation

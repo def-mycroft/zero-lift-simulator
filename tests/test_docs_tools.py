@@ -14,6 +14,12 @@ def test_cli_parses_new_doc():
     assert args.new_doc
 
 
+def test_cli_parses_build_docs():
+    parser = build_parser()
+    args = parser.parse_args(["dev", "--build-docs"])
+    assert args.build_docs
+
+
 def test_new_doc_creates_file(tmp_path):
     docs = tmp_path / "docs"
     docs.mkdir()
@@ -34,3 +40,4 @@ def test_generate_docs_toc_includes_all_prompts():
         numbers.append(num)
     assert numbers == sorted(numbers, reverse=True)
     assert len(prompt_lines) >= 10
+
