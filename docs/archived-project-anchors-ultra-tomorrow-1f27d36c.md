@@ -236,5 +236,5 @@ I moved a function out of sandbox and into an agent method. update test
 
 # 🧠 Anchor: Agent Log – verdant-variety 405ed937 (x/5)
 
-[[unnamed-cowardly-leather-d8f8b337.md]]
+[[anchor-cowardly-leather-d8f8b337]]
 

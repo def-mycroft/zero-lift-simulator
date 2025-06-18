@@ -1,5 +1,4 @@
 """Simulation engine for Zero Lift."""
-
 from __future__ import annotations
 
 import heapq

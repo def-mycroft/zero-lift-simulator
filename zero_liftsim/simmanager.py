@@ -180,7 +180,6 @@ class SimulationManager:
 
         return data
 
-
     def subset_agent_logs(self, agent):
         """Return log entries for ``agent`` as a DataFrame."""
         self.retrieve_data()

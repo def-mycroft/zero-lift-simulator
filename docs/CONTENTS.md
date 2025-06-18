@@ -21,6 +21,7 @@
 - [Tutorial - Infer Agent State](partial-kernel-tutorial-infer-agent-states.md)
 
 ## Prompt Articles
+- [prompt23 Replicable Simulation Outcomes nappy-shelter 969bdb49](prompt23_nappy-shelter-969bdb49.md)
 - [prompt22  add prompt section to docs dreary-watch b68eecea](prompt22_dreary-watch-b68eecea.md)
 - [prompt21 traceback sampling error  wary-bitter 1b487118](prompt21_wary-bitter-1b487118.md)
 - [prompt20 pytest tossup breakable-scratch 689c423e](prompt20_breakable_scratch-689c423e.md)
@@ -48,6 +49,8 @@
 ## Articles
 - [Agent Experience](agent-experience.md)
 - [Running the Alpha Simulation](alpha_sim_usage.md)
+- [00 Analyze Examples gruesome-church 737d4eba](analyze-examples-gruesome-church-737d4eba.md)
+- [🧠 Anchor: Agent Log – verdant-variety 405ed937 (x/5)](anchor-cowardly-leather-d8f8b337.md)
 - [archived project anchors ultra-tomorrow 1f27d36c](archived-project-anchors-ultra-tomorrow-1f27d36c.md)
 - [Bugfix - Add Dependencies](bugfix_add_deps.md)
 - [Bugfix - Agent state circular import](bugfix_agent_state_circular_import.md)
@@ -66,10 +69,8 @@
 - [Simulation Motivations](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
 - [Running Tests Using python -m pytest](running_tests.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
-- [🧠 Anchor: Agent Log – verdant-variety 405ed937 (x/5)](unnamed-cowardly-leather-d8f8b337.md)
 - [🧠 Anchor: bugfix test – grandiose-secretary 10554173 (5/5)](unnamed-crooked-revenue-67c6c0ef.md)
 - [unnamed dapper-leading f5ed905a](unnamed-dapper-leading-f5ed905a.md)
-- [00 Analyze Examples gruesome-church 737d4eba](analyze-examples-gruesome-church-737d4eba.md)
 - [unnamed guttural-place 5c711918](unnamed-guttural-place-5c711918.md)
 - [unnamed hellish-point 7ff2842e](unnamed-hellish-point-7ff2842e.md)
 - [unnamed lyrical-development efd3227f](unnamed-lyrical-development-efd3227f.md)
