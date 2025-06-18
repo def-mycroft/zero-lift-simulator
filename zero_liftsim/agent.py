@@ -298,7 +298,7 @@ class Agent:
         """Raise exception if given time not within bounds of act log"""
         df = self.get_activity_log_df()
         msg = 'given time should be within limits'
-        assert time >= df['time'].min() and time <= df['time'].max(), msg
+        assert time >= df['time_offset'].min() and time <= df['time_offset'].max(), msg
 # }}}
 
     def get_rideloop_experience_log_df(self):
