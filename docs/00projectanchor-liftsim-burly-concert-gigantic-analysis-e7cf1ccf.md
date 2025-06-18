@@ -71,16 +71,16 @@ xxx
 
 
 
-# 🧠 Anchor: fix outcomes – nappy-shelter-969bdb49 (3/5)
+# 🧠 Anchor: add seed option for deterministic simulation – nappy-shelter-969bdb49 (3/5)
 
 2025-06-17 22:04:17 -0600
 given a seed, set the simulation outcome so that it can be perfectly replicated. 
 [[prompt23_nappy-shelter-969bdb49]]
 
 
-
 ## Log 
 
+2025-06-18 07:53:40 -0600 - tests failed, had codex fixing noww 
 2025-06-17 22:03:52 -0600 - [[prompt23_nappy-shelter-969bdb49]]
 
 ## Checklist
