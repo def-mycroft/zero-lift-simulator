@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import pandas as pd
 from pathlib import Path
 from datetime import datetime, timedelta
 
@@ -132,6 +133,11 @@ class SimulationManager:
                 total_wait += info["time_spent_in_queue"]
         avg_wait = total_wait / total_rides if total_rides > 0 else 0
         return {"total_rides": total_rides, "average_wait": avg_wait, "agents": self.agents}
+
+    def sample_agent(self):
+        """Get a simple random sample of agents"""
+        a = pd.Series(self.agents).sample().iloc[0]
+        return a 
 
     def archive_agent_rideloop_experience(self, directory: str | Path) -> None:
         """Write each agent's ride loop log to ``directory`` in JSON format."""

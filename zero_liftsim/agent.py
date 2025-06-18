@@ -300,6 +300,17 @@ class Agent:
         msg = 'given time should be within limits'
         assert time >= df['time'].min() and time <= df['time'].max(), msg
 # }}}
+
+    def get_rideloop_experience_log_df(self):
+# {{{
+        """Return dataframe version of activity log"""
+        df = (pd.DataFrame.from_dict(self.experience_rideloop.log, orient='index')
+                .reset_index().rename(columns={"index":"time"}))
+        df['time'] = pd.to_datetime(df['time'])
+        return df
+# }}}
+
+# {{{
     def get_activity_log_df(self):
 # {{{
         """Return dataframe version of activity log"""

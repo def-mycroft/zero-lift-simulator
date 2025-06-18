@@ -1,14 +1,5 @@
 # Table of Contents
 
-```meta-bind-button
-style: primary
-label: 道 
-action:
-  type: open
-  link: "[[00projectanchor-liftsim-burly-concert-gigantic-analysis-e7cf1ccf]]"
-```
-
-
 ## Main Notes
 - [00 Project Action Anchor](00projectanchor-liftsim-burly-concert-gigantic-analysis-e7cf1ccf.md)
 - [How to Add Wiki Articles](main_notes_adding_wiki_articles.md)
@@ -78,6 +69,7 @@ action:
 - [🧠 Anchor: Agent Log – verdant-variety 405ed937 (x/5)](unnamed-cowardly-leather-d8f8b337.md)
 - [🧠 Anchor: bugfix test – grandiose-secretary 10554173 (5/5)](unnamed-crooked-revenue-67c6c0ef.md)
 - [unnamed dapper-leading f5ed905a](unnamed-dapper-leading-f5ed905a.md)
+- [00 Analyze Examples gruesome-church 737d4eba](unnamed-gruesome-church-737d4eba.md)
 - [unnamed guttural-place 5c711918](unnamed-guttural-place-5c711918.md)
 - [unnamed hellish-point 7ff2842e](unnamed-hellish-point-7ff2842e.md)
 - [unnamed lyrical-development efd3227f](unnamed-lyrical-development-efd3227f.md)

@@ -17,6 +17,8 @@ action:
 
 ***
 
+#todo #important why are queue times ints? aauugh
+
 
 # Template (0/5)
 
@@ -61,6 +63,7 @@ xxx
 
 *** 
 
+#todo #dependency going to need to implement sim archival (I think this will be necessary for tracing agent bhv)
 #todo the docs here are working really well, should be able to make this into a module which can work for any codebase built on cool-jacket. 
 #todo not sure if this needs to be updated or not 
 
@@ -76,7 +79,12 @@ hellish-point-7ff2842e
 
 ## Log 
 
-xxx 
+2025-06-17 20:09:48 -0600 - [[unnamed-gruesome-church-737d4eba]]
+
+
+2025-06-17 19:03:08 -0600 - going to need to implement sim archival 
+
+2025-06-17 15:52:17 -0600 - picking this back up again. 
 
 ## Checklist
 
