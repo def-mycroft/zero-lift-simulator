@@ -49,6 +49,29 @@ def codename():
     return {'uuid':i, 'name':cd(i)}
 
 
+def seed_from_uuid(value: str) -> int:
+    """Return a deterministic integer seed derived from ``value``.
+
+    Parameters
+    ----------
+    value:
+        UUID string used to derive the seed.
+
+    Returns
+    -------
+    int
+        Integer representation of the UUID truncated to 32 bits.
+    """
+    from uuid import UUID
+
+    try:
+        uid = UUID(value)
+    except Exception as exc:  # pragma: no cover - defensive guard
+        raise ValueError("invalid uuid string") from exc
+
+    return uid.int & 0xFFFFFFFF
+
+
 def load_asset_template(name: str):
     """Load a jinja2 template bundled in ``assets``.
 
@@ -113,6 +136,7 @@ def base_config(**overrides: Any) -> Dict[str, Any]:
             "run": _defaults_from_callable(SimulationManager.run),
         },
         "Simulation": {
+            "__init__": _defaults_from_callable(Simulation.__init__),
             "run": _defaults_from_callable(Simulation.run),
         },
         "Lift": _defaults_from_callable(Lift.__init__),

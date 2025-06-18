@@ -12,6 +12,7 @@ from zero_liftsim.agent import Agent
 from zero_liftsim.events import ArrivalEvent, BoardingEvent, ReturnEvent
 from zero_liftsim.lift import Lift
 from zero_liftsim.logging import Logger
+from zero_liftsim.helpers import seed_from_uuid
 
 
 class SimulationManager:
@@ -54,6 +55,7 @@ class SimulationManager:
 
         self._run_cfg = config.get("SimulationManager", {}).get("run", {})
         self._sim_cfg = config.get("Simulation", {}).get("run", {})
+        self._sim_init_cfg = config.get("Simulation", {}).get("__init__", {})
         self._lift_cfg = config.get("Lift", {})
         self._agent_cfg = config.get("Agent", {}).get("__init__", {})
 
@@ -64,7 +66,7 @@ class SimulationManager:
         self.agent_exp_log_data = {}
 
     def _setup(self) -> None:
-        self.sim = Simulation()
+        self.sim = Simulation(**self._sim_init_cfg)
         num_chairs = self._lift_cfg.get("num_chairs", 50)
         self.lift = Lift(self.lift_capacity, num_chairs)
         for attr in ("ride_mean", "ride_sd", "traverse_mean", "traverse_sd"):
@@ -124,6 +126,7 @@ class SimulationManager:
             logger=self.logger,
             full_agent_logging=self._sim_cfg.get("full_agent_logging", False),
             start_datetime=self.start_datetime,
+            random_seed=seed_from_uuid(self.sim.simulation_uuid),
         )
         total_wait = 0.0
         total_rides = 0
