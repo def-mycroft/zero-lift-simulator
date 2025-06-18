@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import heapq
 from uuid import uuid4 as uuid
+import random
 from datetime import datetime, timedelta
 
 try:
@@ -20,13 +21,13 @@ from .events import Event, ArrivalEvent, BoardingEvent, ReturnEvent
 class Simulation:
     """Discrete-event simulation engine."""
 
-    def __init__(self) -> None:
+    def __init__(self, simulation_uuid: str | None = None) -> None:
         self.current_time: int = 0
         self._counter: int = 0
         self._queue: list[tuple[int, int, Event]] = []
         self._agent_logger: Logger | None = None
         self._agent_records: list[dict] = []
-        self.simulation_uuid = str(uuid())
+        self.simulation_uuid = simulation_uuid or str(uuid())
         self.simulation_codename = codenamize(self.simulation_uuid)
         self.stop_time: int | None = None
 
@@ -42,9 +43,12 @@ class Simulation:
         *,
         full_agent_logging: bool = False,
         start_datetime: datetime = datetime(2025, 3, 12, 9, 0, 0),
+        random_seed: int | None = None,
     ) -> None:
         """Execute scheduled events."""
         self.start_datetime = start_datetime
+        if random_seed is not None:
+            random.seed(random_seed)
         self.stop_time = stop_time
         if full_agent_logging:
             self._agent_logger = Logger("agent.log")
