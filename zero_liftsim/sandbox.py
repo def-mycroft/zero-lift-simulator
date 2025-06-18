@@ -76,5 +76,6 @@ def get_sample():
     lines.append(f"\n{e_params}\n")
 
     return {'keyParameters':keyParameters, 'lines':lines,
-            'printme':'\n'.join(lines)}
+            'printme':'\n'.join(lines), 'agent_uuid':agent.agent_uuid, 
+            'agent_state':agent.get_state(INDEX_TIME)}
 

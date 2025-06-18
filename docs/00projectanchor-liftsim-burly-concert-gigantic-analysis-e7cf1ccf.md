@@ -79,7 +79,7 @@ hellish-point-7ff2842e
 
 ## Log 
 
-2025-06-17 20:09:48 -0600 - [[unnamed-gruesome-church-737d4eba]]
+2025-06-17 20:09:48 -0600 - [[analyze-examples-gruesome-church-737d4eba]]
 
 
 2025-06-17 19:03:08 -0600 - going to need to implement sim archival 
