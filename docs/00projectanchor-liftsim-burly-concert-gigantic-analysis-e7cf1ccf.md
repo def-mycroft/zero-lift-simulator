@@ -71,9 +71,10 @@ xxx
 
 
 
-# 🧠 Anchor: fix outcomes – nappy-shelter-969bdb49 (0/5)
+# 🧠 Anchor: fix outcomes – nappy-shelter-969bdb49 (2/5)
 
 2025-06-17 22:04:17 -0600
+given a seed, set the simulation outcome so that it can be perfectly replicated. 
 [[prompt23_nappy-shelter-969bdb49]]
 
 
@@ -89,7 +90,7 @@ xxx
   _What does this code need to do?_  
   `...describe the target behavior, interface, or bug...`
 
-- [ ] **Log the Prompt to `docs/`**  
+- [x] **Log the Prompt to `docs/`**  
   _Where is the long-term context?_  
   `promptX_name.md` → codename: `[codename hash]`
 
