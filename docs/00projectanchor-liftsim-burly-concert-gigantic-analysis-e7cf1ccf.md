@@ -71,7 +71,7 @@ xxx
 
 
 
-# 🧠 Anchor: fix outcomes – nappy-shelter-969bdb49 (2/5)
+# 🧠 Anchor: fix outcomes – nappy-shelter-969bdb49 (3/5)
 
 2025-06-17 22:04:17 -0600
 given a seed, set the simulation outcome so that it can be perfectly replicated. 
@@ -94,7 +94,7 @@ given a seed, set the simulation outcome so that it can be perfectly replicated.
   _Where is the long-term context?_  
   `promptX_name.md` → codename: `[codename hash]`
 
-- [ ] **Describe the Purpose**  
+- [x] **Describe the Purpose**  
   _Why am I doing this?_  
   `One sentence: This enables/clarifies/supports...`
 
