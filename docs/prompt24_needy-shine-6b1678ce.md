@@ -2,6 +2,7 @@
 
 random codename: needy-shine 6b1678ce
 
+#prompt 
 ***
 
 note: this is redo of [[prompt23_nappy-shelter-969bdb49]], it didn't really work right so going to do more prompt crafting. 
