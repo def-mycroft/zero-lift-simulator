@@ -15,6 +15,7 @@
 - [codex: Update the Table of Contents](main_notes_for_codex_update_toc.md)
 - [Initial Develop Description - Zero Lift Simulator](main_notes_implementation.md)
 - [Using SimulationManager](main_notes_simulation_manager_tutorial.md)
+- [Scikit-Learn Estimator Structure](scikit_learn_estimator_structure.md)
 - [Styleguide for Wiki Articles](main_notes_styleguide_wiki_articles.md)
 - [Wiki Article Creation Instructions for Codex](main_notes_wiki_article_creation_for_codex.md)
 - [Wiki Article Template - Article Title Here](main_notes_wiki_article_template.md)

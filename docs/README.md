@@ -18,6 +18,7 @@ Welcome to the project wiki. Navigate using the links below:
 - [Prompt4 Alpha Simulation and Logging](prompt4_implement_alpha_sim.md)
 - [Checkpoint - Primary Classes Implemented - pink-walk](main_notes_checkpoint_prim_classes.md)
 - [Running the Alpha Simulation](alpha_sim_usage.md)
+- [Scikit-Learn Estimator Structure](scikit_learn_estimator_structure.md)
 
 - [Project Questions](project_questions_orange.md)
 - [Sandbox Pytest Exclusion](aberrant-prize-47d02ecb.md)
