@@ -135,7 +135,36 @@ class SimulationManager:
             for info in agent.experience_rideloop.log.values():
                 total_wait += info["time_spent_in_queue"]
         avg_wait = total_wait / total_rides if total_rides > 0 else 0
+
         return {"total_rides": total_rides, "average_wait": avg_wait, "agents": self.agents}
+
+    # sklearn-style API --------------------------------------------------
+    def fit(
+        self,
+        *,
+        end_datetime: datetime | None = None,
+        runtime_minutes: int | None = None,
+    ) -> "SimulationManager":
+        """Run the simulation and store results on the instance.
+
+        Returns
+        -------
+        SimulationManager
+            ``self`` for method chaining.
+        """
+
+        self.results_ = self.run(
+            end_datetime=end_datetime,
+            runtime_minutes=runtime_minutes,
+        )
+        return self
+
+    def predict(self, X=None):
+        """Return results from the most recent :meth:`fit` call."""
+
+        if not hasattr(self, "results_"):
+            raise RuntimeError("SimulationManager.fit must be called before predict")
+        return self.results_
 
     def sample_agent(self):
         """Get a simple random sample of agents"""
