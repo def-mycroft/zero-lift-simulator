@@ -6,8 +6,15 @@ except ModuleNotFoundError:  # pragma: no cover - fallback for environments with
         """Simplistic fallback that returns the first eight characters."""
         return value[:8]
 
-from zero_helpers.imports import *  
-from zero_helpers.main import string_to_clipboard
+try:
+    from zero_helpers.imports import *  # type: ignore
+    from zero_helpers.main import string_to_clipboard
+except ModuleNotFoundError:  # pragma: no cover - optional dependency
+    from os.path import join, exists, expanduser
+
+    def string_to_clipboard(text: str) -> None:
+        """Fallback no-op if ``zero_helpers`` is unavailable."""
+        return None
 
 from uuid import uuid4 as uuid
 from pathlib import Path

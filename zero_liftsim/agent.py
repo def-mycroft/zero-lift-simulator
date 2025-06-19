@@ -72,6 +72,7 @@ class Agent:
         self.current_state = ''
         self.activity_log: dict[int, dict] = {}
         self.experience_rideloop = AgentRideLoopExperience()
+        self._start_datetime: datetime | None = None
         if logger is not None:
             logger.devlog(
                 f"init agent {self.agent_uuid} {self.agent_uuid_codename}"
@@ -171,6 +172,18 @@ class Agent:
         return wait_time
 
 # }}}
+    # ------------------------------------------------------------------
+    def _get_start_datetime(self) -> datetime:
+        """Infer the simulation's start datetime from ``activity_log``."""
+        if self._start_datetime is None:
+            if not self.activity_log:
+                raise ValueError("agent has no activity log")
+            first = next(iter(self.activity_log.values()))
+            ts = datetime.fromisoformat(first["time"])
+            offset = first.get("time_offset", 0)
+            self._start_datetime = ts - timedelta(minutes=offset)
+        return self._start_datetime
+
     # Return the most recent event not after ``dt``.
     def get_latest_event(self, dt: datetime) -> str:
 # {{{
@@ -287,9 +300,10 @@ class Agent:
         # TODO - if this needs to be exec cost optimized, can do a couple things
         # here 
         self.assert_possible_log_time(time)
-        d = infer_agent_states(self, time)
+        dt = self._get_start_datetime() + timedelta(minutes=time)
+        d = infer_agent_states(self, dt)
         assert len(d) == 1
-        self.current_state = next(iter(d.values())) 
+        self.current_state = next(iter(d.values()))
         return self.current_state
 # }}}
     # Raise exception if given time not within bounds of act log"""
