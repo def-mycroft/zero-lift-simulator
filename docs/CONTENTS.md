@@ -15,13 +15,13 @@
 - [codex: Update the Table of Contents](main_notes_for_codex_update_toc.md)
 - [Initial Develop Description - Zero Lift Simulator](main_notes_implementation.md)
 - [Using SimulationManager](main_notes_simulation_manager_tutorial.md)
-- [Scikit-Learn Estimator Structure](scikit_learn_estimator_structure.md)
 - [Styleguide for Wiki Articles](main_notes_styleguide_wiki_articles.md)
 - [Wiki Article Creation Instructions for Codex](main_notes_wiki_article_creation_for_codex.md)
 - [Wiki Article Template - Article Title Here](main_notes_wiki_article_template.md)
 - [Tutorial - Infer Agent State](partial-kernel-tutorial-infer-agent-states.md)
 
 ## Prompt Articles
+- [prompt24 needy-shine 6b1678ce](prompt24_needy-shine-6b1678ce.md)
 - [prompt23 Replicable Simulation Outcomes nappy-shelter 969bdb49](prompt23_nappy-shelter-969bdb49.md)
 - [prompt22  add prompt section to docs dreary-watch b68eecea](prompt22_dreary-watch-b68eecea.md)
 - [prompt21 traceback sampling error  wary-bitter 1b487118](prompt21_wary-bitter-1b487118.md)
@@ -48,6 +48,7 @@
 - [prompt0 - simulation class](prompt0_dev_init_class.md)
 
 ## Articles
+- [Sandbox Pytest Exclusion](aberrant-prize-47d02ecb.md)
 - [Agent Experience](agent-experience.md)
 - [Running the Alpha Simulation](alpha_sim_usage.md)
 - [00 Analyze Examples gruesome-church 737d4eba](analyze-examples-gruesome-church-737d4eba.md)
@@ -69,13 +70,12 @@
 - [Project Questions stingy-orange - answered](project_questions_orange.md)
 - [Simulation Motivations](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
 - [Running Tests Using python -m pytest](running_tests.md)
+- [scikit_learn_estimator_structure](scikit_learn_estimator_structure.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
 - [🧠 Anchor: bugfix test – grandiose-secretary 10554173 (5/5)](unnamed-crooked-revenue-67c6c0ef.md)
 - [unnamed dapper-leading f5ed905a](unnamed-dapper-leading-f5ed905a.md)
 - [unnamed guttural-place 5c711918](unnamed-guttural-place-5c711918.md)
 - [unnamed hellish-point 7ff2842e](unnamed-hellish-point-7ff2842e.md)
 - [unnamed lyrical-development efd3227f](unnamed-lyrical-development-efd3227f.md)
-- [unnamed needy-shine 6b1678ce](prompt24_needy-shine-6b1678ce.md)
 - [unnamed steady-exit e6ebfe98](unnamed-steady-exit-e6ebfe98.md)
 - [Updating Dependencies](updating_dependencies.md)
-- [Sandbox Pytest Exclusion](aberrant-prize-47d02ecb.md)
