@@ -10,7 +10,6 @@
 - [Project Rules/Conventions for Codex](main_notes_codex_must_read_this_rules_for_codex.md)
 - [Development Reference for Prompts](main_notes_development_ref_for_prompts.md)
 - [Devplan - Current](main_notes_devplan.md)
-- [Docstring Style Guide](main_notes_docstring_style_guide.md)
 - [LiftSim Flowchart](main_notes_flowchart.md)
 - [codex: Update the Table of Contents](main_notes_for_codex_update_toc.md)
 - [Initial Develop Description - Zero Lift Simulator](main_notes_implementation.md)
@@ -21,6 +20,7 @@
 - [Tutorial - Infer Agent State](partial-kernel-tutorial-infer-agent-states.md)
 
 ## Prompt Articles
+- [prompt25 Redo seed state again - rapid-reading 3066babf](prompt25_rapid-reading-3066babf.md)
 - [prompt24 needy-shine 6b1678ce](prompt24_needy-shine-6b1678ce.md)
 - [prompt23 Replicable Simulation Outcomes nappy-shelter 969bdb49](prompt23_nappy-shelter-969bdb49.md)
 - [prompt22  add prompt section to docs dreary-watch b68eecea](prompt22_dreary-watch-b68eecea.md)
@@ -46,7 +46,6 @@
 - [prompt2 - event classes](prompt2_event_classes.md)
 - [prompt1 - lift class](prompt1_implement_lift.md)
 - [prompt0 - simulation class](prompt0_dev_init_class.md)
-- [Redo seed state again - rapid-reading 3066babf](prompt25_rapid-reading-3066babf.md)
 
 ## Articles
 - [Sandbox Pytest Exclusion](aberrant-prize-47d02ecb.md)
@@ -69,6 +68,7 @@
 - [Git Tools](git-tools.md)
 - [Investigating Wait Time with Many Chairs](high_wait_analysis.md)
 - [Simulation Modeling Book Notes](law_simulation_book.md)
+- [w](main_notes_docstring_style_guide.md)
 - [Project Questions stingy-orange - answered](project_questions_orange.md)
 - [Simulation Motivations](purpose-of-simulation-voice-memo-thankful-examination-e38a3737.md)
 - [Running Tests Using python -m pytest](running_tests.md)
@@ -76,6 +76,7 @@
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
 - [🧠 Anchor: bugfix test – grandiose-secretary 10554173 (5/5)](unnamed-crooked-revenue-67c6c0ef.md)
 - [unnamed dapper-leading f5ed905a](unnamed-dapper-leading-f5ed905a.md)
+- [unnamed good-subject 76ac56de](tutorial-simulation-replication-good-subject-76ac56de.md)
 - [unnamed guttural-place 5c711918](unnamed-guttural-place-5c711918.md)
 - [unnamed hellish-point 7ff2842e](unnamed-hellish-point-7ff2842e.md)
 - [unnamed lyrical-development efd3227f](unnamed-lyrical-development-efd3227f.md)

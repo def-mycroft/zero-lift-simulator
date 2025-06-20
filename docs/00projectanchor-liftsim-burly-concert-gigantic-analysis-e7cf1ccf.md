@@ -71,27 +71,29 @@ xxx
 
 
 
-# 🧠 Anchor: xxx – [description] (0/5)
+# 🧠 Anchor: reprod tutorial - good-subject (1/5)
 
 2025-06-20 13:12:35 -0600
-idk what to do 
+make [[tutorial-simulation-replication-good-subject-76ac56de]]
+[task](https://chatgpt.com/codex/tasks/task_e_6855b4e458b8832382999d0f000babf3)
+
 
 ## Log 
 
-xxx 
+2025-06-20 13:22:22 -0600
 
 ## Checklist
 
 %% REGION %% 
-- [ ] **Write the Prompt**  
+- [x] **Write the Prompt**  
   _What does this code need to do?_  
   `...describe the target behavior, interface, or bug...`
 
-- [ ] **Log the Prompt to `docs/`**  
+- [x] **Log the Prompt to `docs/`**  
   _Where is the long-term context?_  
   `promptX_name.md` → codename: `[codename hash]`
 
-- [ ] **Describe the Purpose**  
+- [x] **Describe the Purpose**  
   _Why am I doing this?_  
   `One sentence: This enables/clarifies/supports...`
 
