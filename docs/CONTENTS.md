@@ -20,6 +20,7 @@
 - [Tutorial - Infer Agent State](partial-kernel-tutorial-infer-agent-states.md)
 
 ## Prompt Articles
+- [prompt26 fix issue with int times fuzzy-let 4ffac1de](prompt26_upatefuzzy-let-4ffac1de.md)
 - [prompt25 Redo seed state again - rapid-reading 3066babf](prompt25_rapid-reading-3066babf.md)
 - [prompt24 needy-shine 6b1678ce](prompt24_needy-shine-6b1678ce.md)
 - [prompt23 Replicable Simulation Outcomes nappy-shelter 969bdb49](prompt23_nappy-shelter-969bdb49.md)
@@ -74,9 +75,9 @@
 - [Running Tests Using python -m pytest](running_tests.md)
 - [scikit_learn_estimator_structure](scikit_learn_estimator_structure.md)
 - [Prompt Setup for Simulation Time Entries Enhancement](time_tracking_enhancement.md)
+- [Tutorial - Validate that Simulation is Reproducible good-subject 76ac56de](tutorial-simulation-replication-good-subject-76ac56de.md)
 - [🧠 Anchor: bugfix test – grandiose-secretary 10554173 (5/5)](unnamed-crooked-revenue-67c6c0ef.md)
 - [unnamed dapper-leading f5ed905a](unnamed-dapper-leading-f5ed905a.md)
-- [unnamed good-subject 76ac56de](tutorial-simulation-replication-good-subject-76ac56de.md)
 - [unnamed guttural-place 5c711918](unnamed-guttural-place-5c711918.md)
 - [unnamed hellish-point 7ff2842e](unnamed-hellish-point-7ff2842e.md)
 - [unnamed lyrical-development efd3227f](unnamed-lyrical-development-efd3227f.md)
