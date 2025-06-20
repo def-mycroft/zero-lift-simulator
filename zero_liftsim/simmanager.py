@@ -121,12 +121,17 @@ class SimulationManager:
                 end_datetime = default_end
             runtime_minutes = int((end_datetime - self.start_datetime).total_seconds() // 60)
         stop = runtime_minutes
+        seed = self._sim_cfg.get("random_seed")
+        if isinstance(seed, str):
+            seed = seed_from_uuid(seed)
+        elif seed is None:
+            seed = seed_from_uuid(self.sim.simulation_uuid)
         self.sim.run(
             stop_time=stop,
             logger=self.logger,
             full_agent_logging=self._sim_cfg.get("full_agent_logging", False),
             start_datetime=self.start_datetime,
-            random_seed=seed_from_uuid(self.sim.simulation_uuid),
+            random_seed=seed,
         )
         total_wait = 0.0
         total_rides = 0
