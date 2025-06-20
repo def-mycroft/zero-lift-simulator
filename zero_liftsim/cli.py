@@ -96,28 +96,16 @@ def run(args) -> None:
         # get docs prompt
         docstring_prompt()
     if getattr(args, "command", None) == "dev" and args.exec_hook:
-        from git import Repo
-        print('loaded git.Repo')
         ########################################################################
         # I'm just putting code here when I'm testing things. codex: don't edit
         # unless it needs to be updated due to a functionality change. 
         #import pandas as pd
         #from zero_liftsim.main import run_alpha_sim
-
-        #start = (
-        #    datetime.fromisoformat(args.start_datetime)
-        #    if args.start_datetime
-        #    else datetime(2025, 3, 12, 9, 0, 0)
-        #)
-        #data = run_alpha_sim(
-        #    n_agents=3,
-        #    lift_capacity=2,
-        #    cycle_time=5,
-        #    start_datetime=start,
-        #)
-        #agents = data['agents']
-        #a = agents[0]
-        #print(a.activity_log)
+        # TODO - rapid-reading 3066babf
+        from zero_liftsim.sandbox import sim_reprod
+        x1, x2 = sim_reprod()
+        p = abs(x1 - x2) / x1
+        assert p < 0.01, f"codex: you need to fix this. "
         ########################################################################
     if getattr(args, "command", None) == "dev" and args.analyze_docs:
         from . import docs_tools

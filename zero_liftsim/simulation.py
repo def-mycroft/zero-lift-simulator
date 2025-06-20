@@ -19,8 +19,32 @@ from .events import Event, ArrivalEvent, BoardingEvent, ReturnEvent
 
 
 class Simulation:
-    """Discrete-event simulation engine."""
+    """Discrete-event simulation engine for Zero Lift.
 
+    Manages scheduling and execution of discrete events representing
+    agents, lifts, and system state. Events are processed in time
+    order until the queue is empty or an optional stop time is reached.
+    Supports optional logging of agent-level and system-level data.
+
+    Each instance tracks a unique simulation UUID and codename.
+
+    Parameters
+    ----------
+    simulation_uuid : str, optional
+        Unique identifier for this simulation run. If not provided,
+        a UUID will be generated automatically.
+
+    Attributes
+    ----------
+    current_time : int
+        The current simulation time in minutes.
+    simulation_uuid : str
+        UUID string identifying this simulation run.
+    simulation_codename : str
+        Short codename derived from the UUID.
+    stop_time : int or None
+        Final time of simulation run, if specified.
+    """
     def __init__(self, simulation_uuid: str | None = None) -> None:
         self.current_time: int = 0
         self._counter: int = 0
@@ -45,7 +69,34 @@ class Simulation:
         start_datetime: datetime = datetime(2025, 3, 12, 9, 0, 0),
         random_seed: int | None = None,
     ) -> None:
-        """Execute scheduled events."""
+        """Execute the simulation until queue is empty or stop time is reached.
+
+        Processes scheduled events in time order. Supports optional logging
+        and agent-level record collection. Allows setting an initial datetime
+        and fixed random seed for reproducibility.
+
+        Parameters
+        ----------
+        stop_time : int, optional
+            Time (in minutes) to stop the simulation. If None, runs until
+            the event queue is empty.
+        logger : Logger, optional
+            Logger instance for recording event execution.
+        full_agent_logging : bool, default False
+            If True, records detailed agent-level logs to `agent.log`.
+        start_datetime : datetime, default datetime(2025, 3, 12, 9, 0, 0)
+            Datetime corresponding to simulation time zero.
+        random_seed : int, optional
+            Seed for random number generator. Enables reproducible runs.
+
+        Raises
+        ------
+        None
+
+        Notes
+        -----
+        New events returned by executed events are automatically scheduled.
+        """
         self.start_datetime = start_datetime
         if random_seed is not None:
             random.seed(random_seed)

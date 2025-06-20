@@ -46,6 +46,7 @@
 - [prompt2 - event classes](prompt2_event_classes.md)
 - [prompt1 - lift class](prompt1_implement_lift.md)
 - [prompt0 - simulation class](prompt0_dev_init_class.md)
+- [Redo seed state again - rapid-reading 3066babf](prompt25_rapid-reading-3066babf.md)
 
 ## Articles
 - [Sandbox Pytest Exclusion](aberrant-prize-47d02ecb.md)
@@ -62,6 +63,7 @@
 - [Bugfix Response - Logger Filepath finish](bugfix_response_logger_filepath_finish.md)
 - [Bugfix - missing riders object](bugfix_riders.md)
 - [The Burden of Simulation: Building Trust in Synthetic Behavior](building_trust_simulation.md)
+- [```json](config-example-cooperative-till-5d7dc731.md)
 - [Dev Snippets](dev_snippets.md)
 - [codex: Maintain SimulationManager Documentation](for_codex_simmanager_docs.md)
 - [Git Tools](git-tools.md)
