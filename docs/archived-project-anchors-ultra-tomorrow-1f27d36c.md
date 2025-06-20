@@ -4,7 +4,158 @@ random codename: ultra-tomorrow 1f27d36c
 
 ***
 
+# 🧠 Anchor: rapid-reading (0/5)
 
+2025-06-19 18:45:21 -0600
+[[prompt25_rapid-reading-3066babf]]
+
+https://chatgpt.com/codex/tasks/task_e_6854b9baba3883238d97cdddbea1ce0d
+
+## Log 
+
+2025-06-19 18:46:41 -0600
+
+## Checklist
+
+%% REGION %% 
+- [ ] **Write the Prompt**  
+  _What does this code need to do?_  
+  `...describe the target behavior, interface, or bug...`
+
+- [ ] **Log the Prompt to `docs/`**  
+  _Where is the long-term context?_  
+  `promptX_name.md` → codename: `[codename hash]`
+
+- [ ] **Describe the Purpose**  
+  _Why am I doing this?_  
+  `One sentence: This enables/clarifies/supports...`
+
+- [ ] **Execute the Change**  
+  _What will I edit, run, or generate?_  
+  `...brief note on the script/module/test touched...`
+
+- [ ] **Return Point**  
+  _Where do I pick up next?_  
+  `Next step is to... / Pending: ... / Waiting on: ...`
+%% ENDREGION %%
+
+
+# 🧠 Anchor: prompt24 redo deterministic seed – xxx (0/5)
+
+2025-06-18 22:19:03 -0600
+[[prompt24_needy-shine-6b1678ce]]
+
+
+## Log 
+
+2025-06-18 22:38:52 -0600
+
+## Checklist
+
+%% REGION %% 
+- [ ] **Write the Prompt**  
+  _What does this code need to do?_  
+  `...describe the target behavior, interface, or bug...`
+
+- [ ] **Log the Prompt to `docs/`**  
+  _Where is the long-term context?_  
+  `promptX_name.md` → codename: `[codename hash]`
+
+- [ ] **Describe the Purpose**  
+  _Why am I doing this?_  
+  `One sentence: This enables/clarifies/supports...`
+
+- [ ] **Execute the Change**  
+  _What will I edit, run, or generate?_  
+  `...brief note on the script/module/test touched...`
+
+- [ ] **Return Point**  
+  _Where do I pick up next?_  
+  `Next step is to... / Pending: ... / Waiting on: ...`
+%% ENDREGION %%
+
+
+
+
+*** 
+
+
+
+
+***
+# 🧠 Anchor: docs for rewrite_loop (5/5)
+
+2025-06-19 09:07:20 -0600
+task: [linek](https://chatgpt.com/codex/tasks/task_e_68542e858a088323a928d505efcb8a32)
+quick ask to codex to write docs for `rewrite_loops`. 
+
+## Log 
+
+2025-06-19 09:07:45 -0600
+## Checklist
+
+%% REGION %% 
+- [x] **Write the Prompt**  
+  _What does this code need to do?_  
+  `...describe the target behavior, interface, or bug...`
+
+- [x] **Log the Prompt to `docs/`**  
+  _Where is the long-term context?_  
+  `promptX_name.md` → codename: `[codename hash]`
+
+- [x] **Describe the Purpose**  
+  _Why am I doing this?_  
+  `One sentence: This enables/clarifies/supports...`
+
+- [ ] **Execute the Change**  
+  _What will I edit, run, or generate?_  
+  `...brief note on the script/module/test touched...`
+
+- [ ] **Return Point**  
+  _Where do I pick up next?_  
+  `Next step is to... / Pending: ... / Waiting on: ...`
+%% ENDREGION %%
+
+***
+
+
+# 🧠 Anchor: simple iterative writing - thera-essay (0/5)
+
+2025-06-18 18:39:08 -0600
+have codex come up with a way of iteratively tweaking and improving a document. 
+[[prompt2_therapeutic-essay-3e4c6fa9]]
+
+## Log 
+
+2025-06-18 22:54:14 -0600
+
+
+2025-06-18 22:34:02 -0600
+waiting on chunking 
+
+## Checklist
+
+%% REGION %% 
+- [ ] **Write the Prompt**  
+  _What does this code need to do?_  
+  `...describe the target behavior, interface, or bug...`
+
+- [ ] **Log the Prompt to `docs/`**  
+  _Where is the long-term context?_  
+  `promptX_name.md` → codename: `[codename hash]`
+
+- [ ] **Describe the Purpose**  
+  _Why am I doing this?_  
+  `One sentence: This enables/clarifies/supports...`
+
+- [ ] **Execute the Change**  
+  _What will I edit, run, or generate?_  
+  `...brief note on the script/module/test touched...`
+
+- [ ] **Return Point**  
+  _Where do I pick up next?_  
+  `Next step is to... / Pending: ... / Waiting on: ...`
+%% ENDREGION %%
 
 
 # 🧠 Anchor: add seed option for deterministic simulation – nappy-shelter-969bdb49 (x/5)

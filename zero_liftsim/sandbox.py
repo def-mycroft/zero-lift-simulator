@@ -1,4 +1,5 @@
 """Sandbox dev scratchpad"""
+from copy import deepcopy
 try:  # optional dependency for convenience functions
     from zero_helpers.imports import *  # type: ignore
 except ModuleNotFoundError:  # pragma: no cover - allow running without package
@@ -21,7 +22,7 @@ from zero_liftsim import helpers as hp
 from zero_liftsim.lift import Lift
 
 
-def sim_reprod():
+def sim_reprod(random_seed='d7a0baf7-61aa-484d-a48e-e7f9b3fb4a6d'):
 
     # Run Simulation
 
@@ -69,19 +70,25 @@ def sim_reprod():
     """
     cfg = json.loads(x)
 
-    cfg['Simulation']['run']['random_seed'] = 'd7a0baf7-61aa-484d-a48e-e7f9b3fb4a6d'
+    cfg['Simulation']['run']['random_seed'] = random_seed
 
-    manager = SimulationManager(cfg)
-    result1 = manager.run(runtime_minutes=60)
+
+    # this runs the same seed twice (or should at least)
+    manager1 = SimulationManager(copy(cfg))
+    result1 = manager1.run(runtime_minutes=60)
     print(result1)
     print(result1['average_wait'])
 
-    manager = SimulationManager(cfg)
-    result2 = manager.run(runtime_minutes=60)
+    manager2 = SimulationManager(copy(cfg))
+    result2 = manager2.run(runtime_minutes=60)
     print(result2)
     print(result2['average_wait'])
 
-    return result1['average_wait'], result2['average_wait']
+    items = {'result1':result1['average_wait'],
+             'result2':result2['average_wait'], 'manager1':manager1,
+             'manager2':manager2, 'config':cfg}
+
+    return items
 
 
 def get_sample():    
