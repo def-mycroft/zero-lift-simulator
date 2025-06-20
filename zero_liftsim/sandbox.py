@@ -1,5 +1,8 @@
 """Sandbox dev scratchpad"""
-from zero_helpers.imports import *
+try:  # optional dependency for convenience functions
+    from zero_helpers.imports import *  # type: ignore
+except ModuleNotFoundError:  # pragma: no cover - allow running without package
+    pass
 from codenamize import codenamize as cd
 import json
 from copy import deepcopy as copy
